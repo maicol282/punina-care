@@ -1,0 +1,98 @@
+# =====================================================
+# PUNINA CARE - .gitignore
+# Sistema médico - Protección de datos sensibles
+# =====================================================
+
+# --- Laravel core ---
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+Homestead.json
+Homestead.yaml
+.env
+.env.backup
+.env.production
+.env.local
+auth.json
+.phpactor.json
+.phpunit.result.cache
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+
+# --- Logs ---
+*.log
+/storage/logs/*.log
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# =====================================================
+# 🔒 DATOS SENSIBLES MÉDICOS - NUNCA A GIT
+# =====================================================
+# Adjuntos médicos encriptados de pacientes (AES-256)
+/storage/app/private/adjuntos/*
+!/storage/app/private/adjuntos/.gitkeep
+
+# Cualquier archivo privado en storage
+/storage/app/private/*
+!/storage/app/private/.gitkeep
+
+# Certificados de firma electrónica (FIRMA EC)
+*.p12
+*.pfx
+*.pem
+*.key
+!public/*.pem
+
+# Backups de base de datos
+*.sql
+*.sql.gz
+/database/backups/
+/database/*.sqlite
+
+# --- Reportes y exportaciones generadas ---
+/storage/app/public/exportaciones/
+/storage/app/public/reportes/
+/storage/app/public/temp/
+
+# --- Backup del backup (evitar recursión) ---
+.gitignore.backup
+
+# --- Archivos de respaldo del editor ---
+*.bak
+*_backup.php
+*_old.php
+*.orig
+
+# =====================================================
+# PUNINA CARE - EXCLUSIONES ESPECÍFICAS DEL PROYECTO
+# =====================================================
+
+# Backups de vistas y archivos
+*_backup*.blade.php
+*_backup*.php
+*.blade.php.bak
+
+# Archivos de diagnóstico temporales
+diagnostico_*.txt
+proyecto_completo.txt
+proyecto.zip
+
+# Compilados de Vite (ya está /public/build pero por si acaso)
+/public/build/*
+/public/hot
+
+# Archivos raros que puedan generarse
+elect(*)

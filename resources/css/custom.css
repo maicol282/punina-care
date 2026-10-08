@@ -1,0 +1,252 @@
+/* ============================================
+   DISEÑO PROFESIONAL - SOLO APARIENCIA
+   ESTRUCTURA HTML NO MODIFICADA
+   ============================================ */
+
+:root {
+    --primary: #1e3a5f;
+    --primary-dark: #0f2b45;
+    --secondary: #2b7a62;
+    --accent: #e67e22;
+    --gray-bg: #f5f7fb;
+    --gray-border: #e2e8f0;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+    --radius-md: 10px;
+    --radius-lg: 16px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--gray-bg);
+    color: var(--text-dark);
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    box-shadow: 2px 0 12px rgba(0,0,0,0.08);
+}
+
+.sidebar .nav-link {
+    border-radius: 10px;
+    margin: 4px 12px;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateX(4px);
+}
+
+.sidebar .nav-link.active {
+    background: var(--secondary);
+    box-shadow: 0 2px 8px rgba(43,122,98,0.3);
+}
+
+/* ========== NAVBAR TOP ========== */
+.navbar-top {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 16px 24px;
+    margin-bottom: 24px;
+}
+
+/* ========== TARJETAS ========== */
+.card {
+    border: none;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.card-header {
+    background: white;
+    border-bottom: 1px solid var(--gray-border);
+    font-weight: 600;
+    padding: 16px 20px;
+}
+
+/* ========== TABLAS ========== */
+.table {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.table thead th {
+    background: #f8fafc;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 13px;
+    border-bottom: 1px solid var(--gray-border);
+}
+
+.table tbody tr:hover {
+    background: rgba(43,122,98,0.04);
+}
+
+/* ========== BOTONES ========== */
+.btn {
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30,58,95,0.25);
+}
+
+.btn-success {
+    background: var(--secondary);
+    border: none;
+}
+
+.btn-success:hover {
+    background: #236b56;
+    transform: translateY(-2px);
+}
+
+.btn-warning {
+    background: var(--accent);
+    border: none;
+    color: white;
+}
+
+.btn-warning:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+.btn-sm {
+    border-radius: 20px;
+    padding: 5px 14px;
+}
+
+/* ========== FORMULARIOS ========== */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1px solid var(--gray-border);
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(43,122,98,0.1);
+}
+
+.form-label {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+/* ========== BADGES ========== */
+.badge {
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-weight: 500;
+}
+
+.badge.bg-primary {
+    background: var(--primary) !important;
+}
+
+/* ========== ALERTAS ========== */
+.alert {
+    border: none;
+    border-radius: 12px;
+}
+
+.alert-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #2e7d32;
+}
+
+.alert-danger {
+    background: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+
+/* ========== PAGINACIÓN ========== */
+.pagination {
+    gap: 6px;
+}
+
+.page-link {
+    border-radius: 10px;
+    border: 1px solid var(--gray-border);
+    color: var(--text-dark);
+}
+
+.page-item.active .page-link {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* ========== MODALES ========== */
+.modal-content {
+    border: none;
+    border-radius: 16px;
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--gray-border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--gray-border);
+}
+
+/* ========== SIDEBAR COLAPSABLE ========== */
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed .nav-link span,
+.sidebar.collapsed .brand-text {
+    display: none;
+}
+
+.main-content.expanded {
+    margin-left: 80px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+    }
+    .sidebar .nav-link span,
+    .sidebar .brand-text {
+        display: none;
+    }
+    .main-content {
+        margin-left: 80px;
+        padding: 16px;
+    }
+    .navbar-top {
+        padding: 12px 16px;
+    }
+}
