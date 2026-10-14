@@ -33,7 +33,7 @@
         <!-- ========== GINECO OBSTÉTRICOS ========== -->
                 @include('historial.partials._gineco-obstetricos')
 <!-- ========== ENFERMEDAD ACTUAL ========== -->
-        <        @include('historial.partials._enfermedad-actual')
+               @include('historial.partials._enfermedad-actual')
         <!-- ========== SIGNOS VITALES ========== -->
         <div class="card mb-4 shadow-sm">
         
