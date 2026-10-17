@@ -17,15 +17,6 @@ use Carbon\Carbon;
 
 class HistorialClinicoController extends Controller
 {
-    public function index()
-    {
-        $historiales = HistorialClinico::with('paciente')
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
-        
-        return view('historial.index', compact('historiales'));
-    }
-
     public function create(Paciente $paciente)
     {
         $medicos = User::whereHas('roles', function($query) {
@@ -273,7 +264,7 @@ if ($request->has('generar_receta') && $request->generar_receta == '1') {
         return view('historial.show', compact('paciente', 'historial'));
     }
 
-   public function edit($historialId)
+    public function edit($historialId)
 {
     $historial = HistorialClinico::with(['paciente', 'diagnosticos', 'estudiosAdjuntos'])->findOrFail($historialId);
     $paciente = $historial->paciente;
@@ -565,26 +556,6 @@ if ($request->has('generar_receta') && $request->generar_receta == '1') {
         }
     }
 
-    public function pdf(Paciente $paciente, HistorialClinico $historial)
-    {
-        $historial->load([
-            'diagnosticos', 
-            'recetas', 
-            'seguimientos', 
-            'adjuntos', 
-            'estudiosAdjuntos'
-        ]);
-        
-        $pdf = Pdf::loadView('historial.pdf', compact('paciente', 'historial'));
-        $pdf->setPaper('A4', 'portrait');
-        
-        return $pdf->download('Historial_Clinico_' . $historial->id . '_' . $paciente->nombre_completo . '.pdf');
-    }
-
-    // ============================================
-    // MÉTODOS PARA ARCHIVOS ADJUNTOS
-    // ============================================
-    
     public function eliminarArchivo($id)
     {
         try {
@@ -624,7 +595,7 @@ if ($request->has('generar_receta') && $request->generar_receta == '1') {
             /**
          * Obtener el último historial clínico de un paciente (para copiar datos)
          */
-        public function ultimoHistorial(Paciente $paciente)
+    public function ultimoHistorial(Paciente $paciente)
         {
             try {
                 $ultimoHistorial = HistorialClinico::where('paciente_id', $paciente->id)
