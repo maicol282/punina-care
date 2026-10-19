@@ -4,91 +4,103 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
-    // Método auxiliar para verificar si es administrador
-    private function verificarAdmin()
+    /**
+     * Display a listing of the resource.
+     */
+        public function index()
     {
-        if (!auth()->user() || !auth()->user()->hasRole('Administrador')) {
-            abort(403, 'Acceso denegado. Solo el Administrador puede gestionar usuarios.');
-        }
-    }
-
-    public function index()
-    {
-        $this->verificarAdmin();
-        $usuarios = User::with('roles')->paginate(10);
+        $usuarios = User::paginate(10);
         return view('usuarios.index', compact('usuarios'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $this->verificarAdmin();
         $roles = Role::all();
         return view('usuarios.create', compact('roles'));
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+        public function store(Request $request)
     {
-        $this->verificarAdmin();
-        
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'cedula' => 'required|string|max:20',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|exists:roles,name',
-            'especialidad' => 'nullable|string|max:100'
+            'role' => 'required|string|exists:roles,name',
+            'especialidad' => 'nullable|string|max:100',
         ]);
 
-        $usuario = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'email_verified_at' => now(),
-        ]);
+        // Limpiamos la cédula: solo números
+        $cedulaLimpia = preg_replace('/[^0-9]/', '', $validated['cedula']);
 
-        $usuario->assignRole($request->role);
+        $user = new User();
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->cedula = $cedulaLimpia; 
+        $user->cedula_hash = hash('sha256', $cedulaLimpia); // Forzamos el hash
+        $user->password = Hash::make($validated['password']);
+        $user->especialidad = $validated['especialidad'] ?? null;
+        $user->save();
+
+        $user->assignRole($validated['role']);
 
         return redirect()->route('usuarios.index')
-            ->with('success', 'Usuario registrado exitosamente.');
+            ->with('success', 'Usuario creado exitosamente.');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(User $usuario)
     {
-        $this->verificarAdmin();
         $roles = Role::all();
         return view('usuarios.edit', compact('usuario', 'roles'));
     }
 
-    public function update(Request $request, User $usuario)
+    /**
+     * Update the specified resource in storage.
+     */
+        public function update(Request $request, User $usuario)
     {
-        $this->verificarAdmin();
-        
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $usuario->id,
-            'role' => 'required|exists:roles,name',
-            'especialidad' => 'nullable|string|max:100'
+            'email' => 'required|string|email|max:255|unique:users,email,' . $usuario->id,
+            'cedula' => 'required|string|max:20',
+            'role' => 'required|string|exists:roles,name',
+            'especialidad' => 'nullable|string|max:100',
         ]);
 
-        $usuario->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        // Limpiamos la cédula: solo números
+        $cedulaLimpia = preg_replace('/[^0-9]/', '', $validated['cedula']);
 
-        $usuario->syncRoles([$request->role]);
+        $usuario->name = $validated['name'];
+        $usuario->email = $validated['email'];
+        $usuario->cedula = $cedulaLimpia;
+        $usuario->cedula_hash = hash('sha256', $cedulaLimpia); // Forzamos el hash
+        $usuario->especialidad = $validated['especialidad'] ?? null;
+        $usuario->save();
+
+        $usuario->syncRoles([$validated['role']]);
 
         return redirect()->route('usuarios.index')
             ->with('success', 'Usuario actualizado exitosamente.');
     }
-
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(User $usuario)
     {
-        $this->verificarAdmin();
-        
         if ($usuario->id === auth()->id()) {
             return redirect()->route('usuarios.index')
                 ->with('error', 'No puedes eliminarte a ti mismo.');

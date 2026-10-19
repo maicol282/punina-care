@@ -9,16 +9,14 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email -->
+        <!-- CEDULA -->
         <div class="mb-3">
-            <label for="email" class="form-label">Correo Electrónico</label>
-            <input id="email" type="email" name="email"
-                   class="form-control @error('email') is-invalid @enderror"
-                   value="{{ old('email') }}" required autofocus autocomplete="username">
-            @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+    <label for="cedula" class="form-label">Cédula</label>
+    <input id="cedula" type="text" name="cedula" class="form-control @error('cedula') is-invalid @enderror" value="{{ old('cedula') }}" required autofocus autocomplete="username" placeholder="Ej: 1700000001">
+    @error('cedula')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
 
         <!-- Password -->
         <div class="mb-3">

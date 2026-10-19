@@ -20,6 +20,15 @@
                     @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                    <label for="cedula" class="form-label">Cédula <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('cedula') is-invalid @enderror" 
+                           id="cedula" name="cedula" value="{{ old('cedula') }}" required placeholder="Ej: 1712345678">
+                    @error('cedula')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -82,9 +91,9 @@
                 </div>
             </div>
 
-            <div class="alert alert-info mt-3">
+                        <div class="alert alert-info mt-3">
                 <i class="fas fa-info-circle me-2"></i>
-                <strong>Nota:</strong> El usuario podrá iniciar sesión con el email y contraseña registrados.
+                <strong>Nota:</strong> El usuario podrá iniciar sesión con su <strong>cédula</strong> y contraseña.
             </div>
 
             <div class="text-end mt-4">

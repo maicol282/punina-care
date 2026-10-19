@@ -68,3 +68,14 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    function confirmDelete(event, formId) {
+        event.preventDefault();
+        
+        if (confirm('¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.')) {
+            document.getElementById(formId).submit();
+        }
+    }
+</script>
+@endpush

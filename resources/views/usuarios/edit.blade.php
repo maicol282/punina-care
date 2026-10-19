@@ -24,6 +24,15 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
+                    <label for="cedula" class="form-label">Cédula <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('cedula') is-invalid @enderror" 
+                           id="cedula" name="cedula" value="{{ old('cedula', $usuario->cedula) }}" required placeholder="Ej: 1712345678">
+                    @error('cedula')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6 mb-3">
                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" 
                            id="email" name="email" value="{{ old('email', $usuario->email) }}" required>
