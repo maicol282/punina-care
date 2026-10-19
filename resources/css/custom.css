@@ -4,8 +4,8 @@
    ============================================ */
 
 :root {
-    --primary: #1e3a5f;
-    --primary-dark: #0f2b45;
+    --primary: #1e293b;
+    --primary-dark: #0f172a;
     --secondary: #2b7a62;
     --accent: #e67e22;
     --gray-bg: #f5f7fb;
@@ -38,13 +38,13 @@ body {
 }
 
 .sidebar .nav-link:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.25);
     transform: translateX(4px);
 }
 
 .sidebar .nav-link.active {
-    background: var(--secondary);
-    box-shadow: 0 2px 8px rgba(43,122,98,0.3);
+    background: #ffffff; color: #0f766e !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 /* ========== NAVBAR TOP ========== */
@@ -115,7 +115,7 @@ body {
 }
 
 .btn-success {
-    background: var(--secondary);
+    background: #ffffff; color: #0f766e !important;
     border: none;
 }
 
@@ -249,4 +249,47 @@ body {
     .navbar-top {
         padding: 12px 16px;
     }
+}
+/* ============================================
+   MENÚ LATERAL COLORIDO Y ARMÓNICO
+   ============================================ */
+
+/* Color base de los iconos (blanco suave por defecto) */
+.sidebar .nav-link i {
+    font-size: 1.15rem;
+    width: 24px;
+    text-align: center;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Colores específicos por sección */
+.sidebar .nav-link[href*="dashboard"] i          { color: #38bdf8; } /* Celeste */
+.sidebar .nav-link[href*="pacientes.index"] i    { color: #4ade80; } /* Verde */
+.sidebar .nav-link[href*="pacientes.create"] i   { color: #a78bfa; } /* Violeta */
+.sidebar .nav-link[href*="historiales"] i        { color: #fbbf24; } /* Ámbar */
+.sidebar .nav-link[href*="recetas"] i            { color: #f87171; } /* Rojo suave */
+.sidebar .nav-link[href*="citas"] i              { color: #22d3ee; } /* Cyan */
+.sidebar .nav-link[href*="ia"] i                 { color: #c084fc; } /* Púrpura brillante */
+.sidebar .nav-link[href*="certificados"] i       { color: #34d399; } /* Esmeralda */
+
+/* Efecto hover: el icono brilla más */
+.sidebar .nav-link:hover i {
+    transform: scale(1.15);
+    filter: brightness(1.2);
+}
+
+/* El enlace activo: fondo con el color de su sección */
+.sidebar .nav-link.active {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+    border-left: 4px solid #38bdf8; /* Línea celeste a la izquierda */
+    padding-left: 12px;
+}
+
+/* Separadores sutiles */
+.nav-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    margin: 12px 20px;
 }

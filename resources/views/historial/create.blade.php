@@ -3,7 +3,7 @@
 @section('title', 'Nuevo Historial Clínico')
 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
     <div>
-        <i class="fas fa-notes-medical me-2 text-primary"></i> 
+        <i class="fas fa-file-medical me-2 text-primary"></i> 
         <span class="fw-semibold">Registrar Nuevo Historial Clínico</span>
         @if($paciente->historialClinicos->count() > 0)
             <span class="badge bg-info ms-2">Historiales previos: {{ $paciente->historialClinicos->count() }}</span>
