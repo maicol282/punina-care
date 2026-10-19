@@ -66,36 +66,69 @@
     @foreach($recetas as $index => $receta)
         <div class="receta-item">
             <h4>Receta #{{ $index + 1 }} - {{ $receta->fecha_emision->format('d/m/Y') }}</h4>
-            <table>
-                <tr>
-                    <td width="30%"><strong>Medicamento:</strong></td>
-                    <td>{{ $receta->medicamento }}</td>
-                </tr>
-                @if($receta->presentacion)
-                <tr>
-                    <td><strong>Presentación:</strong></td>
-                    <td>{{ $receta->presentacion }}</td>
-                </tr>
-                @endif
-                @if($receta->concentracion)
-                <tr>
-                    <td><strong>Concentración:</strong></td>
-                    <td>{{ $receta->concentracion }}</td>
-                </tr>
-                @endif
-                <tr>
-                    <td><strong>Dosis:</strong></td>
-                    <td>{{ $receta->dosis }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Frecuencia:</strong></td>
-                    <td>{{ $receta->frecuencia }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Duración:</strong></td>
-                    <td>{{ $receta->duracion }}</td>
-                </tr>
-            </table>
+                        @php
+                $meds = $receta->medicamentos_json ? json_decode($receta->medicamentos_json, true) : [];
+                if (empty($meds)) {
+                    $meds = [['medicamento' => $receta->medicamento, 'dosis' => $receta->dosis, 'frecuencia' => $receta->frecuencia, 'duracion' => $receta->duracion]];
+                }
+            @endphp
+
+            @foreach($meds as $i => $med)
+                <table style="margin-bottom: 10px; border-bottom: 1px dashed #ccc;">
+                    <tr>
+                        <td width="30%"><strong>Medicamento #{{ $i + 1 }}:</strong></td>
+                        <td>{{ $med['medicamento'] ?? '' }}</td>
+                    </tr>
+                    @if(!empty($med['presentacion']))
+                    <tr>
+                        <td><strong>Presentación:</strong></td>
+                        <td>{{ $med['presentacion'] }}</td>
+                    </tr>
+                    @endif
+                    @if(!empty($med['concentracion']))
+                    <tr>
+                        <td><strong>Concentración:</strong></td>
+                        <td>{{ $med['concentracion'] }}</td>
+                    </tr>
+                    @endif
+                    @if(!empty($med['via']))
+                    <tr>
+                        <td><strong>Vía:</strong></td>
+                        <td>{{ $med['via'] }}</td>
+                    </tr>
+                    @endif
+                    @if(!empty($med['dosis']))
+                    <tr>
+                        <td><strong>Dosis:</strong></td>
+                        <td>{{ $med['dosis'] }}</td>
+                    </tr>
+                    @endif
+                    @if(!empty($med['frecuencia']))
+                    <tr>
+                        <td><strong>Frecuencia:</strong></td>
+                        <td>{{ $med['frecuencia'] }}</td>
+                    </tr>
+                    @endif
+                    @if(!empty($med['duracion']))
+                    <tr>
+                        <td><strong>Duración:</strong></td>
+                        <td>{{ $med['duracion'] }}</td>
+                    </tr>
+                    @endif
+                    @if(!empty($med['cantidad']))
+                    <tr>
+                        <td><strong>Cantidad:</strong></td>
+                        <td>{{ $med['cantidad'] }}</td>
+                    </tr>
+                    @endif
+                    @if(!empty($med['advertencias']))
+                    <tr>
+                        <td><strong>Advertencias:</strong></td>
+                        <td style="color: #c0392b;">{{ $med['advertencias'] }}</td>
+                    </tr>
+                    @endif
+                </table>
+            @endforeach
             
             @if($receta->indicaciones)
                 <p><strong>Indicaciones:</strong> {{ $receta->indicaciones }}</p>

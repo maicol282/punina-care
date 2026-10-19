@@ -485,6 +485,12 @@
                                     <span class="detalle-value">{{ $med['concentracion'] }}</span>
                                 </div>
                                 @endif
+                                @if(!empty($med['via']))
+                                <div class="detalle-row">
+                                    <span class="detalle-label">Vía</span>
+                                    <span class="detalle-value">{{ $med['via'] }}</span>
+                                </div>
+                                @endif
                                 @if(!empty($med['dosis']))
                                 <div class="detalle-row">
                                     <span class="detalle-label">Dosis</span>
@@ -501,6 +507,18 @@
                                 <div class="detalle-row">
                                     <span class="detalle-label">Duración</span>
                                     <span class="detalle-value">{{ $med['duracion'] }}</span>
+                                </div>
+                                @endif
+                                @if(!empty($med['cantidad']))
+                                <div class="detalle-row">
+                                    <span class="detalle-label">Cantidad</span>
+                                    <span class="detalle-value">{{ $med['cantidad'] }}</span>
+                                </div>
+                                @endif
+                                @if(!empty($med['advertencias']))
+                                <div class="detalle-row">
+                                    <span class="detalle-label">Advertencias</span>
+                                    <span class="detalle-value" style="color: #c0392b; font-weight: 600;">{{ $med['advertencias'] }}</span>
                                 </div>
                                 @endif
                             </div>

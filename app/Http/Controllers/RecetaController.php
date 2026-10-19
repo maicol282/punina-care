@@ -62,7 +62,9 @@ public function update(Request $request, Receta $receta)
         'receta_fecha_emision' => 'required|date',
         'receta_advertencias' => 'nullable|string',
         'receta_signos_alarma' => 'nullable|string',
-        'receta_recomendaciones_no_farmacologicas' => 'nullable|string',
+        'receta_recomendaciones_no_farmacologicas' => 'nullable|string','receta_medicamentos.*.via' => 'nullable|string|max:50',
+        'receta_medicamentos.*.cantidad' => 'nullable|string|max:50',
+        'receta_medicamentos.*.advertencias' => 'nullable|string',
     ]);
 
     try {

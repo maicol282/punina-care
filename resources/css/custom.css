@@ -293,3 +293,36 @@ body {
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     margin: 12px 20px;
 }
+
+/* ============================================
+   CORRECCIÓN DE LAYOUT - CONTENIDO PRINCIPAL
+   ============================================ */
+
+/* Asegura que el contenido no se meta debajo del sidebar */
+.main-content, 
+main, 
+.content-wrapper {
+    margin-left: 260px !important; /* Ajusta el ancho del sidebar */
+    padding: 20px 30px !important; /* Da respiro a los lados */
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+}
+
+/* Si el sidebar está colapsado, el contenido se expande */
+.sidebar.collapsed ~ .main-content,
+.sidebar.collapsed ~ main,
+.sidebar.collapsed ~ .content-wrapper {
+    margin-left: 80px !important;
+}
+
+/* Arreglar los inputs del formulario de recetas */
+.card-body {
+    overflow-x: hidden; /* Evita que los inputs se salgan de la tarjeta */
+}
+
+/* Hacer que las columnas de Bootstrap respiren */
+.row.g-2 > [class*="col-"] {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}

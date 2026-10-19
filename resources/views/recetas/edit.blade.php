@@ -4,6 +4,7 @@
 @section('page-title', 'Editar Receta Médica')
 
 @section('content')
+
 <div class="card">
     <div class="card-header">
         <h5 class="mb-0">
@@ -56,29 +57,51 @@
                             <label class="form-label fw-semibold">Medicamento <span class="text-danger">*</span></label>
                             <input type="text" name="receta_medicamentos[{{ $index }}][medicamento]" class="form-control form-control-sm" value="{{ $med['medicamento'] ?? '' }}" placeholder="Ej: Paracetamol">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="form-label fw-semibold">Presentación</label>
                             <input type="text" name="receta_medicamentos[{{ $index }}][presentacion]" class="form-control form-control-sm" value="{{ $med['presentacion'] ?? '' }}" placeholder="Ej: Tabletas">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="form-label fw-semibold">Concentración</label>
                             <input type="text" name="receta_medicamentos[{{ $index }}][concentracion]" class="form-control form-control-sm" value="{{ $med['concentracion'] ?? '' }}" placeholder="Ej: 500mg">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Vía de Administración</label>
+                            <select name="receta_medicamentos[{{ $index }}][via]" class="form-select form-select-sm">
+                                <option value="">Seleccione</option>
+                                <option value="Oral" {{ ($med['via'] ?? '') == 'Oral' ? 'selected' : '' }}>Oral</option>
+                                <option value="Intravenosa" {{ ($med['via'] ?? '') == 'Intravenosa' ? 'selected' : '' }}>Intravenosa</option>
+                                <option value="Intramuscular" {{ ($med['via'] ?? '') == 'Intramuscular' ? 'selected' : '' }}>Intramuscular</option>
+                                <option value="Subcutánea" {{ ($med['via'] ?? '') == 'Subcutánea' ? 'selected' : '' }}>Subcutánea</option>
+                                <option value="Tópica" {{ ($med['via'] ?? '') == 'Tópica' ? 'selected' : '' }}>Tópica</option>
+                                <option value="Sublingual" {{ ($med['via'] ?? '') == 'Sublingual' ? 'selected' : '' }}>Sublingual</option>
+                                <option value="Rectal" {{ ($med['via'] ?? '') == 'Rectal' ? 'selected' : '' }}>Rectal</option>
+                                <option value="Inhalatoria" {{ ($med['via'] ?? '') == 'Inhalatoria' ? 'selected' : '' }}>Inhalatoria</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
                             <label class="form-label fw-semibold">Dosis</label>
                             <input type="text" name="receta_medicamentos[{{ $index }}][dosis]" class="form-control form-control-sm" value="{{ $med['dosis'] ?? '' }}" placeholder="Ej: 1 tableta">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="form-label fw-semibold">Frecuencia</label>
                             <input type="text" name="receta_medicamentos[{{ $index }}][frecuencia]" class="form-control form-control-sm" value="{{ $med['frecuencia'] ?? '' }}" placeholder="Ej: Cada 8 horas">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="form-label fw-semibold">Duración</label>
                             <input type="text" name="receta_medicamentos[{{ $index }}][duracion]" class="form-control form-control-sm" value="{{ $med['duracion'] ?? '' }}" placeholder="Ej: 7 días">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Cantidad (Números y Letras)</label>
+                            <input type="text" name="receta_medicamentos[{{ $index }}][cantidad]" class="form-control form-control-sm" value="{{ $med['cantidad'] ?? '' }}" placeholder="Ej: 2 (dos)">
+                        </div>
+                        <div class="col-md-8">
                             <label class="form-label fw-semibold">Indicaciones específicas</label>
                             <input type="text" name="receta_medicamentos[{{ $index }}][indicaciones]" class="form-control form-control-sm" value="{{ $med['indicaciones'] ?? '' }}" placeholder="Instrucciones para este medicamento...">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-semibold">Advertencias para este medicamento</label>
+                            <input type="text" name="receta_medicamentos[{{ $index }}][advertencias]" class="form-control form-control-sm" value="{{ $med['advertencias'] ?? '' }}" placeholder="Ej: Tomar con alimentos, no conducir...">
                         </div>
                     </div>
                 </div>
@@ -92,7 +115,7 @@
                     <input type="date" name="receta_fecha_emision" class="form-control" value="{{ $receta->fecha_emision->format('Y-m-d') }}">
                 </div>
                 <div class="col-12">
-                    <label class="form-label fw-semibold">Advertencias</label>
+                    <label class="form-label fw-semibold">Advertencias Generales</label>
                     <textarea name="receta_advertencias" class="form-control" rows="2">{{ $receta->advertencias }}</textarea>
                 </div>
                 <div class="col-12">
@@ -116,7 +139,7 @@
         </form>
     </div>
 </div>
-
+@endsection
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -144,29 +167,51 @@ document.addEventListener('DOMContentLoaded', function() {
                     <label class="form-label fw-semibold">Medicamento <span class="text-danger">*</span></label>
                     <input type="text" name="receta_medicamentos[${newIndex}][medicamento]" class="form-control form-control-sm" placeholder="Ej: Paracetamol">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Presentación</label>
                     <input type="text" name="receta_medicamentos[${newIndex}][presentacion]" class="form-control form-control-sm" placeholder="Ej: Tabletas">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Concentración</label>
                     <input type="text" name="receta_medicamentos[${newIndex}][concentracion]" class="form-control form-control-sm" placeholder="Ej: 500mg">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Vía de Administración</label>
+                    <select name="receta_medicamentos[${newIndex}][via]" class="form-select form-select-sm">
+                        <option value="">Seleccione</option>
+                        <option value="Oral">Oral</option>
+                        <option value="Intravenosa">Intravenosa</option>
+                        <option value="Intramuscular">Intramuscular</option>
+                        <option value="Subcutánea">Subcutánea</option>
+                        <option value="Tópica">Tópica</option>
+                        <option value="Sublingual">Sublingual</option>
+                        <option value="Rectal">Rectal</option>
+                        <option value="Inhalatoria">Inhalatoria</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Dosis</label>
                     <input type="text" name="receta_medicamentos[${newIndex}][dosis]" class="form-control form-control-sm" placeholder="Ej: 1 tableta">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Frecuencia</label>
                     <input type="text" name="receta_medicamentos[${newIndex}][frecuencia]" class="form-control form-control-sm" placeholder="Ej: Cada 8 horas">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Duración</label>
                     <input type="text" name="receta_medicamentos[${newIndex}][duracion]" class="form-control form-control-sm" placeholder="Ej: 7 días">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Cantidad (Números y Letras)</label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][cantidad]" class="form-control form-control-sm" placeholder="Ej: 2 (dos)">
+                </div>
+                <div class="col-md-8">
                     <label class="form-label fw-semibold">Indicaciones específicas</label>
                     <input type="text" name="receta_medicamentos[${newIndex}][indicaciones]" class="form-control form-control-sm" placeholder="Instrucciones para este medicamento...">
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label fw-semibold">Advertencias para este medicamento</label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][advertencias]" class="form-control form-control-sm" placeholder="Ej: Tomar con alimentos, no conducir...">
                 </div>
             </div>
         `;
@@ -195,7 +240,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (label) {
                 label.textContent = `Medicamento #${index + 1}`;
             }
-            const inputs = row.querySelectorAll('input');
+            // Actualizar nombres de inputs Y selects
+            const inputs = row.querySelectorAll('input, select');
             inputs.forEach(input => {
                 const name = input.getAttribute('name');
                 if (name) {

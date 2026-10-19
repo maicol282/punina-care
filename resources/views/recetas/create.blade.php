@@ -1,139 +1,261 @@
 @extends('layouts.app')
 
-@section('title', 'Nueva Receta')
-@section('page-title', 'Registrar Nueva Receta')
+@section('title', 'Nueva Receta Médica')
+@section('page-title', 'Nueva Receta Médica')
 
 @section('content')
-<div class="row">
-    <div class="col-md-8 mx-auto">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fas fa-prescription-bottle me-2 text-primary"></i>
-                    Nueva Receta - {{ $historial->paciente->nombre_completo }}
-                </h5>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('recetas.store', $historial) }}" method="POST">
-                    @csrf
-                    
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="fecha_emision" class="form-label">Fecha de Emisión <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control @error('fecha_emision') is-invalid @enderror" 
-                                   id="fecha_emision" name="fecha_emision" 
-                                   value="{{ old('fecha_emision', date('Y-m-d')) }}" required>
-                            @error('fecha_emision')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+<div class="container-fluid px-0">
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">
+                <i class="fas fa-prescription me-2 text-primary"></i>
+                Nueva Receta Médica
+            </h5>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('recetas.store') }}" method="POST">
+                @csrf
+
+                <!-- Datos generales -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Paciente <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" value="{{ $historial->paciente->nombre ?? 'N/A' }}" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Fecha de Emisión <span class="text-danger">*</span></label>
+                        <input type="date" name="fecha_emision" class="form-control" value="{{ old('fecha_emision', date('Y-m-d')) }}" required>
+                    </div>
+                </div>
+
+                <!-- Sección de medicamentos -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold text-primary mb-0">
+                        <i class="fas fa-prescription me-2"></i> Medicamentos
+                    </h6>
+                    <button type="button" class="btn btn-sm btn-success" id="agregarMedicamento">
+                        <i class="fas fa-plus me-1"></i> Agregar Medicamento
+                    </button>
+                </div>
+                
+                <div id="medicamentosContainer">
+                    <!-- Medicamento #1 por defecto -->
+                    <div class="medicamento-row border rounded-3 p-3 mb-3" style="background: #f8faff;" data-index="0">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-semibold text-primary">Medicamento #1</span>
+                            <button type="button" class="btn btn-sm btn-danger eliminar-medicamento" disabled>
+                                <i class="fas fa-times me-1"></i> Eliminar
+                            </button>
                         </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="medicamento" class="form-label">Medicamento <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('medicamento') is-invalid @enderror" 
-                                   id="medicamento" name="medicamento" value="{{ old('medicamento') }}" required>
-                            @error('medicamento')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="presentacion" class="form-label">Presentación</label>
-                            <input type="text" class="form-control @error('presentacion') is-invalid @enderror" 
-                                   id="presentacion" name="presentacion" value="{{ old('presentacion') }}" 
-                                   placeholder="Ej: Tableta, Cápsula, Jarabe...">
-                            @error('presentacion')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="concentracion" class="form-label">Concentración</label>
-                            <input type="text" class="form-control @error('concentracion') is-invalid @enderror" 
-                                   id="concentracion" name="concentracion" value="{{ old('concentracion') }}" 
-                                   placeholder="Ej: 500mg, 10mg/ml...">
-                            @error('concentracion')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="dosis" class="form-label">Dosis <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('dosis') is-invalid @enderror" 
-                                   id="dosis" name="dosis" value="{{ old('dosis') }}" 
-                                   placeholder="Ej: 1 tableta, 10ml..." required>
-                            @error('dosis')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="frecuencia" class="form-label">Frecuencia <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('frecuencia') is-invalid @enderror" 
-                                   id="frecuencia" name="frecuencia" value="{{ old('frecuencia') }}" 
-                                   placeholder="Ej: Cada 8 horas, 3 veces al día..." required>
-                            @error('frecuencia')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="duracion" class="form-label">Duración <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('duracion') is-invalid @enderror" 
-                                   id="duracion" name="duracion" value="{{ old('duracion') }}" 
-                                   placeholder="Ej: 7 días, 1 mes..." required>
-                            @error('duracion')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <!-- Signos de Alarma -->
-<div class="col-md-6 mb-3">
-    <label for="signos_alarma" class="form-label">Signos de Alarma</label>
-    <input type="text" class="form-control @error('signos_alarma') is-invalid @enderror" 
-           id="signos_alarma" name="signos_alarma" value="{{ old('signos_alarma') }}">
-    @error('signos_alarma')<div class="invalid-feedback">{{ $message }}</div>@enderror
-</div>
-
-<!-- Recomendaciones No Farmacológicas -->
-<div class="col-md-6 mb-3">
-    <label for="recomendaciones_no_farmacologicas" class="form-label">Recomendaciones No Farmacológicas</label>
-    <input type="text" class="form-control @error('recomendaciones_no_farmacologicas') is-invalid @enderror" 
-           id="recomendaciones_no_farmacologicas" name="recomendaciones_no_farmacologicas" value="{{ old('recomendaciones_no_farmacologicas') }}">
-    @error('recomendaciones_no_farmacologicas')<div class="invalid-feedback">{{ $message }}</div>@enderror
-</div>
-
-                        <div class="col-12 mb-3">
-                            <label for="indicaciones" class="form-label">Indicaciones</label>
-                            <textarea class="form-control @error('indicaciones') is-invalid @enderror" 
-                                      id="indicaciones" name="indicaciones" rows="3" 
-                                      placeholder="Instrucciones adicionales para el paciente...">{{ old('indicaciones') }}</textarea>
-                            @error('indicaciones')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-12 mb-3">
-                            <label for="advertencias" class="form-label">Advertencias</label>
-                            <textarea class="form-control @error('advertencias') is-invalid @enderror" 
-                                      id="advertencias" name="advertencias" rows="2" 
-                                      placeholder="Contraindicaciones, efectos secundarios, precauciones...">{{ old('advertencias') }}</textarea>
-                            @error('advertencias')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Medicamento <span class="text-danger">*</span></label>
+                                <input type="text" name="receta_medicamentos[0][medicamento]" class="form-control form-control-sm" placeholder="Ej: Paracetamol" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Presentación</label>
+                                <input type="text" name="receta_medicamentos[0][presentacion]" class="form-control form-control-sm" placeholder="Ej: Tabletas">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Concentración</label>
+                                <input type="text" name="receta_medicamentos[0][concentracion]" class="form-control form-control-sm" placeholder="Ej: 500mg">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Vía de Administración</label>
+                                <select name="receta_medicamentos[0][via]" class="form-select form-select-sm">
+                                    <option value="">Seleccione</option>
+                                    <option value="Oral">Oral</option>
+                                    <option value="Intravenosa">Intravenosa</option>
+                                    <option value="Intramuscular">Intramuscular</option>
+                                    <option value="Subcutánea">Subcutánea</option>
+                                    <option value="Tópica">Tópica</option>
+                                    <option value="Sublingual">Sublingual</option>
+                                    <option value="Rectal">Rectal</option>
+                                    <option value="Inhalatoria">Inhalatoria</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Dosis <span class="text-danger">*</span></label>
+                                <input type="text" name="receta_medicamentos[0][dosis]" class="form-control form-control-sm" placeholder="Ej: 1 tableta" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Frecuencia <span class="text-danger">*</span></label>
+                                <input type="text" name="receta_medicamentos[0][frecuencia]" class="form-control form-control-sm" placeholder="Ej: Cada 8 horas" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Duración <span class="text-danger">*</span></label>
+                                <input type="text" name="receta_medicamentos[0][duracion]" class="form-control form-control-sm" placeholder="Ej: 7 días" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Cantidad (Números y Letras)</label>
+                                <input type="text" name="receta_medicamentos[0][cantidad]" class="form-control form-control-sm" placeholder="Ej: 2 (dos)">
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label fw-semibold">Indicaciones específicas</label>
+                                <input type="text" name="receta_medicamentos[0][indicaciones]" class="form-control form-control-sm" placeholder="Instrucciones para este medicamento...">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Advertencias para este medicamento</label>
+                                <input type="text" name="receta_medicamentos[0][advertencias]" class="form-control form-control-sm" placeholder="Ej: Tomar con alimentos, no conducir...">
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="text-end">
-                        <a href="{{ route('recetas.index', $historial) }}" class="btn btn-secondary">
-                            <i class="fas fa-times me-1"></i> Cancelar
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-1"></i> Guardar Receta
-                        </button>
+                <!-- Advertencias Generales -->
+                <div class="row g-3 mt-3">
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Advertencias Generales</label>
+                        <textarea name="advertencias" class="form-control" rows="2" placeholder="Advertencias para el paciente..."></textarea>
                     </div>
-                </form>
-            </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Signos de Alarma</label>
+                        <textarea name="signos_alarma" class="form-control" rows="2" placeholder="Signos de alarma a tener en cuenta..."></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Recomendaciones no farmacológicas</label>
+                        <textarea name="recomendaciones_no_farmacologicas" class="form-control" rows="2" placeholder="Recomendaciones adicionales..."></textarea>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> Guardar Receta
+                    </button>
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Cancelar
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let medicamentoIndex = 1; // Empezamos en 1 porque el 0 ya está en el HTML
+
+    // ===== AGREGAR MEDICAMENTO =====
+    document.getElementById('agregarMedicamento')?.addEventListener('click', function() {
+        const container = document.getElementById('medicamentosContainer');
+        const newIndex = medicamentoIndex++;
+        
+        const row = document.createElement('div');
+        row.className = 'medicamento-row border rounded-3 p-3 mb-3';
+        row.style.cssText = 'background: #f8faff;';
+        row.dataset.index = newIndex;
+        
+        row.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-semibold text-primary">Medicamento #${newIndex + 1}</span>
+                <button type="button" class="btn btn-sm btn-danger eliminar-medicamento">
+                    <i class="fas fa-times me-1"></i> Eliminar
+                </button>
+            </div>
+            <div class="row g-2">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Medicamento <span class="text-danger">*</span></label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][medicamento]" class="form-control form-control-sm" placeholder="Ej: Paracetamol" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Presentación</label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][presentacion]" class="form-control form-control-sm" placeholder="Ej: Tabletas">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Concentración</label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][concentracion]" class="form-control form-control-sm" placeholder="Ej: 500mg">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Vía de Administración</label>
+                    <select name="receta_medicamentos[${newIndex}][via]" class="form-select form-select-sm">
+                        <option value="">Seleccione</option>
+                        <option value="Oral">Oral</option>
+                        <option value="Intravenosa">Intravenosa</option>
+                        <option value="Intramuscular">Intramuscular</option>
+                        <option value="Subcutánea">Subcutánea</option>
+                        <option value="Tópica">Tópica</option>
+                        <option value="Sublingual">Sublingual</option>
+                        <option value="Rectal">Rectal</option>
+                        <option value="Inhalatoria">Inhalatoria</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Dosis <span class="text-danger">*</span></label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][dosis]" class="form-control form-control-sm" placeholder="Ej: 1 tableta" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Frecuencia <span class="text-danger">*</span></label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][frecuencia]" class="form-control form-control-sm" placeholder="Ej: Cada 8 horas" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Duración <span class="text-danger">*</span></label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][duracion]" class="form-control form-control-sm" placeholder="Ej: 7 días" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Cantidad (Números y Letras)</label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][cantidad]" class="form-control form-control-sm" placeholder="Ej: 2 (dos)">
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label fw-semibold">Indicaciones específicas</label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][indicaciones]" class="form-control form-control-sm" placeholder="Instrucciones para este medicamento...">
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label fw-semibold">Advertencias para este medicamento</label>
+                    <input type="text" name="receta_medicamentos[${newIndex}][advertencias]" class="form-control form-control-sm" placeholder="Ej: Tomar con alimentos, no conducir...">
+                </div>
+            </div>
+        `;
+        
+        container.appendChild(row);
+        actualizarBotonesEliminar();
+        actualizarNumeros();
+    });
+
+    // ===== ELIMINAR MEDICAMENTO =====
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.eliminar-medicamento')) {
+            const btn = e.target.closest('.eliminar-medicamento');
+            const row = btn.closest('.medicamento-row');
+            if (document.querySelectorAll('.medicamento-row').length > 1) {
+                row.remove();
+                actualizarNumeros();
+                actualizarBotonesEliminar();
+            }
+        }
+    });
+
+    function actualizarNumeros() {
+        document.querySelectorAll('.medicamento-row').forEach((row, index) => {
+            const label = row.querySelector('.fw-semibold');
+            if (label) {
+                label.textContent = `Medicamento #${index + 1}`;
+            }
+            const inputs = row.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                const name = input.getAttribute('name');
+                if (name) {
+                    const newName = name.replace(/\[\d+\]/, `[${index}]`);
+                    input.setAttribute('name', newName);
+                }
+            });
+        });
+    }
+
+    function actualizarBotonesEliminar() {
+        const rows = document.querySelectorAll('.medicamento-row');
+        const buttons = document.querySelectorAll('.eliminar-medicamento');
+        buttons.forEach((btn) => {
+            if (rows.length <= 1) {
+                btn.disabled = true;
+            } else {
+                btn.disabled = false;
+            }
+        });
+    }
+
+    actualizarBotonesEliminar();
+});
+</script>
+@endpush
 @endsection
