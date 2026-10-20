@@ -30,28 +30,27 @@ class UsuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-        public function store(Request $request)
+       public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'cedula' => 'required|string|max:20',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
             'role' => 'required|string|exists:roles,name',
             'especialidad' => 'nullable|string|max:100',
         ]);
 
-        // Limpiamos la cédula: solo números
         $cedulaLimpia = preg_replace('/[^0-9]/', '', $validated['cedula']);
 
-        $user = new User();
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->cedula = $cedulaLimpia; 
-        $user->cedula_hash = hash('sha256', $cedulaLimpia); // Forzamos el hash
-        $user->password = Hash::make($validated['password']);
-        $user->especialidad = $validated['especialidad'] ?? null;
-        $user->save();
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'cedula' => $cedulaLimpia,
+            'cedula_hash' => hash('sha256', $cedulaLimpia),
+            'password' => Hash::make($validated['password']),
+            'especialidad' => $validated['especialidad'] ?? null,
+        ]);
 
         $user->assignRole($validated['role']);
 
@@ -81,15 +80,15 @@ class UsuarioController extends Controller
             'especialidad' => 'nullable|string|max:100',
         ]);
 
-        // Limpiamos la cédula: solo números
         $cedulaLimpia = preg_replace('/[^0-9]/', '', $validated['cedula']);
 
-        $usuario->name = $validated['name'];
-        $usuario->email = $validated['email'];
-        $usuario->cedula = $cedulaLimpia;
-        $usuario->cedula_hash = hash('sha256', $cedulaLimpia); // Forzamos el hash
-        $usuario->especialidad = $validated['especialidad'] ?? null;
-        $usuario->save();
+        $usuario->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'cedula' => $cedulaLimpia,
+            'cedula_hash' => hash('sha256', $cedulaLimpia),
+            'especialidad' => $validated['especialidad'] ?? null,
+        ]);
 
         $usuario->syncRoles([$validated['role']]);
 
@@ -115,10 +114,10 @@ class UsuarioController extends Controller
         /**
      * Resetear la contraseña de un usuario (solo para administradores).
      */
-    public function resetPassword(Request $request, User $usuario)
+        public function resetPassword(Request $request, User $usuario)
     {
         $request->validate([
-            'password' => 'required|string|min:8|confirmed',
+            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
         ]);
 
         $usuario->password = Hash::make($request->password);

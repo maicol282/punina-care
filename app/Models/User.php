@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     protected $encryptable = [
         'email',
-        'cedula',
+        
     ];
 
     protected $fillable = [
@@ -57,19 +57,5 @@ class User extends Authenticatable
     return $this->hasMany(ConsultaTelemedicina::class, 'medico_id');
     }
 
-        /**
-     * Mutador para la cédula: cada vez que se asigna una cédula,
-     * se calcula automáticamente su hash SHA-256 para búsquedas rápidas.
-     */
-    public function setCedulaAttribute($value)
-    {
-        // 1. Limpiamos la cédula: quitamos TODO lo que no sea número
-        $cedulaLimpia = $value ? preg_replace('/[^0-9]/', '', $value) : null;
-        
-        // 2. Guardamos la cédula limpia (el trait Encryptable la encriptará)
-        $this->attributes['cedula'] = $cedulaLimpia;
-        
-        // 3. Calculamos el hash usando la cédula 100% numérica
-        $this->attributes['cedula_hash'] = $cedulaLimpia ? hash('sha256', $cedulaLimpia) : null;
-    }
+    
 }

@@ -24,19 +24,20 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="cedula" class="form-label">Cédula <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control @error('cedula') is-invalid @enderror" 
-                           id="cedula" name="cedula" value="{{ old('cedula', $usuario->cedula) }}" required placeholder="Ej: 1712345678">
-                    @error('cedula')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="col-md-6 mb-3">
                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" 
                            id="email" name="email" value="{{ old('email', $usuario->email) }}" required>
                     @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- CAMPO CÉDULA -->
+                <div class="col-md-6 mb-3">
+                    <label for="cedula" class="form-label">Cédula <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('cedula') is-invalid @enderror" 
+                           id="cedula" name="cedula" value="{{ old('cedula', $usuario->cedula) }}" required placeholder="Ej: 1712345678">
+                    @error('cedula')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -48,7 +49,7 @@
                         <option value="">Seleccione un rol...</option>
                         @foreach($roles as $rol)
                             <option value="{{ $rol->name }}" 
-                                {{ $usuario->hasRole($rol->name) ? 'selected' : '' }}>
+                                {{ old('role', $usuario->hasRole($rol->name) ? $rol->name : '') == $rol->name ? 'selected' : '' }}>
                                 {{ $rol->name }}
                             </option>
                         @endforeach
@@ -57,29 +58,32 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                
                 <div class="col-md-6 mb-3">
-    <label for="especialidad" class="form-label">Especialidad</label>
-    <select class="form-select @error('especialidad') is-invalid @enderror" 
-            id="especialidad" name="especialidad">
-        <option value="">Seleccione una especialidad...</option>
-        <option value="Medicina General" {{ old('especialidad', $usuario->especialidad) == 'Medicina General' ? 'selected' : '' }}>Medicina General</option>
-        <option value="Cardiología" {{ old('especialidad', $usuario->especialidad) == 'Cardiología' ? 'selected' : '' }}>Cardiología</option>
-        <option value="Pediatría" {{ old('especialidad', $usuario->especialidad) == 'Pediatría' ? 'selected' : '' }}>Pediatría</option>
-        <option value="Ginecología" {{ old('especialidad', $usuario->especialidad) == 'Ginecología' ? 'selected' : '' }}>Ginecología</option>
-        <option value="Traumatología" {{ old('especialidad', $usuario->especialidad) == 'Traumatología' ? 'selected' : '' }}>Traumatología</option>
-        <option value="Dermatología" {{ old('especialidad', $usuario->especialidad) == 'Dermatología' ? 'selected' : '' }}>Dermatología</option>
-        <option value="Neurología" {{ old('especialidad', $usuario->especialidad) == 'Neurología' ? 'selected' : '' }}>Neurología</option>
-        <option value="Psiquiatría" {{ old('especialidad', $usuario->especialidad) == 'Psiquiatría' ? 'selected' : '' }}>Psiquiatría</option>
-        <option value="Oftalmología" {{ old('especialidad', $usuario->especialidad) == 'Oftalmología' ? 'selected' : '' }}>Oftalmología</option>
-        <option value="Odontología" {{ old('especialidad', $usuario->especialidad) == 'Odontología' ? 'selected' : '' }}>Odontología</option>
-    </select>
-    @error('especialidad')<div class="invalid-feedback">{{ $message }}</div>@enderror
-</div>
+                    <label for="especialidad" class="form-label">Especialidad</label>
+                    <select class="form-select @error('especialidad') is-invalid @enderror" 
+                            id="especialidad" name="especialidad">
+                        <option value="">Seleccione una especialidad...</option>
+                        <option value="Medicina General" {{ old('especialidad', $usuario->especialidad) == 'Medicina General' ? 'selected' : '' }}>Medicina General</option>
+                        <option value="Cardiología" {{ old('especialidad', $usuario->especialidad) == 'Cardiología' ? 'selected' : '' }}>Cardiología</option>
+                        <option value="Pediatría" {{ old('especialidad', $usuario->especialidad) == 'Pediatría' ? 'selected' : '' }}>Pediatría</option>
+                        <option value="Ginecología" {{ old('especialidad', $usuario->especialidad) == 'Ginecología' ? 'selected' : '' }}>Ginecología</option>
+                        <option value="Traumatología" {{ old('especialidad', $usuario->especialidad) == 'Traumatología' ? 'selected' : '' }}>Traumatología</option>
+                        <option value="Dermatología" {{ old('especialidad', $usuario->especialidad) == 'Dermatología' ? 'selected' : '' }}>Dermatología</option>
+                        <option value="Neurología" {{ old('especialidad', $usuario->especialidad) == 'Neurología' ? 'selected' : '' }}>Neurología</option>
+                        <option value="Psiquiatría" {{ old('especialidad', $usuario->especialidad) == 'Psiquiatría' ? 'selected' : '' }}>Psiquiatría</option>
+                        <option value="Oftalmología" {{ old('especialidad', $usuario->especialidad) == 'Oftalmología' ? 'selected' : '' }}>Oftalmología</option>
+                        <option value="Odontología" {{ old('especialidad', $usuario->especialidad) == 'Odontología' ? 'selected' : '' }}>Odontología</option>
+                    </select>
+                    @error('especialidad')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
 
             <div class="alert alert-info mt-3">
                 <i class="fas fa-info-circle me-2"></i>
-                Si deseas cambiar la contraseña, usa el registro de nuevo usuario o la opción de recuperación.
+                Si deseas cambiar la contraseña de este usuario, usa el botón de la <strong>llave azul</strong> en la tabla de usuarios.
             </div>
 
             <div class="text-end">

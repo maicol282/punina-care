@@ -40,11 +40,11 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6 mb-3">
+                             <div class="col-md-6 mb-3">
                     <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" 
                            id="password" name="password" required>
-                    <small class="text-muted">Mínimo 8 caracteres</small>
+                    <small class="text-muted">Mínimo 8 caracteres, incluir mayúscula, minúscula, número y símbolo.</small>
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
