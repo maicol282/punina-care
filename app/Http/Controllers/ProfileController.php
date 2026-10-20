@@ -20,15 +20,25 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+       public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $data = $request->validated();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Si viene cédula, limpiamos y recalculamos el hash
+        if (!empty($data['cedula'])) {
+            $cedulaLimpia = preg_replace('/[^0-9]/', '', $data['cedula']);
+            $data['cedula'] = $cedulaLimpia;
+            $data['cedula_hash'] = hash('sha256', $cedulaLimpia);
         }
 
-        $request->user()->save();
+        $user->fill($data);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

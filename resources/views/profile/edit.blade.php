@@ -10,36 +10,7 @@
     </div>
     <div class="card-body">
         
-        <!-- ===== DATOS PERSONALES ===== -->
-        <form action="{{ route('profile.update') }}" method="POST">
-            @csrf
-            @method('PUT')
-            
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Nombre</label>
-                    <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}">
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Cédula</label>
-                    <input type="text" name="cedula" class="form-control" value="{{ Auth::user()->cedula }}">
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Especialidad</label>
-                    <input type="text" name="especialidad" class="form-control" value="{{ Auth::user()->especialidad }}">
-                </div>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save me-1"></i> Guardar Cambios
-            </button>
-        </form>
 
-        <hr>
 
         <!-- ===== FIRMA DIGITAL ===== -->
         <div class="card mt-4">

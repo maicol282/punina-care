@@ -246,6 +246,7 @@ Route::middleware(['auth'])->group(function () {
     // 18. USUARIOS
     // =====================================================================
     Route::resource('usuarios', UsuarioController::class);
+    Route::post('/usuarios/{usuario}/reset-password', [App\Http\Controllers\UsuarioController::class, 'resetPassword'])->name('usuarios.reset-password');
 
     // =====================================================================
     // 19. PERFIL Y FIRMA

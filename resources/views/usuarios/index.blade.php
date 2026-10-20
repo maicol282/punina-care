@@ -36,18 +36,26 @@
                             @endforeach
                         </td>
                         <td>{{ $usuario->created_at->diffForHumans() }}</td>
-                        <td>
-                            <div class="btn-group">
-                                <a href="{{ route('usuarios.edit', $usuario) }}" class="btn btn-sm btn-warning">
+                                                   <td>
+                            <div class="d-flex gap-1">
+                                <a href="{{ route('usuarios.edit', $usuario) }}" class="btn btn-sm btn-warning" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
+
+                                <!-- Botón para cambiar contraseña -->
+                                <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalReset{{ $usuario->id }}" title="Cambiar contraseña">
+                                    <i class="fas fa-key"></i>
+                                </button>
+
                                 @if($usuario->id !== auth()->id())
                                 <button type="button" class="btn btn-sm btn-danger"
-                                        onclick="confirmDelete(event, 'delete-form-{{ $usuario->id }}')">
+                                        onclick="confirmDelete(event, 'delete-form-{{ $usuario->id }}')" title="Eliminar">
                                     <i class="fas fa-trash"></i>
                                 </button>
                                 @endif
                             </div>
+
+                            <!-- Formulario oculto para eliminar -->
                             <form id="delete-form-{{ $usuario->id }}" 
                                   action="{{ route('usuarios.destroy', $usuario) }}" 
                                   method="POST" class="d-none">
@@ -55,6 +63,7 @@
                                 @method('DELETE')
                             </form>
                         </td>
+                                               
                     </tr>
                     @empty
                     <tr>
@@ -67,6 +76,43 @@
         {{ $usuarios->links() }}
     </div>
 </div>
+<!-- MODALES DE RESETEO DE CONTRASEÑA (Fuera de la tabla para que funcionen bien) -->
+@foreach($usuarios as $usuario)
+<div class="modal fade" id="modalReset{{ $usuario->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('usuarios.reset-password', $usuario) }}" method="POST">
+                @csrf
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-key me-2"></i>Cambiar contraseña: {{ $usuario->name }}
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nueva Contraseña <span class="text-danger">*</span></label>
+                        <input type="password" name="password" class="form-control" required minlength="8">
+                        <small class="text-muted">Mínimo 8 caracteres.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirmar Contraseña <span class="text-danger">*</span></label>
+                        <input type="password" name="password_confirmation" class="form-control" required minlength="8">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-info text-white">
+                        <i class="fas fa-save me-1"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
 @push('scripts')
 <script>
@@ -77,5 +123,6 @@
             document.getElementById(formId).submit();
         }
     }
+    
 </script>
 @endpush

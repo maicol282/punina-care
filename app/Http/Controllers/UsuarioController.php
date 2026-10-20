@@ -111,4 +111,20 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index')
             ->with('success', 'Usuario eliminado exitosamente.');
     }
+
+        /**
+     * Resetear la contraseña de un usuario (solo para administradores).
+     */
+    public function resetPassword(Request $request, User $usuario)
+    {
+        $request->validate([
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $usuario->password = Hash::make($request->password);
+        $usuario->save();
+
+        return redirect()->route('usuarios.index')
+            ->with('success', 'Contraseña actualizada correctamente para ' . $usuario->name);
+    }
 }
