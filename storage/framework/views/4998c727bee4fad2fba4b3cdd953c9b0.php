@@ -82,6 +82,9 @@
                             <a href="<?php echo e(route('recetas.index', $historial->id)); ?>" class="btn btn-success px-4 py-2">
                                 <i class="fas fa-prescription me-2"></i> Recetas
                             </a>
+                            <a href="<?php echo e(route('pedidos-examenes.create', ['paciente_id' => $paciente->id, 'historial_id' => $historial->id])); ?>" class="btn btn-sm btn-info text-white">
+                            <i class="fas fa-flask me-1"></i> Exámenes
+                            </a>
                         </div>
                     </div>
                 </div>

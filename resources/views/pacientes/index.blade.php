@@ -192,6 +192,10 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                                 @endif
+
+                               <!-- <a href="{{ route('pedidos-examenes.create', ['paciente_id' => $paciente->id]) }}" class="btn btn-info text-white" title="Pedir Examenes" data-bs-toggle="tooltip">
+                                <i class="fas fa-flask me-1"></i>
+                                </a> -->
                             </div>
                         </td>
                     </tr>

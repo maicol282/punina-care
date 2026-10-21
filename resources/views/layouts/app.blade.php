@@ -123,6 +123,14 @@
                     <span>Reposos</span>
                 </a>
             </li> -->
+
+               <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('pedidos-examenes.*') ? 'active' : '' }}" href="{{ route('pedidos-examenes.index') }}">
+                <i class="fas fa-flask"></i>
+                <span>Pedidos de Exámenes</span>
+                 </a>
+                </li>  
+
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('certificados.*') ? 'active' : '' }}" 
                 href="{{ route('certificados.index') }}">

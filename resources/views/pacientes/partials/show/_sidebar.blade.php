@@ -18,6 +18,8 @@
                     <i class="fas fa-edit me-1"></i> Editar Perfil
                 </a>
                 @endcan
+
+                
                 
                 @can('crear historiales')
                 <a href="{{ route('historial.create', $paciente) }}" class="btn btn-success">
@@ -31,6 +33,13 @@
                     <i class="fas fa-trash me-1"></i> Eliminar Paciente
                 </button>
                 @endif
+
+              <!--   <a href="{{ route('pedidos-examenes.create', ['paciente_id' => $paciente->id]) }}" class="btn btn-info text-white">
+                 <i class="fas fa-flask me-1"></i> Pedir Exámenes
+                    </a> -->
+                    <a href="{{ route('pedidos-examenes.index', ['paciente_id' => $paciente->id]) }}" class="btn btn-secondary">
+                     <i class="fas fa-list me-1"></i> Ver Pedidos de Exámenes
+                    </a>
             </div>
         </div>
     </div>

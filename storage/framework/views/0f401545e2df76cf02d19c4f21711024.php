@@ -193,6 +193,10 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                                 <?php endif; ?>
+
+                               <!-- <a href="<?php echo e(route('pedidos-examenes.create', ['paciente_id' => $paciente->id])); ?>" class="btn btn-info text-white" title="Pedir Examenes" data-bs-toggle="tooltip">
+                                <i class="fas fa-flask me-1"></i>
+                                </a> -->
                             </div>
                         </td>
                     </tr>

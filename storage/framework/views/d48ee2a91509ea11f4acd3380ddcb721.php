@@ -20,6 +20,8 @@
                     <i class="fas fa-edit me-1"></i> Editar Perfil
                 </a>
                 <?php endif; ?>
+
+                
                 
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('crear historiales')): ?>
                 <a href="<?php echo e(route('historial.create', $paciente)); ?>" class="btn btn-success">
@@ -33,6 +35,13 @@
                     <i class="fas fa-trash me-1"></i> Eliminar Paciente
                 </button>
                 <?php endif; ?>
+
+              <!--   <a href="<?php echo e(route('pedidos-examenes.create', ['paciente_id' => $paciente->id])); ?>" class="btn btn-info text-white">
+                 <i class="fas fa-flask me-1"></i> Pedir Exámenes
+                    </a> -->
+                    <a href="<?php echo e(route('pedidos-examenes.index', ['paciente_id' => $paciente->id])); ?>" class="btn btn-secondary">
+                     <i class="fas fa-list me-1"></i> Ver Pedidos de Exámenes
+                    </a>
             </div>
         </div>
     </div>

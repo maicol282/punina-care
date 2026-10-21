@@ -89,6 +89,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/historial/{historial}', [HistorialClinicoController::class, 'destroy'])
         ->name('historial.destroy');
 
+        // ===== RUTAS DE PEDIDOS DE EXÁMENES =====
+    Route::get('/pedidos-examenes/crear', [App\Http\Controllers\PedidoExamenController::class, 'create'])->name('pedidos-examenes.create');
+    Route::post('/pedidos-examenes', [App\Http\Controllers\PedidoExamenController::class, 'store'])->name('pedidos-examenes.store');
+    Route::get('/pedidos-examenes', [App\Http\Controllers\PedidoExamenController::class, 'index'])->name('pedidos-examenes.index');
+    Route::get('/pedidos-examenes/{pedido}/pdf', [App\Http\Controllers\PedidoExamenController::class, 'pdf'])->name('pedidos-examenes.pdf');
+    
+
     // =====================================================================
     // 5. SEGUIMIENTOS
     // =====================================================================

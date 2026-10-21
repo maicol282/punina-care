@@ -123,6 +123,14 @@
                     <span>Reposos</span>
                 </a>
             </li> -->
+
+               <li class="nav-item">
+                <a class="nav-link <?php echo e(request()->routeIs('pedidos-examenes.*') ? 'active' : ''); ?>" href="<?php echo e(route('pedidos-examenes.index')); ?>">
+                <i class="fas fa-flask"></i>
+                <span>Pedidos de Exámenes</span>
+                 </a>
+                </li>  
+
             <li class="nav-item">
                 <a class="nav-link <?php echo e(request()->routeIs('certificados.*') ? 'active' : ''); ?>" 
                 href="<?php echo e(route('certificados.index')); ?>">
