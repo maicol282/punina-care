@@ -10,7 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Helpers\PercentageHelper;
 class SeguridadDashboardController extends Controller
 {
     public function index()
@@ -20,13 +20,13 @@ class SeguridadDashboardController extends Controller
         $totalHistoriales = HistorialClinico::count();
         $totalSeguimientos = Seguimiento::count();
         
-        // Próximas citas (placeholder - sin módulo de citas aún)
+        // Próximas citas (placeholder)
         $proximasCitas = collect([]);
 
         // ============ MESES PARA GRÁFICOS ============
         $meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
-        // ============ GRÁFICO: CONSULTAS POR MES ============
+        // ============ CONSULTAS POR MES ============
         $consultasPorMes = HistorialClinico::select(
             DB::raw('YEAR(fecha_consulta) as año'),
             DB::raw('MONTH(fecha_consulta) as mes'),
@@ -38,12 +38,15 @@ class SeguridadDashboardController extends Controller
         ->orderBy('mes', 'asc')
         ->get();
 
-        // ============ GRÁFICO: PACIENTES POR GÉNERO ============
-        $pacientesGenero = Paciente::select('genero', DB::raw('COUNT(*) as total'))
-            ->groupBy('genero')
-            ->get();
+        // ============ PACIENTES POR GÉNERO (con porcentaje) ============
+        $pacientesGenero = PercentageHelper::addPercentage(
+            Paciente::select('genero', DB::raw('COUNT(*) as total'))
+                ->groupBy('genero')
+                ->get(),
+            $totalPacientes
+        );
 
-        // ============ GRÁFICO: NUEVOS PACIENTES POR MES ============
+        // ============ PACIENTES POR MES ============
         $pacientesPorMes = Paciente::select(
             DB::raw('YEAR(created_at) as año'),
             DB::raw('MONTH(created_at) as mes'),
@@ -55,7 +58,7 @@ class SeguridadDashboardController extends Controller
         ->orderBy('mes', 'asc')
         ->get();
 
-        // ============ GRÁFICO: RANGOS DE EDAD (CALCULADA) ============
+        // ============ RANGOS DE EDAD (con porcentaje) ============
         $pacientes = Paciente::whereNotNull('fecha_nacimiento')->get();
         
         $rangosEdad = [
@@ -70,65 +73,86 @@ class SeguridadDashboardController extends Controller
         foreach ($pacientes as $paciente) {
             if ($paciente->fecha_nacimiento) {
                 $edad = Carbon::parse($paciente->fecha_nacimiento)->age;
-                
-                if ($edad < 18) {
-                    $rangosEdad['0-17 años']++;
-                } elseif ($edad <= 30) {
-                    $rangosEdad['18-30 años']++;
-                } elseif ($edad <= 45) {
-                    $rangosEdad['31-45 años']++;
-                } elseif ($edad <= 60) {
-                    $rangosEdad['46-60 años']++;
-                } else {
-                    $rangosEdad['60+ años']++;
-                }
-            } else {
-                $rangosEdad['Sin especificar']++;
-            }
+                if ($edad < 18) { $rangosEdad['0-17 años']++; }
+                elseif ($edad <= 30) { $rangosEdad['18-30 años']++; }
+                elseif ($edad <= 45) { $rangosEdad['31-45 años']++; }
+                elseif ($edad <= 60) { $rangosEdad['46-60 años']++; }
+                else { $rangosEdad['60+ años']++; }
+            } else { $rangosEdad['Sin especificar']++; }
         }
         
-        $edadesStats = collect($rangosEdad)->map(function($total, $rango) {
-            return (object) ['rango_edad' => $rango, 'total' => $total];
+        $edadesStats = collect($rangosEdad)->map(function($total, $rango) use ($totalPacientes) {
+            return (object) [
+                'rango_edad' => $rango, 
+                'total' => $total,
+                'porcentaje' => $totalPacientes > 0 ? round(($total / $totalPacientes) * 100, 1) : 0
+            ];
         })->filter(function($item) {
             return $item->total > 0;
         })->values();
 
-        // ============ GRÁFICO: TOP 5 DIAGNÓSTICOS ============
-        $topDiagnosticos = Diagnostico::select('descripcion', DB::raw('COUNT(*) as total'))
-            ->whereNotNull('descripcion')
-            ->groupBy('descripcion')
-            ->orderBy('total', 'desc')
-            ->take(5)
-            ->get();
+        // ============ TOP 5 DIAGNÓSTICOS (con porcentaje) ============
+        $topDiagnosticos = PercentageHelper::addPercentage(
+            Diagnostico::select('descripcion', DB::raw('COUNT(*) as total'))
+                ->whereNotNull('descripcion')
+                ->groupBy('descripcion')
+                ->orderBy('total', 'desc')
+                ->take(5)
+                ->get(),
+            $totalHistoriales
+        );
 
-        // ============ GRÁFICO: TOP 5 MÉDICOS ============
-        $topMedicos = HistorialClinico::select('doctor', DB::raw('COUNT(*) as total'))
-            ->whereNotNull('doctor')
-            ->where('doctor', '!=', '')
-            ->groupBy('doctor')
-            ->orderBy('total', 'desc')
-            ->take(5)
-            ->get();
+        // ============ TOP 5 MÉDICOS (con porcentaje) ============
+        $topMedicos = PercentageHelper::addPercentage(
+            HistorialClinico::select('doctor', DB::raw('COUNT(*) as total'))
+                ->whereNotNull('doctor')
+                ->where('doctor', '!=', '')
+                ->groupBy('doctor')
+                ->orderBy('total', 'desc')
+                ->take(5)
+                ->get(),
+            $totalHistoriales
+        );
 
-        // ============ GRÁFICO: TOP CIE-10 ============
-        $topCie10 = Diagnostico::select('cie10_code', DB::raw('COUNT(*) as total'))
-            ->whereNotNull('cie10_code')
-            ->where('cie10_code', '!=', '')
-            ->groupBy('cie10_code')
-            ->orderBy('total', 'desc')
-            ->take(5)
-            ->get();
+        // ============ TOP CIE-10 (con porcentaje) ============
+        $topCie10 = PercentageHelper::addPercentage(
+            Diagnostico::select('cie10_code', DB::raw('COUNT(*) as total'))
+                ->whereNotNull('cie10_code')
+                ->where('cie10_code', '!=', '')
+                ->groupBy('cie10_code')
+                ->orderBy('total', 'desc')
+                ->take(5)
+                ->get(),
+            $totalHistoriales
+        );
 
         // ============ ÚLTIMOS PACIENTES ============
-        $ultimosPacientes = Paciente::orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
+        $ultimosPacientes = Paciente::orderBy('created_at', 'desc')->take(5)->get();
 
         // ============ ACTIVIDAD RECIENTE ============
         $actividadReciente = HistorialClinico::with('paciente')
-            ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
+            ->orderBy('created_at', 'desc')->take(5)->get();
+
+        // ============ ESTADÍSTICAS GEOGRÁFICAS (con porcentaje) ============
+        $pacientesPorCiudad = PercentageHelper::addPercentage(
+            Paciente::select('ciudad', DB::raw('count(*) as total'))
+                ->whereNotNull('ciudad')
+                ->where('ciudad', '!=', '')
+                ->groupBy('ciudad')
+                ->orderBy('total', 'desc')
+                ->get(),
+            $totalPacientes
+        );
+
+        $pacientesPorProvincia = PercentageHelper::addPercentage(
+            Paciente::select('provincia', DB::raw('count(*) as total'))
+                ->whereNotNull('provincia')
+                ->where('provincia', '!=', '')
+                ->groupBy('provincia')
+                ->orderBy('total', 'desc')
+                ->get(),
+            $totalPacientes
+        );
 
         return view('seguridad.dashboard', compact(
             'totalPacientes',
@@ -144,7 +168,9 @@ class SeguridadDashboardController extends Controller
             'topMedicos',
             'topCie10',
             'ultimosPacientes',
-            'actividadReciente'
+            'actividadReciente',
+            'pacientesPorCiudad',
+            'pacientesPorProvincia'
         ));
     }
 }

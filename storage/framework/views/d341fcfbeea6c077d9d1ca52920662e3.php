@@ -107,7 +107,10 @@
 
                                 <?php endif; ?>
                             </span>
-                            <span class="badge bg-white text-dark border rounded-pill"><?php echo e($genero->total); ?></span>
+                                                        <span class="badge bg-white text-dark border rounded-pill">
+                                <?php echo e($genero->total); ?> (<?php echo e($genero->porcentaje); ?>%)
+                                
+                            </span>
                         </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
@@ -137,8 +140,19 @@
                 <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-birthday-cake me-2 text-warning"></i> Distribución por Edad</h6>
             </div>
             <div class="card-body p-4">
-                <div style="height: 250px; position: relative;">
+                <div style="height: 180px; position: relative;">
                     <canvas id="edadChart"></canvas>
+                                    <!-- Listado de porcentajes por edad -->
+                <div class="mt-3">
+                    <?php $__currentLoopData = $edadesStats; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $edad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                            <span class="fw-medium text-dark"><?php echo e($edad->rango_edad); ?></span>
+                            <span class="badge bg-white text-dark border rounded-pill">
+                                <?php echo e($edad->total); ?> (<?php echo e($edad->porcentaje); ?>%)
+                            </span>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
                 </div>
             </div>
         </div>
@@ -153,8 +167,22 @@
                 <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-stethoscope me-2 text-info"></i> Top 5 Diagnósticos</h6>
             </div>
             <div class="card-body p-4">
-                <div style="height: 250px; position: relative;">
+                <div style="height: 120px; position: relative;">
                     <canvas id="topDiagnosticosChart"></canvas>
+                                    <!-- Listado de porcentajes -->
+                <div class="mt-3">
+                    <?php $__currentLoopData = $topDiagnosticos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $diag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                            <span class="fw-medium text-dark text-truncate" style="max-width: 70%;" title="<?php echo e($diag->descripcion); ?>">
+                                <?php echo e(Str::limit($diag->descripcion, 30)); ?>
+
+                            </span>
+                            <span class="badge bg-white text-dark border rounded-pill">
+                                <?php echo e($diag->total); ?> (<?php echo e($diag->porcentaje); ?>%)
+                            </span>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
                 </div>
             </div>
         </div>
@@ -166,8 +194,19 @@
                 <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-user-md me-2 text-primary"></i> Top 5 Médicos con más consultas</h6>
             </div>
             <div class="card-body p-4">
-                <div style="height: 250px; position: relative;">
+                <div style="height: 120px; position: relative;">
                     <canvas id="medicosChart"></canvas>
+                                    <!-- Listado de porcentajes -->
+                <div class="mt-3">
+                    <?php $__currentLoopData = $topMedicos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $medico): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                            <span class="fw-medium text-dark"><?php echo e($medico->doctor); ?></span>
+                            <span class="badge bg-white text-dark border rounded-pill">
+                                <?php echo e($medico->total); ?> (<?php echo e($medico->porcentaje); ?>%)
+                            </span>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
                 </div>
             </div>
         </div>
@@ -234,8 +273,22 @@
                 <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-code me-2 text-danger"></i> Códigos CIE-10 Frecuentes</h6>
             </div>
             <div class="card-body p-4">
-                <div style="height: 180px; position: relative;">
+                <div style="height: 150px; position: relative;">
                     <canvas id="cie10Chart"></canvas>
+                                    <!-- Listado de porcentajes -->
+                <div class="mt-3">
+                    <?php $__currentLoopData = $topCie10; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                            <span class="fw-medium text-dark">
+                                <i class="fas fa-code me-1 text-danger"></i> <?php echo e($cie->cie10_code); ?>
+
+                            </span>
+                            <span class="badge bg-white text-dark border rounded-pill">
+                                <?php echo e($cie->total); ?> (<?php echo e($cie->porcentaje); ?>%)
+                            </span>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
                 </div>
             </div>
         </div>
@@ -272,6 +325,87 @@
                     </li>
                     <?php endif; ?>
                 </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== DISTRIBUCIÓN GEOGRÁFICA ========== -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="card h-100 border-0">
+            <div class="card-header bg-transparent py-3">
+                <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-city me-2 text-primary"></i> Pacientes por Ciudad</h6>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="ps-4">Ciudad</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Porcentaje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $__empty_1 = true; $__currentLoopData = $pacientesPorCiudad; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ciudad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <tr>
+                                <td class="ps-4 fw-medium"><?php echo e($ciudad->ciudad); ?></td>
+                                <td class="text-center"><?php echo e($ciudad->total); ?></td>
+                                <td class="text-center">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill"><?php echo e($ciudad->porcentaje); ?>%</span>
+                                </td>
+                            </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                            <tr>
+                                <td colspan="3" class="text-center text-muted py-5">
+                                    <i class="fas fa-map-marker-slash fa-2x mb-3 opacity-50 d-block"></i>
+                                    No hay datos de ciudad registrados
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100 border-0">
+            <div class="card-header bg-transparent py-3">
+                <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-map-marker-alt me-2 text-success"></i> Pacientes por Provincia</h6>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="ps-4">Provincia</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Porcentaje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $__empty_1 = true; $__currentLoopData = $pacientesPorProvincia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $provincia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <tr>
+                                <td class="ps-4 fw-medium"><?php echo e($provincia->provincia); ?></td>
+                                <td class="text-center"><?php echo e($provincia->total); ?></td>
+                                <td class="text-center">
+                                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill"><?php echo e($provincia->porcentaje); ?>%</span>
+                                </td>
+                            </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                            <tr>
+                                <td colspan="3" class="text-center text-muted py-5">
+                                    <i class="fas fa-map-marker-slash fa-2x mb-3 opacity-50 d-block"></i>
+                                    No hay datos de provincia registrados
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

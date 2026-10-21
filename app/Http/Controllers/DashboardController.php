@@ -108,13 +108,37 @@ try {
 } catch (\Exception $e) {
     \Log::warning('Error al obtener top CIE-10: ' . $e->getMessage());
 }
+
+    // Pacientes por ciudad CON PORCENTAJE
+    $pacientesPorCiudad = Paciente::select('ciudad', DB::raw('count(*) as total'))
+        ->whereNotNull('ciudad')
+        ->where('ciudad', '!=', '')
+        ->groupBy('ciudad')
+        ->orderBy('total', 'desc')
+        ->get()
+        ->map(function ($item) use ($totalPacientes) {
+            $item->porcentaje = $totalPacientes > 0 ? round(($item->total / $totalPacientes) * 100, 1) : 0;
+            return $item;
+        });
+
+    // Pacientes por provincia CON PORCENTAJE
+    $pacientesPorProvincia = Paciente::select('provincia', DB::raw('count(*) as total'))
+        ->whereNotNull('provincia')
+        ->where('provincia', '!=', '')
+        ->groupBy('provincia')
+        ->orderBy('total', 'desc')
+        ->get()
+        ->map(function ($item) use ($totalPacientes) {
+            $item->porcentaje = $totalPacientes > 0 ? round(($item->total / $totalPacientes) * 100, 1) : 0;
+            return $item;
+        });
     
     return view('dashboard', compact(
         'totalPacientes',
         'totalHistoriales',
         'totalSeguimientos',
         'pacientesGenero',
-        'edadesStats',           // ← reemplaza a sangreStats
+        'edadesStats',           
         'proximasCitas',
         'ultimosPacientes',
         'consultasPorMes',
@@ -123,6 +147,8 @@ try {
         'topDiagnosticos',
         'consultasPorEspecialidad',
         'topCie10'
+        'pacientesPorCiudad',    
+        'pacientesPorProvincia'
     ));
 }
 }
