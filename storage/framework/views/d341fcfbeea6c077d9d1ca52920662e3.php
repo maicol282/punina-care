@@ -68,7 +68,12 @@
         </div>
     </div>
 </div>
-
+<!-- Botón de Exportar a Excel -->
+<div class="d-flex justify-content-end mb-3">
+    <a href="<?php echo e(route('seguridad.dashboard.exportar')); ?>" class="btn btn-success">
+        <i class="fas fa-file-excel me-1"></i> Exportar Estadísticas a Excel
+    </a>
+</div>
 <!-- ========== GRÁFICOS PRINCIPALES - FILA 1 ========== -->
 <div class="row g-4 mb-4">
     <div class="col-lg-8">

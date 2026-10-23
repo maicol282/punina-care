@@ -51,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/seguridad/dashboard', [SeguridadDashboardController::class, 'index'])
         ->name('seguridad.dashboard');
 
+    Route::get('/seguridad/dashboard/exportar-excel', [SeguridadDashboardController::class, 'exportarExcel'])->name('seguridad.dashboard.exportar');
+
     // =====================================================================
     // 2. PACIENTES
     // =====================================================================

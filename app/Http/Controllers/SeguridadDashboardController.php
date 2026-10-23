@@ -173,4 +173,11 @@ class SeguridadDashboardController extends Controller
             'pacientesPorProvincia'
         ));
     }
+        public function exportarExcel()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(
+            new \App\Exports\EstadisticasExport(),
+            'estadisticas-' . date('Y-m-d') . '.xlsx'
+        );
+    }
 }
