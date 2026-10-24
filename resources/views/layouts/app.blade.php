@@ -109,7 +109,7 @@
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('ia.*') ? 'active' : '' }}" href="{{ route('ia.index') }}">
                     <i class="fas fa-brain me-2"></i>
-                    <span>Itaca IA</span>
+                    <span>IA</span>
                     <span class="badge bg-success text-white ms-1" style="font-size: 8px;">Pro</span>
                 </a>
             </li>

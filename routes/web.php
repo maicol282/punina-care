@@ -249,7 +249,9 @@ Route::middleware(['auth'])->group(function () {
     // =====================================================================
     // 17. ASISTENTE MÉDICO IA
     // =====================================================================
-    Route::get('/asistente-ia', fn() => view('ia.index'))->name('ia.index');
+    // Ruta para mostrar la vista de IA
+    Route::get('/asistente-ia', [App\Http\Controllers\IaController::class, 'index'])->name('ia.index');
+    Route::post('/asistente-ia/chat', [App\Http\Controllers\IaController::class, 'chat'])->name('ia.chat');
 
     // =====================================================================
     // 18. USUARIOS
