@@ -19,8 +19,7 @@
                 <a href="{{ route('certificados.create', $historial) }}" class="btn btn-info text-white">
                     <i class="fas fa-certificate me-1"></i> Certificado
                 </a>
-                <a href="{{ route('reposos.create', $historial) }}" class="btn btn-secondary text-white">
-                    <i class="fas fa-bed me-1"></i> Reposo Médico
+               
                 </a>
                 <a href="{{ route('reportes.historial', $historial) }}" target="_blank" class="btn btn-success text-white">
                     <i class="fas fa-print me-1"></i> Imprimir PDF

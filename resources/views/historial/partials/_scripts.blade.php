@@ -1646,4 +1646,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// ============================================
+// TOGGLE PARA ANTECEDENTES PATOLÓGICOS (toggle-patologico)
+// ============================================
+document.querySelectorAll('.toggle-patologico').forEach(function(checkbox) {
+    const targetId = checkbox.dataset.target;
+    const textarea = document.getElementById(targetId);
+    
+    // Verificar estado inicial (para edit)
+    if (checkbox.checked && textarea) {
+        textarea.style.display = 'block';
+    }
+    
+    checkbox.addEventListener('change', function() {
+        if (textarea) {
+            if (this.checked) {
+                textarea.style.display = 'block';
+                textarea.focus();
+            } else {
+                textarea.style.display = 'none';
+                textarea.value = '';
+            }
+        }
+    });
+});
+
+// ============================================
+// TOGGLE PARA EXPLORACIÓN FÍSICA (exploracion-radio)
+// ============================================
+document.querySelectorAll('.exploracion-radio').forEach(function(radio) {
+    const targetId = radio.dataset.target;
+    const textarea = document.getElementById(targetId);
+    
+    radio.addEventListener('change', function() {
+        if (textarea) {
+            if (this.value === 'CP' && this.checked) {
+                textarea.style.display = 'block';
+                textarea.focus();
+            } else if (this.value === 'SP' && this.checked) {
+                textarea.style.display = 'none';
+                textarea.value = '';
+            }
+        }
+    });
+
+    // Verificar estado inicial (si hay CP seleccionado por defecto desde edit)
+    if (radio.value === 'CP' && radio.checked && textarea) {
+        textarea.style.display = 'block';
+    }
+});
+
 </script>
