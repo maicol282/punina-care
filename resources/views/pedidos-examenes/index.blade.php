@@ -64,6 +64,14 @@
                                 @endif
                             </td>
                             <td>
+                                <a href="{{ route('pedidos-examenes.enviar', $pedido) }}" class="btn btn-sm btn-info text-white" title="Enviar por Correo" onclick="return confirm('¿Enviar pedido al paciente?')">
+                                 <i class="fas fa-envelope"></i>
+                                </a>
+                                @if($pedido->enviado)
+                                 <span class="badge bg-success">Enviado</span>
+                                @endif
+                            </td>
+                            <td>
                                 <a href="{{ route('pedidos-examenes.pdf', $pedido) }}" class="btn btn-sm btn-danger" target="_blank" title="Ver PDF">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>

@@ -53,6 +53,13 @@
                                    class="btn btn-sm btn-warning" title="Editar receta" data-bs-toggle="tooltip">
                                     <i class="fas fa-edit"></i>
                                 </a>
+
+                                <a href="{{ route('recetas.enviar', $receta) }}" class="btn btn-sm btn-info text-white" title="Enviar por Correo" onclick="return confirm('¿Enviar receta al paciente?')">
+                                <i class="fas fa-envelope"></i>
+                                </a>
+                                @if($receta->enviado)
+                                <span class="badge bg-success">Enviada</span>
+                                @endif
                                <!-- <a href="{{ route('exportar.recetas') }}" class="btn btn-success btn-sm" target="_blank">
                                     <i class="fas fa-file-excel me-1"></i> Exportar Excel
                                 </a> -->

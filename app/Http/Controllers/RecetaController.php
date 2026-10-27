@@ -145,4 +145,9 @@ public function todas()
     
     return view('recetas.todas', compact('recetas'));
 }
+    public function enviarPorCorreo(Receta $receta, \App\Services\DocumentoMailerService $mailer)
+    {
+        $resultado = $mailer->enviar($receta, 'receta', 'recetas.pdf');
+        return redirect()->back()->with($resultado['success'] ? 'success' : 'error', $resultado['message']);
+    }
 }

@@ -267,4 +267,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile/update-firma', [ProfileController::class, 'updateFirma'])->name('profile.update.firma');
     Route::get('/profile/delete-firma', [ProfileController::class, 'deleteFirma'])->name('profile.delete.firma');
 
+    Route::get('/recetas/{receta}/enviar-correo', [App\Http\Controllers\RecetaController::class, 'enviarPorCorreo'])->name('recetas.enviar');
+    Route::get('/pedidos-examenes/{pedido}/enviar-correo', [App\Http\Controllers\PedidoExamenController::class, 'enviarPorCorreo'])->name('pedidos-examenes.enviar');
+    Route::get('/certificados/{certificado}/enviar-correo', [CertificadoMedicoController::class, 'enviarPorCorreo'])->name('certificados.enviar');
 });

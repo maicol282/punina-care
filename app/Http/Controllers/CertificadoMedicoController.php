@@ -224,4 +224,11 @@ class CertificadoMedicoController extends Controller
             'estado' => $certificado->estado
         ]);
     }
+            public function enviarPorCorreo(CertificadoMedico $certificado, \App\Services\DocumentoMailerService $mailer)
+    {
+        // El tipo de documento para el correo será 'certificado'
+        $resultado = $mailer->enviar($certificado, 'certificado', 'certificados.pdf'); 
+        
+        return redirect()->back()->with($resultado['success'] ? 'success' : 'error', $resultado['message']);
+    }
 }

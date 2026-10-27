@@ -10,6 +10,7 @@ class CertificadoMedico extends Model
     use HasFactory;
 
     protected $table = 'certificados_medicos';
+
     protected $fillable = [
         'historial_clinico_id',
         'paciente_id',
@@ -30,7 +31,9 @@ class CertificadoMedico extends Model
         'medico_nombre',
         'medico_cedula',
         'medico_especialidad',
-        'estado'
+        'estado',
+        'enviado',       
+        'fecha_envio'    
     ];
 
     protected $casts = [
@@ -38,16 +41,18 @@ class CertificadoMedico extends Model
         'reposo_inicio' => 'date',
         'reposo_fin' => 'date',
         'reposo' => 'boolean',
+        'enviado' => 'boolean',
+        'fecha_envio' => 'datetime',
     ];
 
     public function historialClinico()
     {
-        return $this->belongsTo(HistorialClinico::class);
+        return $this->belongsTo(HistorialClinico::class, 'historial_clinico_id');
     }
 
     public function paciente()
     {
-        return $this->belongsTo(Paciente::class);
+        return $this->belongsTo(Paciente::class, 'paciente_id');
     }
 
     public function getTipoContingenciaLabelAttribute()
@@ -75,4 +80,6 @@ class CertificadoMedico extends Model
     {
         return 'CERT-' . date('Y') . '-' . str_pad($this->id, 4, '0', STR_PAD_LEFT);
     }
+
 }
+

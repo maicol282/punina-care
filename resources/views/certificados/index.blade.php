@@ -112,6 +112,15 @@
                                 </form>
                             </div>
                         </td>
+                        <td>
+                            <a href="{{ route('certificados.enviar', $certificado->id) }}" class="btn btn-sm btn-info text-white" title="Enviar por Correo" onclick="return confirm('¿Enviar certificado al paciente?')">
+                            <i class="fas fa-envelope"></i>
+                            </a>
+                            @if($certificado->enviado)
+                            <span class="badge bg-success">Enviado</span>
+                            @endif
+                        </td>    
+
                     </tr>
                     @empty
                     <tr>

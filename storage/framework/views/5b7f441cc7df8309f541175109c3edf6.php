@@ -113,6 +113,15 @@
                                 </form>
                             </div>
                         </td>
+                        <td>
+                            <a href="<?php echo e(route('certificados.enviar', $certificado->id)); ?>" class="btn btn-sm btn-info text-white" title="Enviar por Correo" onclick="return confirm('¿Enviar certificado al paciente?')">
+                            <i class="fas fa-envelope"></i>
+                            </a>
+                            <?php if($certificado->enviado): ?>
+                            <span class="badge bg-success">Enviado</span>
+                            <?php endif; ?>
+                        </td>    
+
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr>

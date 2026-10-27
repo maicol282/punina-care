@@ -42,13 +42,24 @@ class Receta extends Model
         'recomendaciones_no_farmacologicas' => '',
     ];
 
+    public function getDescripcionCompletaAttribute()
+    {
+        return "{$this->medicamento} - {$this->dosis} {$this->frecuencia} por {$this->duracion}";
+    }
+      
+        /**
+     * Relación con el historial clínico.
+     */
     public function historialClinico()
     {
         return $this->belongsTo(HistorialClinico::class, 'historial_clinico_id');
     }
 
-    public function getDescripcionCompletaAttribute()
+    /**
+     * Obtener el paciente a través del historial clínico.
+     */
+    public function getPacienteAttribute()
     {
-        return "{$this->medicamento} - {$this->dosis} {$this->frecuencia} por {$this->duracion}";
+        return $this->historialClinico?->paciente;
     }
 }

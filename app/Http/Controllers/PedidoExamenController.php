@@ -133,4 +133,9 @@ class PedidoExamenController extends Controller
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pedidos-examenes.pdf', compact('pedido'));
         return $pdf->download('pedido-examenes-' . $pedido->id . '.pdf');
     }
+        public function enviarPorCorreo(PedidoExamen $pedido, \App\Services\DocumentoMailerService $mailer)
+    {
+        $resultado = $mailer->enviar($pedido, 'examen', 'pedidos-examenes.pdf');
+        return redirect()->back()->with($resultado['success'] ? 'success' : 'error', $resultado['message']);
+    }
 }
