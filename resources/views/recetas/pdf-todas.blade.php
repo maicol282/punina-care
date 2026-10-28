@@ -139,6 +139,7 @@
             @endif
             
             <div style="margin-top: 15px;">
+                @include('partials.pdf._firmas')
                 <p>___________________________________</p>
                 <p>Firma del Médico</p>
             </div>
@@ -147,5 +148,6 @@
             <div class="page-break"></div>
         @endif
     @endforeach
+    
 </body>
 </html>

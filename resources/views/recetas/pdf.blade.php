@@ -643,30 +643,7 @@
         </table>
 
         <!-- ===== FIRMA ===== -->
-@if(isset($receta) && $receta->historialClinico->doctor)
-    @php
-        $doctor = $receta->historialClinico->doctor;
-        $medicoUser = \App\Models\User::where('name', $doctor)->first();
-    @endphp
-    
-    <div class="firma" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #e8edf3; text-align: center;">
-        @if($medicoUser && $medicoUser->firma_path)
-            <div style="text-align: center; margin-bottom: 5px;">
-                <img src="{{ public_path('storage/' . $medicoUser->firma_path) }}" 
-                     alt="Firma" 
-                     style="max-height: 60px; width: auto;">
-            </div>
-        @endif
-        <div class="linea" style="border-top: 2px solid #1a1a1a; width: 50%; margin: 10px auto;"></div>
-        <div class="nombre-texto" style="font-weight: 700; font-size: 14px;">{{ $doctor }}</div>
-        <div class="nombre-cargo" style="font-size: 12px; color: #555;">Médico Tratante</div>
-        <div style="font-size: 10px; color: #27ae60; margin-top: 5px;">
-            ✅ Documento firmado electrónicamente
-            <br>
-            <span style="font-size: 9px; color: #888;">{{ now()->format('d/m/Y H:i') }}</span>
-        </div>
-    </div>
-@endif
+@include('partials.pdf._firmas')
         <!-- ===== FOOTER ===== -->
         <div class="footer">
             <p>

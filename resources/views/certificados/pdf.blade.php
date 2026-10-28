@@ -274,6 +274,8 @@
                  style="max-height: 60px; width: auto;">
         </div>
     @endif
+@include('partials.pdf._firmas')
+
     
     <div class="linea"></div>
     <div class="nombre">{{ $certificado->medico_nombre }}</div>
@@ -299,5 +301,6 @@
         </div>
 
     </div>
+    
 </body>
 </html>

@@ -78,6 +78,7 @@
             @endforelse
         </tbody>
     </table>
+    @include('partials.pdf._firmas')
 
     <div class="footer">
         <p>Documento generado electrónicamente - Sistema de Historial Clínico</p>

@@ -597,16 +597,10 @@
     </table>
 </div>
 @endif
+@include('partials.pdf._firmas')
 
 <!-- ==================== FIRMA ==================== -->
-<div class="firma">
-    <p>______________________</p>
-    <br>
-    <p><strong>{{ $historial->doctor ?? 'Médico Responsable' }}</strong></p>
-    <p style="font-size: 9px; color: #666;">Firma del Médico Responsable</p>
-    <br>
-    <p style="font-size: 8px; color: #999;">Documento generado electrónicamente - Sistema de Historial Clínico</p>
-</div>
+
 
 </body>
 </html>

@@ -104,4 +104,47 @@ class ProfileController extends Controller
         
         return redirect()->back()->with('status', 'Firma eliminada correctamente.');
     }
+        public function updateCertificado(Request $request): RedirectResponse
+    {
+                $request->validate([
+            'certificado' => 'required|file|max:2048', // <-- Quitamos 'mimes' para evitar el bloqueo
+            'certificado_password' => 'required|string',
+        ]);
+        
+        // Validación manual de la extensión
+        $extension = $request->file('certificado')->getClientOriginalExtension();
+        if (!in_array(strtolower($extension), ['p12', 'pfx'])) {
+            return back()->withErrors(['certificado' => 'El archivo debe ser un certificado .p12 o .pfx válido.']);
+        }
+
+        $user = $request->user();
+
+        // Eliminar el anterior si existe
+        if ($user->certificado_p12) {
+            \Illuminate\Support\Facades\Storage::disk('local')->delete($user->certificado_p12);
+        }
+
+        // Guardar el nuevo en storage/app/certificados
+        $path = $request->file('certificado')->store('certificados', 'local');
+        
+        $user->certificado_p12 = $path;
+        $user->certificado_password = $request->certificado_password;
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'certificado-updated');
+    }
+
+    public function deleteCertificado(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        if ($user->certificado_p12) {
+            \Illuminate\Support\Facades\Storage::disk('local')->delete($user->certificado_p12);
+            $user->certificado_p12 = null;
+            $user->certificado_password = null;
+            $user->save();
+        }
+
+        return Redirect::route('profile.edit')->with('status', 'certificado-deleted');
+    }
 }

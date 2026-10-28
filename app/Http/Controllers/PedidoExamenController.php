@@ -123,19 +123,19 @@ class PedidoExamenController extends Controller
         return view('pedidos-examenes.index', compact('pedidos'));
     }
 
-        /**
-     * Generar el PDF del pedido.
-     */
-    public function pdf(PedidoExamen $pedido)
+        public function pdf(PedidoExamen $pedido, \App\Services\PdfSignerService $signer)
     {
         $pedido->load(['paciente', 'medico', 'detalles.examen']);
         
+        // Generar el PDF
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pedidos-examenes.pdf', compact('pedido'));
-        return $pdf->download('pedido-examenes-' . $pedido->id . '.pdf');
-    }
-        public function enviarPorCorreo(PedidoExamen $pedido, \App\Services\DocumentoMailerService $mailer)
-    {
-        $resultado = $mailer->enviar($pedido, 'examen', 'pedidos-examenes.pdf');
-        return redirect()->back()->with($resultado['success'] ? 'success' : 'error', $resultado['message']);
+        $pdfContent = $pdf->output();
+
+        // Firmar el PDF
+        $pdfContent = $signer->firmar($pdfContent);
+
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="pedido-examenes-' . $pedido->id . '.pdf"');
     }
 }

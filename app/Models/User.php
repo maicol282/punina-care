@@ -25,11 +25,13 @@ class User extends Authenticatable
         'cedula_hash',
         'password',
         'firma_path',
+        'certificado_password',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'certificado_password',
     ];
 
         public function getFirmaUrlAttribute()

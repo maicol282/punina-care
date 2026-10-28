@@ -9,50 +9,56 @@ use Illuminate\Http\Request;
 
 class ReporteController extends Controller
 {
-    /**
-     * Generar PDF del historial completo de un paciente
-     */
-    public function historialPaciente(Paciente $paciente)
+       public function historialPaciente($id, \App\Services\PdfSignerService $signer)
     {
-        $paciente->load(['historialClinicos.seguimientos']);
-        
+        $paciente = \App\Models\Paciente::with(['historialClinicos' => function($q) {
+            $q->orderBy('fecha_consulta', 'desc');
+        }])->findOrFail($id);
+
         $pdf = Pdf::loadView('reportes.historial-paciente', compact('paciente'));
+        $pdfContent = $pdf->output();
         
-        return $pdf->download('historial_' . $paciente->nombre_completo . '_' . now()->format('Ymd_His') . '.pdf');
+        // Firmar el PDF
+        $pdfContent = $signer->firmar($pdfContent);
+        
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="historial_' . $paciente->nombre_completo . '_' . now()->format('Ymd_His') . '.pdf"');
     }
 
-    /**
-     * Generar PDF de un historial específico
-     */
-    public function historialUnico(HistorialClinico $historial)
+       public function historialUnico($id, \App\Services\PdfSignerService $signer)
     {
-            $historial->load(['paciente', 'seguimientos']);
-        
+        $historial = \App\Models\HistorialClinico::with(['paciente', 'recetas', 'diagnosticos', 'seguimientos'])->findOrFail($id);
+
         $pdf = Pdf::loadView('reportes.historial-unico', compact('historial'));
+        $pdfContent = $pdf->output();
         
-        return $pdf->download('consulta_' . $historial->fecha_consulta->format('Ymd') . '_' . $historial->paciente->nombre_completo . '.pdf');
+        // Firmar el PDF
+        $pdfContent = $signer->firmar($pdfContent);
+        
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="consulta_' . $historial->fecha_consulta->format('Ymd') . '_' . $historial->paciente->nombre_completo . '.pdf"');
     }
 
-    /**
-     * Generar PDF de todos los historiales por rango de fechas
-     */
-    public function historialPorFecha(Request $request)
+       public function historialesRango(\Illuminate\Http\Request $request, \App\Services\PdfSignerService $signer)
     {
-        $request->validate([
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
-        ]);
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
         
-        $fechaInicio = $request->fecha_inicio;
-        $fechaFin = $request->fecha_fin;
-        
-        $historiales = HistorialClinico::with('paciente')
+        $historiales = \App\Models\HistorialClinico::with(['paciente'])
             ->whereBetween('fecha_consulta', [$fechaInicio, $fechaFin])
             ->orderBy('fecha_consulta', 'desc')
             ->get();
-        
+
         $pdf = Pdf::loadView('reportes.historiales-rango', compact('historiales', 'fechaInicio', 'fechaFin'));
+        $pdfContent = $pdf->output();
         
-        return $pdf->download('consultas_' . $fechaInicio . '_a_' . $fechaFin . '.pdf');
+        // Firmar el PDF
+        $pdfContent = $signer->firmar($pdfContent);
+        
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="historiales_' . $fechaInicio . '_' . $fechaFin . '.pdf"');
     }
 }

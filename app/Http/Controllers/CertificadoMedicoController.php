@@ -202,12 +202,21 @@ class CertificadoMedicoController extends Controller
             ->with('success', 'Certificado eliminado exitosamente.');
     }
 
-    public function imprimir(CertificadoMedico $certificado)
+        public function imprimir(CertificadoMedico $certificado, \App\Services\PdfSignerService $signer)
     {
         $certificado->load(['paciente', 'historialClinico']);
+        
+        // Generar el PDF
         $pdf = Pdf::loadView('certificados.pdf', compact('certificado'));
         $pdf->setPaper('A4', 'portrait');
-        return $pdf->download('Certificado_Medico_' . $certificado->numero_certificado . '.pdf');
+        $pdfContent = $pdf->output();
+
+        // Firmar el PDF
+        $pdfContent = $signer->firmar($pdfContent);
+
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="Certificado_Medico_' . $certificado->numero_certificado . '.pdf"');
     }
 
     public function cambiarEstado(Request $request, CertificadoMedico $certificado)

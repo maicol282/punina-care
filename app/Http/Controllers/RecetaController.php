@@ -109,16 +109,15 @@ public function update(Request $request, Receta $receta)
             ->with('success', 'Receta eliminada exitosamente.');
     }
 
-public function imprimir($id)
+public function imprimir($id, \App\Services\PdfSignerService $signer)
 {
     // Cargar la receta con todas las relaciones
     $receta = Receta::with(['historialClinico' => function($query) {
-        $query->select('*'); // Asegurar que trae todos los campos
+        $query->select('*'); 
     }, 'historialClinico.paciente'])->findOrFail($id);
     
     // Verificar y forzar el CIE-10 si es necesario
     if (!$receta->historialClinico->cie10_definitivo && !$receta->historialClinico->cie10_code) {
-        // Intentar obtener el CIE-10 del diagnóstico
         $cie10 = \App\Models\Cie10Code::where('diagnostico', $receta->historialClinico->diagnostico)->first();
         if ($cie10) {
             $receta->historialClinico->cie10_code = $cie10->codigo;
@@ -126,16 +125,35 @@ public function imprimir($id)
         }
     }
     
+    // Generar el PDF
     $pdf = Pdf::loadView('recetas.pdf', compact('receta'));
-    return $pdf->download('receta_' . $receta->id . '_' . now()->format('Ymd_His') . '.pdf');
+    $pdfContent = $pdf->output();
+
+    // Firmar el PDF
+    $pdfContent = $signer->firmar($pdfContent);
+
+    // Devolver el PDF firmado para descarga
+    return response($pdfContent, 200)
+        ->header('Content-Type', 'application/pdf')
+        ->header('Content-Disposition', 'attachment; filename="receta_' . $receta->id . '_' . now()->format('Ymd_His') . '.pdf"');
 }
 
-public function imprimirTodas(HistorialClinico $historial)
+public function imprimirTodas(HistorialClinico $historial, \App\Services\PdfSignerService $signer)
 {
     $recetas = $historial->recetas;
     $historial->load('paciente');
+    
+    // Generar el PDF
     $pdf = Pdf::loadView('recetas.pdf-todas', compact('historial', 'recetas'));
-    return $pdf->download('recetas_' . $historial->paciente->nombre_completo . '_' . now()->format('Ymd_His') . '.pdf');
+    $pdfContent = $pdf->output();
+
+    // Firmar el PDF
+    $pdfContent = $signer->firmar($pdfContent);
+
+    // Devolver el PDF firmado para descarga
+    return response($pdfContent, 200)
+        ->header('Content-Type', 'application/pdf')
+        ->header('Content-Disposition', 'attachment; filename="recetas_' . $historial->paciente->nombre_completo . '_' . now()->format('Ymd_His') . '.pdf"');
 }
 public function todas()
 {

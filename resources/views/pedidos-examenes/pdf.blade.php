@@ -102,6 +102,8 @@
         </tbody>
     </table>
 
+    @include('partials.pdf._firmas')
+
     <div class="footer">
         <div class="firma-line"></div>
         <div class="firma-text">Dr. {{ $pedido->medico->name }}</div>

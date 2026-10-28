@@ -412,6 +412,7 @@
                     {{ now()->format('d/m/Y H:i') }}
                 </div>
             </td>
+            @include('partials.pdf._firmas')
             
             <!-- Firma del Paciente -->
             <td style="width: 50%; text-align: center; padding: 20px 10px; vertical-align: bottom;">
