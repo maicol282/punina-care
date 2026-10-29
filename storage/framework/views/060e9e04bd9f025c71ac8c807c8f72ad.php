@@ -2,6 +2,20 @@
 <?php $__env->startSection('page-title', 'Punina Care - Telemedicina'); ?>
 
 <?php $__env->startSection('content'); ?>
+    <!-- AVISO DE USO DE TELECONSULTA -->
+    <div class="alert alert-info alert-dismissible fade show shadow-sm border-0 rounded-3 mb-4" role="alert">
+        <div class="d-flex">
+            <div class="me-3">
+                <i class="fas fa-info-circle fa-2x"></i>
+            </div>
+            <div>
+                <h5 class="alert-heading fw-bold mb-1">¿Cómo funciona la Teleconsulta?</h5>
+                <p class="mb-0 small">Haga clic en el botón verde de cualquier consulta para abrir la <strong>App de Jitsi</strong>. Usted será el anfitrión. Puede navegar por el sistema sin cortes mientras la app se mantiene abierta.</p>
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">

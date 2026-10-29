@@ -4,6 +4,25 @@
 @section('page-title', 'Detalle de Teleconsulta')
 
 @section('content')
+    <!-- AVISO DE USO DE TELECONSULTA -->
+    <div class="alert alert-info alert-dismissible fade show shadow-sm border-0 rounded-3 mb-4" role="alert">
+        <div class="d-flex">
+            <div class="me-3">
+                <i class="fas fa-info-circle fa-2x"></i>
+            </div>
+            <div>
+                <h5 class="alert-heading fw-bold mb-1">¿Cómo funciona la Teleconsulta?</h5>
+                <p class="mb-2 small">Siga estos pasos para una experiencia sin cortes:</p>
+                <ol class="mb-0 small">
+                    <li><strong>Inicie la videollamada:</strong> Haga clic en el botón verde. Se abrirá la <strong>App de Escritorio de Jitsi</strong> (si no la tiene, descárguela <a href="https://github.com/jitsi/jitsi-meet-electron/releases" target="_blank" class="alert-link">aquí</a>).</li>
+                    <li><strong>Sea el anfitrión:</strong> Usted será el moderador de la sala. Copie el enlace desde la app y envíeselo al paciente.</li>
+                    <li><strong>Navegue sin cortes:</strong> Deje la ventana de Jitsi abierta (puede ponerla "Siempre visible" en su sistema). Mientras tanto, navegue por Punina Care (pacientes, historiales, recetas) sin que la llamada se corte.</li>
+                </ol>
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
 <div class="container-fluid px-0">
     <div class="card shadow-sm">
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
