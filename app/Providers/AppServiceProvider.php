@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rules\Password;
+use App\Models\Paciente;
+use App\Policies\PacientePolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,14 +21,17 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-        public function boot(): void
+    public function boot(): void
     {
+        // Registrar la Policy de Paciente
+        Gate::policy(Paciente::class, PacientePolicy::class);
+
         // Configuración global de contraseñas fuertes
-        \Illuminate\Validation\Rules\Password::defaults(function () {
-            return \Illuminate\Validation\Rules\Password::min(8)
+        Password::defaults(function () {
+            return Password::min(8)
                 ->mixedCase()      // Mayúsculas y minúsculas
                 ->numbers()        // Al menos un número
-                ->symbols();       // Al menos un símbolo (ej: !@#$%^&*)
+                ->symbols();       // Al menos un símbolo
         });
     }
 }
