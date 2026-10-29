@@ -42,11 +42,9 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
-            @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="text-decoration-none small">
-                    ¿Olvidaste tu contraseña?
-                </a>
-            @endif
+            <a href="#" class="text-decoration-none small" onclick="alert('Las contraseñas son gestionadas internamente. Por favor, contacte al Administrador del sistema.'); return false;">
+                ¿Olvidaste tu contraseña?
+            </a>
 
             <button type="submit" class="btn btn-primary px-4">
                 Iniciar Sesión
