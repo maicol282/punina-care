@@ -138,4 +138,13 @@ class PedidoExamenController extends Controller
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="pedido-examenes-' . $pedido->id . '.pdf"');
     }
+
+    /**
+     * Enviar pedido de exámenes por correo al paciente.
+     */
+    public function enviarPorCorreo(PedidoExamen $pedido, \App\Services\DocumentoMailerService $mailer)
+    {
+        $resultado = $mailer->enviar($pedido, 'examen', 'pedidos-examenes.pdf');
+        return redirect()->back()->with($resultado['success'] ? 'success' : 'error', $resultado['message']);
+    }
 }

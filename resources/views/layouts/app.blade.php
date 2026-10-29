@@ -155,7 +155,7 @@
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('profile.edit') ? 'active' : '' }}" href="{{ route('profile.edit') }}">
                     <i class="fas fa-user-cog"></i>
-                    <span>Mi Perfil</span>
+                    <span>Firma de documentos</span>
                 </a>
             </li>
             
@@ -748,6 +748,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     
+
+
+    <!-- MODAL DE CARGA PARA ENVÍO DE CORREOS -->
+    <div class="modal fade" id="modalEnviandoCorreo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-body text-center py-5">
+                    <i class="fas fa-envelope-open-text fa-4x text-primary mb-4"></i>
+                    <h5 class="mb-4 fw-bold">Enviando documento...</h5>
+                    <div class="progress" style="height: 25px; border-radius: 12px;">
+                        <div id="progressBarCorreo" class="progress-bar progress-bar-striped progress-bar-animated bg-success fw-bold" role="progressbar" style="width: 0%; font-size: 14px;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                    </div>
+                    <p class="text-muted mt-4 mb-0 small"><i class="fas fa-info-circle me-1"></i> Por favor, no cierre esta ventana.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

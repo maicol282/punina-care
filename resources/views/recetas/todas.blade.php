@@ -54,9 +54,12 @@
                                     <i class="fas fa-edit"></i>
                                 </a>
 
-                                <a href="{{ route('recetas.enviar', $receta) }}" class="btn btn-sm btn-info text-white" title="Enviar por Correo" onclick="return confirm('¿Enviar receta al paciente?')">
-                                <i class="fas fa-envelope"></i>
-                                </a>
+                                <a href="{{ route('recetas.enviar', $receta) }}" 
+   class="btn btn-sm btn-info text-white" 
+   title="Enviar por Correo"
+   onclick="event.preventDefault(); var url = this.href; document.getElementById('modalEnviandoCorreo').classList.add('show'); document.getElementById('modalEnviandoCorreo').style.display='block'; var progressBar = document.getElementById('progressBarCorreo'); var width = 0; var interval = setInterval(function() { if (width >= 100) { clearInterval(interval); window.location.href = url; } else { width += 10; progressBar.style.width = width + '%'; progressBar.innerHTML = width + '%'; } }, 150);">
+    <i class="fas fa-envelope"></i>
+</a>
                                 @if($receta->enviado)
                                 <span class="badge bg-success">Enviada</span>
                                 @endif
