@@ -1,15 +1,12 @@
 function abrirJitsiEnPiP(salaNombre, nombrePaciente) {
-    // 1. Verificar si el navegador soporta Document PiP
     if (!('documentPictureInPicture' in window)) {
-        alert('Tu navegador no soporta la ventana flotante (Picture-in-Picture). Por favor, usa Google Chrome o Microsoft Edge.');
+        alert('Tu navegador no soporta la ventana flotante. Usa Chrome o Edge.');
         return;
     }
 
-    // 2. Generar la URL de Jitsi
     const salaLimpia = salaNombre.replace(/[^a-zA-Z0-9\-]/g, '');
     const url = "https://meet.jit.si/" + salaLimpia + "#userInfo.displayName=%22Dr.%20" + encodeURIComponent(nombrePaciente) + "%22&config.prejoinPageEnabled=false";
 
-    // 3. Crear un iframe temporal (si no existe)
     let iframe = document.getElementById('jitsi-pip-iframe');
     if (!iframe) {
         iframe = document.createElement('iframe');
@@ -19,22 +16,20 @@ function abrirJitsiEnPiP(salaNombre, nombrePaciente) {
         iframe.style.border = 'none';
         iframe.allow = "camera; microphone; fullscreen; display-capture; autoplay;";
         iframe.src = url;
-        document.body.appendChild(iframe); // Lo agregamos al body temporalmente
+        document.body.appendChild(iframe);
     } else {
         iframe.src = url;
     }
 
-    // 4. Abrir la ventana PiP y mover el iframe
+    // Abrir ventana PiP más grande
     window.documentPictureInPicture.requestWindow({
-        width: 400,
-        height: 300,
+        width: 650,  // Más ancho
+        height: 450, // Más alto
     }).then((pipWindow) => {
-        // Mover el iframe a la ventana PiP
         pipWindow.document.body.style.margin = '0';
         pipWindow.document.body.style.overflow = 'hidden';
         pipWindow.document.body.appendChild(iframe);
-        
-        // Opcional: Copiar estilos del documento principal a la ventana PiP
+
         [...document.styleSheets].forEach((styleSheet) => {
             try {
                 const cssRules = [...styleSheet.cssRules].map((rule) => rule.cssText).join('');
@@ -51,15 +46,14 @@ function abrirJitsiEnPiP(salaNombre, nombrePaciente) {
             }
         });
 
-        // 5. Manejar el cierre de la ventana PiP (devolver el iframe al body)
         pipWindow.addEventListener('pagehide', () => {
             if (iframe && iframe.parentNode === pipWindow.document.body) {
                 document.body.appendChild(iframe);
-                iframe.style.display = 'none'; // Ocultarlo de nuevo
+                iframe.style.display = 'none';
             }
         });
     }).catch((error) => {
         console.error('Error al abrir PiP:', error);
-        alert('No se pudo abrir la ventana flotante. Asegúrate de que la página esté en HTTPS o en localhost.');
+        alert('No se pudo abrir la ventana flotante. Asegúrate de estar en HTTPS o localhost.');
     });
 }

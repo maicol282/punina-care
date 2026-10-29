@@ -42,10 +42,9 @@
                 </div>
                 <div class="col-md-6 text-end">
                     @if($consulta->estado !== 'finalizada' && $consulta->estado !== 'cancelada')
-                       <button type="button" class="btn btn-success btn-lg" 
-        onclick="abrirJitsiEnPiP('{{ $consulta->sala_nombre }}', '{{ $consulta->paciente->nombre_completo ?? 'Paciente' }}')">
-    <i class="fas fa-video me-2"></i> Iniciar Videollamada (Ventana Flotante)
-</button>
+                       <a href="jitsi-meet://{{ $consulta->sala_nombre }}" target="_blank" class="btn btn-success btn-lg">
+                            <i class="fas fa-video me-2"></i> Iniciar Videollamada (App Escritorio)
+                        </a>
                     @else
                         <div class="alert alert-info">
                             <i class="fas fa-check-circle me-1"></i> Esta consulta ya ha finalizado.
