@@ -80,6 +80,6 @@ class ConsultaTelemedicina extends Model
 
     public function getEnlaceAccesoAttribute()
     {
-        return 'https://meet.jit.si/' . $this->sala_nombre;
+        return 'https://meet.centromedicopuninacare.tech/' . $this->sala_nombre;
     }
 }

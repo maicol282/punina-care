@@ -44,8 +44,8 @@
                     <div class="mt-4 p-3 bg-light rounded border">
                         <h6 class="fw-bold text-primary mb-2"><i class="fas fa-link me-2"></i>Enlace para el Paciente</h6>
                         <div class="input-group">
-                            <input type="text" class="form-control" readonly value="https://meet.jit.si/{{ $consulta->sala_nombre }}">
-                            <button class="btn btn-outline-secondary" type="button" onclick="navigator.clipboard.writeText('https://meet.jit.si/{{ $consulta->sala_nombre }}'); alert('Enlace copiado al portapapeles');">
+                            <input type="text" class="form-control" readonly value="https://meet.centromedicopuninacare.tech/{{ $consulta->sala_nombre }}">
+                            <button class="btn btn-outline-secondary" type="button" onclick="navigator.clipboard.writeText('https://meet.centromedicopuninacare.tech/{{ $consulta->sala_nombre }}'); alert('Enlace copiado al portapapeles');">
                                 <i class="fas fa-copy"></i> Copiar
                             </button>
                         </div>

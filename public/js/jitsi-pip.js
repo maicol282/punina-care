@@ -5,7 +5,7 @@ function abrirJitsiEnPiP(salaNombre, nombrePaciente) {
     }
 
     const salaLimpia = salaNombre.replace(/[^a-zA-Z0-9\-]/g, '');
-    const url = "https://meet.jit.si/" + salaLimpia + "#userInfo.displayName=%22Dr.%20" + encodeURIComponent(nombrePaciente) + "%22&config.prejoinPageEnabled=false";
+    const url = "https://meet.centromedicopuninacare.tech/" + salaLimpia + "#userInfo.displayName=%22Dr.%20" + encodeURIComponent(nombrePaciente) + "%22&config.prejoinPageEnabled=false";
 
     let iframe = document.getElementById('jitsi-pip-iframe');
     if (!iframe) {
