@@ -259,11 +259,24 @@
         @yield('content')
         
         <!-- Footer -->
-        <footer class="text-center mt-4 py-3">
-            <p class="mb-0 text-muted small">
-                &copy; {{ date('Y') }} Sistema de Historial Clínico. Todos los derechos reservados.
+        
+    <footer class="text-center py-4 mt-auto border-top bg-light">
+        <div class="container">
+            <p class="text-muted small mb-2">
+                &copy; {{ date('Y') }} Punina Care - Sistema Médico Electrónico. Todos los derechos reservados.
             </p>
-        </footer>
+            <div class="d-flex justify-content-center gap-3 small">
+                <a href="{{ route('legal.terminos') }}" class="text-decoration-none text-muted">Términos y Condiciones</a>
+                <span class="text-muted">|</span>
+                <a href="{{ route('legal.privacidad') }}" class="text-decoration-none text-muted">Política de Privacidad</a>
+                <span class="text-muted">|</span>
+                <a href="{{ route('legal.cookies') }}" class="text-decoration-none text-muted">Política de Cookies</a>
+                <span class="text-muted">|</span>
+                <a href="{{ route('legal.consentimiento') }}" class="text-decoration-none text-muted">Consentimiento Informado</a>
+            </div>
+        </div>
+    </footer>
+
     </div>
     <div class="modal fade" id="ayudaModal" tabindex="-1">
         <div class="modal-dialog modal-lg">

@@ -273,3 +273,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pedidos-examenes/{pedido}/enviar-correo', [App\Http\Controllers\PedidoExamenController::class, 'enviarPorCorreo'])->name('pedidos-examenes.enviar');
     Route::get('/certificados/{certificado}/enviar-correo', [CertificadoMedicoController::class, 'enviarPorCorreo'])->name('certificados.enviar');
 });
+// ===== PÁGINAS LEGALES =====
+Route::get('/terminos-y-condiciones', function () {
+    return view('legal.terminos');
+})->name('legal.terminos');
+
+Route::get('/politica-de-privacidad', function () {
+    return view('legal.privacidad');
+})->name('legal.privacidad');
+
+Route::get('/politica-de-cookies', function () {
+    return view('legal.cookies');
+})->name('legal.cookies');
+
+Route::get('/consentimiento-informado', function () {
+    return view('legal.consentimiento');
+})->name('legal.consentimiento');
