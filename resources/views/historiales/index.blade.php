@@ -196,8 +196,8 @@
                                     <i class="fas fa-clipboard-check"></i>
                                 </a>
                                 @endcan
-                                <a href="{{ route('reposos.create', $historial) }}" class="btn btn-sm btn-light border text-info" title="Emitir Reposo" data-bs-toggle="tooltip">
-                                    <i class="fas fa-bed"></i>
+                                <a href="{{ route('certificados.create', $historial) }}" class="btn btn-sm btn-light border text-info" title="Emitir Certificado" data-bs-toggle="tooltip">
+                                    <i class="fas fa-certificate"></i>
                                 </a>
                             </div>
                         </td>

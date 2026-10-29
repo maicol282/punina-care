@@ -9,7 +9,7 @@
             </a>
             @endcan
             
-            <!-- Recetas / Certificados / Reposos -->
+            <!-- Recetas / Certificados -->
             <div class="btn-group shadow-sm ms-md-auto">
                 @if($historial->recetas->count() > 0)
                     <a href="{{ route('recetas.index', $historial) }}" class="btn" style="background-color: #6366f1; color: white;">
@@ -19,14 +19,12 @@
                 <a href="{{ route('certificados.create', $historial) }}" class="btn btn-info text-white">
                     <i class="fas fa-certificate me-1"></i> Certificado
                 </a>
-               
-                </a>
                 <a href="{{ route('reportes.historial', $historial) }}" target="_blank" class="btn btn-success text-white">
                     <i class="fas fa-print me-1"></i> Imprimir PDF
                 </a>
             </div>
 
-            @if(auth()->user()->hasAnyRole(['Administrador', 'Médico']))
+            @if(auth()->user()->hasRole(['Administrador', 'Médico']))
             <button type="button" class="btn btn-outline-danger px-4 rounded-pill ms-md-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
                 <i class="fas fa-trash me-1"></i> Eliminar
             </button>
