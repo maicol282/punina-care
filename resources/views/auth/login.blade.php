@@ -8,6 +8,12 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
+        <!-- Honeypot: los humanos no lo ven, los bots lo rellenan -->
+        <div style="display: none;">
+            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+        </div>
+        <!-- Time-Trap: timestamp encriptado -->
+        <input type="hidden" name="timestamp" value="{{ $timestamp ?? '' }}">
 
         <!-- CEDULA -->
         <div class="mb-3">

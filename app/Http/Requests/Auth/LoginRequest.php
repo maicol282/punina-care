@@ -24,12 +24,29 @@ class LoginRequest extends FormRequest
         return [
             'cedula' => ['required', 'string'],
             'password' => ['required', 'string'],
+            'website' => ['nullable', 'string', 'max:0'], // Honeypot
+            'timestamp' => ['required', 'string'],
         ];
     }
 
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+
+        // Validación Time-Trap: verificar que pasaron al menos 3 segundos
+        try {
+            $timestamp = decrypt($this->input('timestamp'));
+            if (now()->timestamp - $timestamp < 3) {
+                throw ValidationException::withMessages([
+                    'cedula' => 'El formulario se envió demasiado rápido. Intenta de nuevo.',
+                ]);
+            }
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            throw ValidationException::withMessages([
+                'cedula' => 'Error de seguridad. Recarga la página e intenta de nuevo.',
+            ]);
+        }
+
 
         // 1. Obtener la cédula del formulario
         $cedula = $this->input('cedula');
