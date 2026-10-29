@@ -171,13 +171,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [ConsultaTelemedicinaController::class, 'index'])->name('index');
         Route::get('/create', [ConsultaTelemedicinaController::class, 'create'])->name('create');
         Route::post('/', [ConsultaTelemedicinaController::class, 'store'])->name('store');
-        Route::get('/{consulta}/sala', [ConsultaTelemedicinaController::class, 'sala'])->name('sala');
-        Route::get('/{consulta}/popup', [ConsultaTelemedicinaController::class, 'popup'])->name('popup');
         Route::get('/{consulta}', [ConsultaTelemedicinaController::class, 'show'])->name('show');
         Route::get('/{consulta}/edit', [ConsultaTelemedicinaController::class, 'edit'])->name('edit');
         Route::put('/{consulta}', [ConsultaTelemedicinaController::class, 'update'])->name('update');
         Route::delete('/{consulta}', [ConsultaTelemedicinaController::class, 'destroy'])->name('destroy');
         Route::post('/{consulta}/iniciar', [ConsultaTelemedicinaController::class, 'iniciar'])->name('iniciar');
+        Route::post('/{consulta}/iniciar-sesion', [ConsultaTelemedicinaController::class, 'iniciarSesion'])->name('iniciar-sesion');
         Route::post('/{consulta}/finalizar', [ConsultaTelemedicinaController::class, 'finalizar'])->name('finalizar');
         Route::post('/{consulta}/cancelar', [ConsultaTelemedicinaController::class, 'cancelar'])->name('cancelar');
     });

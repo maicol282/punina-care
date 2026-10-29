@@ -120,7 +120,7 @@ class ConsultaTelemedicinaController extends Controller
             
             // Redirigir según el estado
             if ($estado === 'en_curso') {
-                return redirect()->route('telemedicina.sala', $consulta)
+                return redirect()->route('telemedicina.show', $consulta)
                     ->with('success', 'Consulta creada. Entrando a la sala...');
             }
             
@@ -240,46 +240,12 @@ class ConsultaTelemedicinaController extends Controller
         }
     }
 
-    public function popup(ConsultaTelemedicina $consulta)
-    {
-        // Verificar que el médico sea el asignado o un admin
-        /** @var \App\Models\User $user */
-        $user = \Illuminate\Support\Facades\Auth::user();
-        
-        if ($user->id !== $consulta->medico_id && !$user->hasRole('Administrador')) {
-            abort(403, 'No tiene permiso para acceder a esta consulta.');
-        }
-        
-        $consulta->load(['paciente', 'medico']);
-        
-        return view('telemedicina.popup', compact('consulta'));
-    }
-
-
     /**
-     * Sala de videollamada - Vista principal de la consulta
+     * Actualizar estado a 'en_curso' (AJAX).
      */
-    public function sala(ConsultaTelemedicina $consulta)
-{
-    // Verificar permisos
-    if (auth()->id() !== $consulta->medico_id && !auth()->user()->hasRole('Administrador')) {
-        abort(403, 'No tiene permiso para acceder a esta consulta.');
+    public function iniciarSesion(ConsultaTelemedicina $consulta)
+    {
+        $consulta->update(['estado' => 'en_curso']);
+        return response()->json(['success' => true, 'message' => 'Consulta iniciada']);
     }
-
-    // Cargar relaciones
-    $consulta->load(['paciente', 'medico', 'historialClinico']);
-
-    // Guardar en sesión (por si acaso)
-    session(['consulta_activa_id' => $consulta->id]);
-
-    // Cambiar estado a "en_curso" si estaba programada
-    if ($consulta->estado === 'programada') {
-        $consulta->update([
-            'estado' => 'en_curso',
-            'fecha_inicio_real' => now(),
-        ]);
-    }
-
-    return view('telemedicina.sala', compact('consulta'));
-}
 }

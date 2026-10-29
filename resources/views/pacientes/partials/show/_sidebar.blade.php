@@ -13,6 +13,9 @@
             </p>
             
             <div class="d-grid gap-2">
+<button type="button" class="btn btn-success w-100 mb-2" onclick="iniciarTeleconsulta('{{ $paciente->nombre_completo }}', '{{ $paciente->id }}')">
+    <i class="fas fa-video me-1"></i> Iniciar Teleconsulta
+</button>
                 @can('editar pacientes')
                 <a href="{{ route('pacientes.edit', $paciente) }}" class="btn btn-warning">
                     <i class="fas fa-edit me-1"></i> Editar Perfil

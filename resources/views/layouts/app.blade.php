@@ -28,6 +28,9 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     
     @stack('styles')
+    @push('scripts')
+<script src="{{ asset('js/jitsi-pip.js') }}"></script>
+@endpush
 </head>
 <body>
 
@@ -432,7 +435,6 @@
     <!-- 6. Scripts personalizados -->
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/autocompletado-gmail.js') }}"></script>
-    <script src="{{ asset('js/scroll-fix.js') }}"></script>
     
     @stack('scripts')
     
@@ -516,7 +518,8 @@
                     // Restaurar modo desktop
                     sidebar.classList.remove('open');
                     if (overlay) overlay.classList.remove('active');
-                    document.body.style.overflow = ''; else {
+                    document.body.style.overflow = '';
+                } else {
                         sidebar.classList.remove('collapsed');
                         if (mainContent) mainContent.classList.remove('expanded');
                     }
@@ -547,7 +550,7 @@
     }
     
     console.log('✅ Sistema de menú responsive inicializado. Pantalla:', getScreenType());
-});
+
 </script>
 <script>
 // ============================================================
@@ -720,5 +723,31 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Sistema de menú responsive inicializado. Pantalla:', getScreenType());
 });
 </script>
+
+
+
+    
+    
+
+
+    <!-- ============================================ -->
+    
+    
+
+
+    <!-- ============================================ -->
+    
+
+
+
+    
+
+
+
+    
+
+
+    
+
 </body>
 </html>

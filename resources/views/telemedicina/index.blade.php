@@ -102,9 +102,9 @@
                                         </form>
                                     @endif
                                     @if($consulta->estado == 'programada' || $consulta->estado == 'en_curso')
-                                        <a href="{{ route('telemedicina.sala', $consulta) }}" class="btn btn-success" title="Iniciar videollamada" target="_blank">
-                                            <i class="fas fa-video"></i>
-                                        </a>
+                                        <button type="button" class="btn btn-success" title="Iniciar videollamada" onclick="iniciarConsultaRemota({{ $consulta->id }}, {{ json_encode($consulta->paciente->nombre_completo ?? 'Paciente') }}, {{ json_encode($consulta->sala_nombre) }})">
+    <i class="fas fa-video"></i>
+</button>
                                     @endif
                                 </div>
                             </td>

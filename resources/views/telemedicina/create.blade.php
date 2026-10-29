@@ -187,6 +187,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <div class="alert alert-info">
                 <i class="fas fa-info-circle me-2"></i>
@@ -199,8 +200,8 @@
                 <a href="{{ route('telemedicina.index') }}" class="btn btn-secondary">
                     <i class="fas fa-times me-1"></i> Cancelar
                 </a>
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <i class="fas fa-video me-1"></i> Crear y Entrar a la Sala
+               <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Guardar y Agendar Consulta
                 </button>
             </div>
 
