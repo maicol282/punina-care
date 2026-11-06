@@ -76,3 +76,40 @@
                 </div>
             </div>
         </div>
+
+<script>
+    function calcularEdadGestacional(fecha) {
+        const egInput = document.getElementById('edad_gestacional');
+        if (!egInput || !fecha) {
+            if (egInput) egInput.value = '';
+            return;
+        }
+        
+        const fmu = new Date(fecha);
+        const hoy = new Date();
+        
+        if (isNaN(fmu.getTime())) {
+            egInput.value = 'Fecha inválida';
+            return;
+        }
+        if (fmu > hoy) {
+            egInput.value = 'Fecha futura inválida';
+            return;
+        }
+        
+        const diffTime = hoy - fmu;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const semanas = Math.floor(diffDays / 7);
+        const dias = diffDays % 7;
+        
+        egInput.value = semanas + ' semanas y ' + dias + ' días';
+    }
+
+    // Ejecutar al cargar si ya hay una fecha (para edición)
+    document.addEventListener('DOMContentLoaded', function() {
+        const fmuInput = document.getElementById('fmu');
+        if (fmuInput && fmuInput.value) {
+            calcularEdadGestacional(fmuInput.value);
+        }
+    });
+</script>
