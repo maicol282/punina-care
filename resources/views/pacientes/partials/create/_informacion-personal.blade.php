@@ -27,6 +27,7 @@
             <div class="col-md-6 mb-3">
                 <label for="edad" class="form-label">Edad (años)</label>
                 <input type="text" class="form-control" id="edad" readonly style="background-color: #e9ecef;">
+                <small class="text-muted" id="edad_detallada" style="font-size: 12px;"></small>
             </div>
         </div>
 

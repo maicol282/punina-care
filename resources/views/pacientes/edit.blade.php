@@ -47,6 +47,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="edad" class="form-label">Edad (años)</label>
                                     <input type="text" class="form-control" id="edad" readonly style="background-color: #e9ecef;">
+                                    <small class="text-muted" id="edad_detallada" style="font-size: 12px;"></small>
                                 </div>
                             </div>
 
@@ -270,43 +271,68 @@
 </div>
 @endsection
 
+
 @push('scripts')
 <script>
-    function calcularEdad(fechaNacimiento) {
-        if (!fechaNacimiento) return '';
+    function calcularEdadDetallada(fechaNacimiento) {
+        const edadInput = document.getElementById('edad');
+        const detalleInput = document.getElementById('edad_detallada');
         
-        let fecha = new Date(fechaNacimiento);
-        let hoy = new Date();
+        if (!fechaNacimiento || !edadInput) return;
         
-        if (isNaN(fecha.getTime())) return '';
+        const hoy = new Date();
+        const nacimiento = new Date(fechaNacimiento);
         
-        let edad = hoy.getFullYear() - fecha.getFullYear();
-        let mes = hoy.getMonth() - fecha.getMonth();
-        
-        if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) {
-            edad--;
+        if (isNaN(nacimiento.getTime())) {
+            edadInput.value = '';
+            if (detalleInput) detalleInput.textContent = '';
+            return;
         }
         
-        return edad >= 0 ? edad : '';
+        let años = hoy.getFullYear() - nacimiento.getFullYear();
+        let meses = hoy.getMonth() - nacimiento.getMonth();
+        let dias = hoy.getDate() - nacimiento.getDate();
+        
+        if (dias < 0) {
+            meses--;
+            const ultimoDiaMesAnterior = new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+            dias += ultimoDiaMesAnterior;
+        }
+        
+        if (meses < 0) {
+            años--;
+            meses += 12;
+        }
+        
+        edadInput.value = años;
+        
+        if (detalleInput) {
+            if (años === 0) {
+                if (meses === 0) {
+                    detalleInput.textContent = `(${dias} días de nacido)`;
+                } else {
+                    detalleInput.textContent = `(${meses} meses y ${dias} días)`;
+                }
+            } else if (años < 2) {
+                const totalMeses = (años * 12) + meses;
+                detalleInput.textContent = `(${totalMeses} meses)`;
+            } else {
+                detalleInput.textContent = '';
+            }
+        }
     }
 
     document.addEventListener('DOMContentLoaded', function() {
         const fechaInput = document.getElementById('fecha_nacimiento');
-        const edadInput = document.getElementById('edad');
-        
-        if (fechaInput && edadInput) {
-            // Calcular edad inicial
+        if (fechaInput) {
             if (fechaInput.value) {
-                edadInput.value = calcularEdad(fechaInput.value);
+                setTimeout(() => calcularEdadDetallada(fechaInput.value), 100);
             }
-            
-            // Actualizar al cambiar fecha
             fechaInput.addEventListener('change', function() {
-                edadInput.value = calcularEdad(this.value);
+                calcularEdadDetallada(this.value);
             });
-            
             fechaInput.addEventListener('input', function() {
-                edadInput.value = calcularEdad(this.value);
+                calcularEdadDetallada(this.value);
             });
         }
     });

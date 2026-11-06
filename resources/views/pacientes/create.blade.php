@@ -41,6 +41,74 @@
         </form>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    function calcularEdadDetallada(fechaNacimiento) {
+        const edadInput = document.getElementById('edad');
+        const detalleInput = document.getElementById('edad_detallada');
+        
+        if (!fechaNacimiento || !edadInput) return;
+        
+        const hoy = new Date();
+        const nacimiento = new Date(fechaNacimiento);
+        
+        if (isNaN(nacimiento.getTime())) {
+            edadInput.value = '';
+            if (detalleInput) detalleInput.textContent = '';
+            return;
+        }
+        
+        let años = hoy.getFullYear() - nacimiento.getFullYear();
+        let meses = hoy.getMonth() - nacimiento.getMonth();
+        let dias = hoy.getDate() - nacimiento.getDate();
+        
+        if (dias < 0) {
+            meses--;
+            const ultimoDiaMesAnterior = new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+            dias += ultimoDiaMesAnterior;
+        }
+        
+        if (meses < 0) {
+            años--;
+            meses += 12;
+        }
+        
+        edadInput.value = años;
+        
+        if (detalleInput) {
+            if (años === 0) {
+                if (meses === 0) {
+                    detalleInput.textContent = `(${dias} días de nacido)`;
+                } else {
+                    detalleInput.textContent = `(${meses} meses y ${dias} días)`;
+                }
+            } else if (años < 2) {
+                const totalMeses = (años * 12) + meses;
+                detalleInput.textContent = `(${totalMeses} meses)`;
+            } else {
+                detalleInput.textContent = '';
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const fechaInput = document.getElementById('fecha_nacimiento');
+        if (fechaInput) {
+            if (fechaInput.value) {
+                setTimeout(() => calcularEdadDetallada(fechaInput.value), 100);
+            }
+            fechaInput.addEventListener('change', function() {
+                calcularEdadDetallada(this.value);
+            });
+            fechaInput.addEventListener('input', function() {
+                calcularEdadDetallada(this.value);
+            });
+        }
+    });
+</script>
+@endpush
+
 @endsection
 
 @include('pacientes.partials.create._scripts')
