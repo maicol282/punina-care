@@ -209,7 +209,29 @@
             <td class="label">Nombre Completo:</td>
             <td>{{ $historial->paciente->nombre_completo }}</td>
             <td class="label">Edad:</td>
-            <td>{{ $historial->paciente->edad }} años</td>
+            <td>
+                    @php
+                        $nacimiento = \Carbon\Carbon::parse($historial->paciente->fecha_nacimiento);
+                        $hoy = \Carbon\Carbon::now();
+                        $años = floor($nacimiento->diffInYears($hoy));
+                        $meses = floor($nacimiento->diffInMonths($hoy)) % 12;
+                        $dias = floor($nacimiento->diffInDays($hoy)) % 30;
+                    @endphp
+                    {{ $años }} años, {{ $meses }} meses y {{ $dias }} días
+                    @if($historial->esta_embarazada ?? false)
+                        <br><small class="text-muted"><strong>Embarazo:</strong> Sí
+                        @if($historial->fmu)
+                            @php
+                                $fmu = \Carbon\Carbon::parse($historial->fmu);
+                                $diffDays = $fmu->diffInDays(\Carbon\Carbon::now());
+                                $semanas = floor($diffDays / 7);
+                                $diasEG = $diffDays % 7;
+                            @endphp
+                            ({{ $semanas }} semanas y {{ $diasEG }} días)
+                        @endif
+                        </small>
+                    @endif
+                </td>
         </tr>
         <tr>
             <td class="label">Cédula:</td>

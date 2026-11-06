@@ -44,7 +44,16 @@
             </tr>
             <tr>
                 <td class="info-label">Edad:</td>
-                <td>{{ $pedido->paciente->edad }} años</td>
+                <td>
+                    @php
+                        $nacimiento = \Carbon\Carbon::parse($pedido->paciente->fecha_nacimiento);
+                        $hoy = \Carbon\Carbon::now();
+                        $años = floor($nacimiento->diffInYears($hoy));
+                        $meses = floor($nacimiento->diffInMonths($hoy)) % 12;
+                        $dias = floor($nacimiento->diffInDays($hoy)) % 30;
+                    @endphp
+                    {{ $años }} años, {{ $meses }} meses y {{ $dias }} días
+                </td>
                 <td class="info-label">Médico:</td>
                 <td>Dr. {{ $pedido->medico->name }}</td>
             </tr>

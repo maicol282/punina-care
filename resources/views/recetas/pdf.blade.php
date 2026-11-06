@@ -396,7 +396,16 @@
             </td>
             <td width="15%">
                 <span class="info-label"> Edad:</span>
-                <span class="info-value">{{ $receta->historialClinico->paciente->edad ?? 'N/E' }} años</span>
+                <span class="info-value">
+                    @php
+                        $nacimiento = \Carbon\Carbon::parse($receta->historialClinico->paciente->fecha_nacimiento);
+                        $hoy = \Carbon\Carbon::now();
+                        $años = floor($nacimiento->diffInYears($hoy));
+                        $meses = floor($nacimiento->diffInMonths($hoy)) % 12;
+                        $dias = floor($nacimiento->diffInDays($hoy)) % 30;
+                    @endphp
+                    {{ $años }} años, {{ $meses }} meses y {{ $dias }} días
+                </span>
             </td>
             <td width="15%">
                 <span class="info-label"> Sexo:</span>
