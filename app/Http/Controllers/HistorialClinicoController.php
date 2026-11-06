@@ -234,10 +234,14 @@ if ($request->has('generar_receta') && $request->generar_receta == '1') {
             $usuario = Auth::user();
             $nombreUsuario = $usuario ? $usuario->name : 'Desconocido';
 
-            Log::info("Historial clínico creado", [
+            Log::info("AUDITORIA: Historial clínico creado", [
                 'historial_id' => $historial->id,
                 'paciente_id' => $paciente->id,
-                'usuario' => $nombreUsuario
+                'usuario_id' => Auth::id(),
+                'usuario_nombre' => $nombreUsuario,
+                'ip' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+                'timestamp' => now()->toIso8601String()
             ]);
 
             return redirect()->route('pacientes.show', $paciente->id)
