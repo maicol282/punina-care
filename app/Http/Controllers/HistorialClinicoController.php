@@ -35,7 +35,7 @@ class HistorialClinicoController extends Controller
             'diagnostico' => 'nullable|string',
             'tratamiento' => 'nullable|string',
             'recomendaciones' => 'nullable|string',
-            'archivos.*' => 'nullable|file|max:10240|mimes:jpeg,png,gif,webp,pdf,doc,docx,xls,xlsx',
+'archivos.*' => 'nullable|file|max:10240|mimes:jpeg,png,gif,webp,pdf,doc,docx,xls,xlsx',
         ]);
 
         try {
@@ -51,9 +51,9 @@ class HistorialClinicoController extends Controller
             $historial->sat = $request->sat;
             $historial->fr = $request->fr;
             $historial->temperatura = $request->temperatura;
-            $historial->peso = $request->peso;
-            $historial->altura = $request->altura;
-            $historial->masa_corporal = $request->masa_corporal;
+            $historial->peso = $request->peso ?? null;
+            $historial->altura = $request->altura ?? null;
+            $historial->masa_corporal = $request->masa_corporal ?? null;
             
             // Antecedentes Patológicos
             $historial->hospitalizaciones = $request->hospitalizaciones;
@@ -288,7 +288,7 @@ if ($request->has('generar_receta') && $request->generar_receta == '1') {
             'diagnostico' => 'nullable|string',
             'tratamiento' => 'nullable|string',
             'recomendaciones' => 'nullable|string',
-            'archivos.*' => 'nullable|file|max:10240|mimes:jpeg,png,gif,webp,pdf,doc,docx,xls,xlsx',
+'archivos.*' => 'nullable|file|max:10240|mimes:jpeg,png,gif,webp,pdf,doc,docx,xls,xlsx',
         ]);
 
         try {
@@ -302,9 +302,9 @@ if ($request->has('generar_receta') && $request->generar_receta == '1') {
             $historial->sat = $request->sat;
             $historial->fr = $request->fr;
             $historial->temperatura = $request->temperatura;
-            $historial->peso = $request->peso;
-            $historial->altura = $request->altura;
-            $historial->masa_corporal = $request->masa_corporal;
+            $historial->peso = $request->peso ?? null;
+            $historial->altura = $request->altura ?? null;
+            $historial->masa_corporal = $request->masa_corporal ?? null;
             
             // Antecedentes Patológicos
             $historial->hospitalizaciones = $request->hospitalizaciones;
