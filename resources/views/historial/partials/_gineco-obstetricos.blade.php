@@ -12,9 +12,17 @@
                         <label class="form-label fw-semibold">Ritmo Menstrual</label>
                         <input type="text" name="ritmo" class="form-control" placeholder="Regular/Irregular">
                     </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="esta_embarazada" id="esta_embarazada" value="1" {{ old('esta_embarazada', $historial->esta_embarazada ?? false) ? 'checked' : '' }}>
+                            <label class="form-check-label fw-semibold" for="esta_embarazada">
+                                ¿La paciente está embarazada?
+                            </label>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">F.M.U</label>
-                        <input type="date" name="fmu" id="fmu" class="form-control">
+                        <input type="date" name="fmu" id="fmu" class="form-control" {{ (old('esta_embarazada', $historial->esta_embarazada ?? false)) ? '' : 'disabled' }}>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold">Edad Gestacional</label>
@@ -112,4 +120,34 @@
             calcularEdadGestacional(fmuInput.value);
         }
     });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkbox = document.getElementById('esta_embarazada');
+    const fmuInput = document.getElementById('fmu');
+    const egInput = document.getElementById('edad_gestacional');
+    
+    if (!checkbox || !fmuInput || !egInput) return;
+    
+    function toggleEmbarazo() {
+        if (checkbox.checked) {
+            fmuInput.disabled = false;
+            // Si hay FUM, calcular
+            if (fmuInput.value) {
+                calcularEdadGestacional(fmuInput.value);
+            }
+        } else {
+            fmuInput.disabled = true;
+            fmuInput.value = '';
+            egInput.value = '';
+        }
+    }
+    
+    // Ejecutar al cargar
+    toggleEmbarazo();
+    
+    // Escuchar cambios
+    checkbox.addEventListener('change', toggleEmbarazo);
+});
 </script>

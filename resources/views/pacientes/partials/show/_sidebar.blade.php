@@ -54,7 +54,15 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-birthday-cake me-2 text-muted"></i>Edad:</span>
-                    <span class="badge bg-info">{{ $paciente->edad }} años</span>
+                    @php
+                        $nacimiento = \Carbon\Carbon::parse($paciente->fecha_nacimiento);
+                        $hoy = \Carbon\Carbon::now();
+                        $años = $nacimiento->diffInYears($hoy);
+                        $meses = $nacimiento->diffInMonths($hoy) % 12;
+                        $dias = $nacimiento->diffInDays($hoy) % 30;
+                    @endphp
+                    <span class="badge bg-info">{{ $años }} años</span>
+                    <small class="text-muted d-block" style="font-size: 11px;">({{ $meses }} meses y {{ $dias }} días)</small>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-venus-mars me-2 text-muted"></i>Género:</span>
