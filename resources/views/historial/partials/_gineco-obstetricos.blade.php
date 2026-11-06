@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">F.M.U</label>
-                        <input type="date" name="fmu" class="form-control">
+                        <input type="date" name="fmu" id="fmu" class="form-control">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold">Edad Gestacional</label>
