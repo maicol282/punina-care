@@ -1609,40 +1609,6 @@ function extraerMedicamentoSimple(texto) {
 // ============================================
 // OCULTAR PRESIÓN ARTERIAL EN NIÑOS (< 15 años)
 // ============================================
-function verificarEdadParaPresion() {
-    const fechaNacimiento = document.getElementById('fecha_nacimiento_paciente')?.value;
-    const contenedorPresion = document.getElementById('presion_arterial_container');
-    
-    if (!fechaNacimiento || !contenedorPresion) return;
-    
-    const hoy = new Date();
-    const nacimiento = new Date(fechaNacimiento);
-    let edad = hoy.getFullYear() - nacimiento.getFullYear();
-    const mes = hoy.getMonth() - nacimiento.getMonth();
-    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
-        edad--;
-    }
-    
-    if (edad < 15) {
-        contenedorPresion.style.display = 'none';
-        // Establecer valor por defecto
-        document.querySelector('[name="presion_arterial"]').value = 'N/A (Paciente pediátrico)';
-    } else {
-        contenedorPresion.style.display = 'block';
-        if (document.querySelector('[name="presion_arterial"]').value === 'N/A (Paciente pediátrico)') {
-            document.querySelector('[name="presion_arterial"]').value = '';
-        }
-    }
-}
-
-// Ejecutar al cargar y al cambiar fecha de nacimiento
-document.addEventListener('DOMContentLoaded', function() {
-    const fechaInput = document.getElementById('fecha_nacimiento_paciente');
-    if (fechaInput) {
-        fechaInput.addEventListener('change', verificarEdadParaPresion);
-        fechaInput.addEventListener('input', verificarEdadParaPresion);
-        // Ejecutar inicialmente
-        setTimeout(verificarEdadParaPresion, 500);
     }
 });
 
@@ -1734,4 +1700,79 @@ document.getElementById('fmu')?.addEventListener('input', calcularEdadGestaciona
 // Calcular al cargar si ya hay una FUM guardada (para edición)
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(calcularEdadGestacional, 500);
+});
+
+// ============================================
+// LÓGICA DE PRESIÓN ARTERIAL PEDIÁTRICA (NUEVA)
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const fechaNacimiento = document.getElementById('fecha_nacimiento_paciente')?.value;
+    const presionInput = document.getElementById('presion_arterial');
+    const btnToggle = document.getElementById('togglePresionBtn');
+    const ayuda = document.getElementById('presion_ayuda');
+    
+    if (!presionInput) return;
+
+    function calcularEdad(fecha) {
+        if (!fecha) return 0;
+        const hoy = new Date();
+        const nacimiento = new Date(fecha);
+        let edad = hoy.getFullYear() - nacimiento.getFullYear();
+        const mes = hoy.getMonth() - nacimiento.getMonth();
+        if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+            edad--;
+        }
+        return edad;
+    }
+
+    function configurarPresion() {
+        const edad = calcularEdad(fechaNacimiento);
+        
+        if (edad > 0 && edad < 15) {
+            presionInput.disabled = true;
+            presionInput.value = 'N/A (Paciente pediátrico)';
+            if (ayuda) ayuda.textContent = 'Presión deshabilitada (niño). Use el botón para habilitar.';
+            if (btnToggle) {
+                btnToggle.classList.remove('btn-outline-secondary');
+                btnToggle.classList.add('btn-outline-warning');
+            }
+        } else {
+            presionInput.disabled = false;
+            if (presionInput.value === 'N/A (Paciente pediátrico)') {
+                presionInput.value = '';
+            }
+            if (ayuda) ayuda.textContent = 'Habilitado por defecto';
+            if (btnToggle) {
+                btnToggle.classList.remove('btn-outline-warning');
+                btnToggle.classList.add('btn-outline-secondary');
+            }
+        }
+    }
+
+    configurarPresion();
+
+    const fechaInput = document.getElementById('fecha_nacimiento_paciente');
+    if (fechaInput) {
+        fechaInput.addEventListener('change', configurarPresion);
+        fechaInput.addEventListener('input', configurarPresion);
+    }
+
+    if (btnToggle) {
+        btnToggle.addEventListener('click', function() {
+            if (presionInput.disabled) {
+                presionInput.disabled = false;
+                presionInput.value = '';
+                presionInput.focus();
+                if (ayuda) ayuda.textContent = 'Presión habilitada manualmente.';
+                this.classList.remove('btn-outline-warning');
+                this.classList.add('btn-outline-success');
+            } else {
+                presionInput.disabled = true;
+                presionInput.value = 'N/A (Paciente pediátrico)';
+                if (ayuda) ayuda.textContent = 'Presión deshabilitada manualmente.';
+                this.classList.remove('btn-outline-success');
+                this.classList.add('btn-outline-warning');
+            }
+        });
+    }
 });
