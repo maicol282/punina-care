@@ -12,6 +12,19 @@
                     <span class="text-dark fw-medium">{{ $historial->fecha_consulta->format('d/m/Y') }}</span>
                 </div>
                 <div class="col-md-3">
+                    <span class="d-block text-muted small fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Edad del Paciente</span>
+                    @php
+                        $nacimiento = \Carbon\Carbon::parse($historial->paciente->fecha_nacimiento);
+                        $hoy = \Carbon\Carbon::now();
+                        $años = $nacimiento->diffInYears($hoy);
+                        $meses = $nacimiento->diffInMonths($hoy) % 12;
+                        $dias = $nacimiento->diffInDays($hoy) % 30;
+                    @endphp
+                    <span class="text-dark fw-medium">
+                        {{ $años }} años, {{ $meses }} meses y {{ $dias }} días
+                    </span>
+                </div>
+                <div class="col-md-3">
                     <span class="d-block text-muted small fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Doctor Responsable</span>
                     <span class="text-dark fw-medium"><i class="fas fa-user-md text-primary me-1"></i> {{ $historial->doctor ?? 'No registrado' }}</span>
                 </div>

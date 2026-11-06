@@ -21,6 +21,24 @@
                         <span class="text-dark fw-bold fs-6">{{ $historial->$campo ?? '-' }}</span>
                     </div>
                 @endforeach
+                <div class="col-md-6 col-lg-4 text-start pt-3 border-top border-end">
+                    <span class="text-muted small fw-semibold me-2">Estado de Embarazo:</span>
+                    @if($historial->esta_embarazada)
+                        <span class="badge bg-success rounded-pill px-3">Embarazada</span>
+                        @if($historial->fmu)
+                            @php
+                                $fmu = \Carbon\Carbon::parse($historial->fmu);
+                                $hoy = \Carbon\Carbon::now();
+                                $diffDays = $fmu->diffInDays($hoy);
+                                $semanas = floor($diffDays / 7);
+                                $dias = $diffDays % 7;
+                            @endphp
+                            <div class="mt-1 small text-dark"><strong>Edad Gestacional:</strong> {{ $semanas }} semanas y {{ $dias }} días</div>
+                        @endif
+                    @else
+                        <span class="badge bg-secondary rounded-pill px-3">No embarazada</span>
+                    @endif
+                </div>
                 <div class="col-md-6 col-lg-4 text-start pt-3 border-top">
                     <span class="text-muted small fw-semibold me-2">Usa Anticonceptivos:</span>
                     <span class="badge {{ $historial->usa_anticonceptivos ? 'bg-success' : 'bg-secondary' }} rounded-pill px-3">{{ $historial->usa_anticonceptivos ? 'Sí' : 'No' }}</span>

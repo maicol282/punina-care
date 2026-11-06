@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">F.M.U</label>
-                        <input type="date" name="fmu" id="fmu" class="form-control" {{ (old('esta_embarazada', $historial->esta_embarazada ?? false)) ? '' : 'disabled' }}>
+                        <input type="date" name="fmu" id="fmu" class="form-control" >
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold">Edad Gestacional</label>
@@ -132,14 +132,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function toggleEmbarazo() {
         if (checkbox.checked) {
-            fmuInput.disabled = false;
             // Si hay FUM, calcular
             if (fmuInput.value) {
                 calcularEdadGestacional(fmuInput.value);
             }
         } else {
-            fmuInput.disabled = true;
-            fmuInput.value = '';
+            // Si no está embarazada, limpiar la edad gestacional (pero no la FUM)
             egInput.value = '';
         }
     }
