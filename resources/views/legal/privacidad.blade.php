@@ -30,7 +30,7 @@
             <p>Para el funcionamiento del sistema, compartimos datos estrictamente necesarios con:</p>
             <ul>
                 <li><strong>Groq (IA):</strong> Recibe datos clínicos <strong>anonimizados</strong> (sin nombre ni cédula) para generar sugerencias médicas. No se envía información que identifique al paciente.</li>
-                <li><strong>Jitsi Meet:</strong> Plataforma de videollamada para teleconsultas. <strong>Advertencia:</strong> Mientras se use el servidor público (<code>meet.jit.si</code>), la comunicación no está cifrada de extremo a extremo y cualquier persona con el enlace puede unirse. Una vez instalado el servidor propio, se garantizará la privacidad de la sala.</li>
+                <li><strong>Jitsi Meet:</strong> Plataforma de videollamada para teleconsultas. El servidor es propio de la clínica y está alojado en nuestra infraestructura, garantizando la privacidad de la sala. <strong>Advertencia:</strong> La teleconsulta presenta riesgos técnicos (fallas de conexión, interrupciones) y un riesgo mínimo de interceptación. El paciente debe firmar un consentimiento informado específico antes de la consulta.</li>
                 <li><strong>Gmail (Google):</strong> Servicio de correo para el envío de recetas y certificados. Los datos de salud se transmiten a través de servidores de Google (EE.UU.).</li>
             </ul>
 

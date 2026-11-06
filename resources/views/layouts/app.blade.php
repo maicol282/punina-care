@@ -273,6 +273,8 @@
                 <a href="{{ route('legal.cookies') }}" class="text-decoration-none text-muted">Política de Cookies</a>
                 <span class="text-muted">|</span>
                 <a href="{{ route('legal.consentimiento') }}" class="text-decoration-none text-muted">Consentimiento Informado</a>
+                <span class="text-muted">|</span>
+                <a href="{{ route('legal.consentimiento-teleconsulta') }}" class="text-decoration-none text-muted">Consentimiento Teleconsulta</a>
             </div>
         </div>
     </footer>

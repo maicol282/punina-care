@@ -289,3 +289,7 @@ Route::get('/politica-de-cookies', function () {
 Route::get('/consentimiento-informado', function () {
     return view('legal.consentimiento');
 })->name('legal.consentimiento');
+
+Route::get('/consentimiento-teleconsulta', function () {
+    return view('legal.consentimiento-teleconsulta');
+})->name('legal.consentimiento-teleconsulta');
