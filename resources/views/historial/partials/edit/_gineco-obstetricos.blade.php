@@ -14,7 +14,13 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">F.M.U</label>
-                        <input type="date" name="fmu" class="form-control" value="{{ old('fmu', $historial->fmu ? $historial->fmu->format('Y-m-d') : '') }}">
+                        <input type="date" name="fmu" class="form-control" value="{{ old('fmu', $historial->
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold">Edad Gestacional</label>
+                        <input type="text" id="edad_gestacional" class="form-control" readonly placeholder="Se calcula con la FUM">
+                    </div>
+                    <div class="col-md-4 mb-3">fmu ? $historial->fmu->format('Y-m-d') : '') }}">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">Menopausia</label>

@@ -16,6 +16,12 @@
                         <label class="form-label fw-semibold">F.M.U</label>
                         <input type="date" name="fmu" class="form-control">
                     </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold">Edad Gestacional</label>
+                        <input type="text" id="edad_gestacional" class="form-control" readonly placeholder="Se calcula con la FUM">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                    </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">Menopausia</label>
                         <select name="menopausia" class="form-select">

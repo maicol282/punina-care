@@ -1697,3 +1697,41 @@ document.querySelectorAll('.exploracion-radio').forEach(function(radio) {
 });
 
 </script>
+
+// ============================================
+// CALCULAR EDAD GESTACIONAL
+// ============================================
+function calcularEdadGestacional() {
+    const fmuInput = document.getElementById('fmu');
+    const edadGestacionalInput = document.getElementById('edad_gestacional');
+    
+    if (!fmuInput || !edadGestacionalInput) return;
+    
+    const fmu = new Date(fmuInput.value);
+    const hoy = new Date();
+    
+    if (isNaN(fmu.getTime())) {
+        edadGestacionalInput.value = '';
+        return;
+    }
+    
+    if (fmu > hoy) {
+        edadGestacionalInput.value = 'Fecha futura inválida';
+        return;
+    }
+    
+    const diffTime = hoy - fmu;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const semanas = Math.floor(diffDays / 7);
+    const dias = diffDays % 7;
+    
+    edadGestacionalInput.value = semanas + ' semanas y ' + dias + ' días';
+}
+
+document.getElementById('fmu')?.addEventListener('change', calcularEdadGestacional);
+document.getElementById('fmu')?.addEventListener('input', calcularEdadGestacional);
+
+// Calcular al cargar si ya hay una FUM guardada (para edición)
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(calcularEdadGestacional, 500);
+});

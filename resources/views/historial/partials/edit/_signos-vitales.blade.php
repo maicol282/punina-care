@@ -4,9 +4,15 @@
             </div>
             <div class="card-body">
                 <div class="row g-3">
-                    <div class="col-md-3">
-                        <label class="form-label fw-semibold">Presión Arterial</label>
-                        <input type="text" name="presion_arterial" class="form-control" placeholder="120/80" value="{{ old('presion_arterial', $historial->presion_arterial) }}">
+                    <div class="col-md-3" id="presion_arterial_container">
+                        <label class="form-label fw-semibold">Presión Arterial (mmHg)</label>
+                        <div class="input-group">
+                            <input type="text" name="presion_arterial" id="presion_arterial" class="form-control" placeholder="120/80" value="{{ old('presion_arterial', $historial->presion_arterial ?? '') }}">
+                            <button type="button" class="btn btn-outline-secondary" id="togglePresionBtn" title="Habilitar/Deshabilitar presión para pediatría">
+                                <i class="fas fa-child"></i>
+                            </button>
+                        </div>
+                        <small class="text-muted" id="presion_ayuda">Deshabilitado por defecto en niños</small>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">FC (lpm)</label>
