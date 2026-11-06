@@ -16,9 +16,9 @@
                     @php
                         $nacimiento = \Carbon\Carbon::parse($historial->paciente->fecha_nacimiento);
                         $hoy = \Carbon\Carbon::now();
-                        $años = $nacimiento->diffInYears($hoy);
-                        $meses = $nacimiento->diffInMonths($hoy) % 12;
-                        $dias = $nacimiento->diffInDays($hoy) % 30;
+                        $años = floor($nacimiento->diffInYears($hoy));
+                        $meses = floor($nacimiento->diffInMonths($hoy)) % 12;
+                        $dias = floor($nacimiento->diffInDays($hoy)) % 30;
                     @endphp
                     <span class="text-dark fw-medium">
                         {{ $años }} años, {{ $meses }} meses y {{ $dias }} días

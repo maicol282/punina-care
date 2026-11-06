@@ -57,9 +57,10 @@
                     @php
                         $nacimiento = \Carbon\Carbon::parse($paciente->fecha_nacimiento);
                         $hoy = \Carbon\Carbon::now();
-                        $años = $nacimiento->diffInYears($hoy);
-                        $meses = $nacimiento->diffInMonths($hoy) % 12;
-                        $dias = $nacimiento->diffInDays($hoy) % 30;
+                        // Forzar entero con floor()
+                        $años = floor($nacimiento->diffInYears($hoy));
+                        $meses = floor($nacimiento->diffInMonths($hoy)) % 12;
+                        $dias = floor($nacimiento->diffInDays($hoy)) % 30;
                     @endphp
                     <span class="badge bg-info">{{ $años }} años</span>
                     <small class="text-muted d-block" style="font-size: 11px;">({{ $meses }} meses y {{ $dias }} días)</small>
