@@ -313,11 +313,9 @@
                 } else {
                     detalleInput.textContent = `(${meses} meses y ${dias} días)`;
                 }
-            } else if (años < 2) {
-                const totalMeses = (años * 12) + meses;
-                detalleInput.textContent = `(${totalMeses} meses)`;
             } else {
-                detalleInput.textContent = '';
+                // Siempre mostrar años, meses y días
+                detalleInput.textContent = `(${años} años, ${meses} meses y ${dias} días)`;
             }
         }
     }
