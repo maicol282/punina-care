@@ -781,5 +781,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
+    @include('cookie-consent::index')
 </body>
 </html>

@@ -293,3 +293,7 @@ Route::get('/consentimiento-informado', function () {
 Route::get('/consentimiento-teleconsulta', function () {
     return view('legal.consentimiento-teleconsulta');
 })->name('legal.consentimiento-teleconsulta');
+
+Route::get('/declaracion-accesibilidad', function () {
+    return view('legal.accesibilidad');
+})->name('legal.accesibilidad');

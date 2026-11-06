@@ -17,6 +17,7 @@
         "psr/simple-cache": "3.0",
         "setasign/fpdf": "^1.9",
         "setasign/fpdi-fpdf": "^2.3",
+        "spatie/laravel-cookie-consent": "^3.5",
         "spatie/laravel-permission": "^7.2"
     },
     "require-dev": {
