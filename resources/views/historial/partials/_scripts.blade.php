@@ -1251,6 +1251,7 @@ Object.keys(recetaCampos).forEach(key => {
             guardarValoresOriginales();
         });
     }
+    }, 500); // Esperar 500ms a que el DOM esté listo
 });
 
 // ===== INICIALIZAR GUARDADO DE VALORES =====
@@ -1708,7 +1709,9 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const fechaNacimiento = document.getElementById('fecha_nacimiento_paciente')?.value;
     const presionInput = document.getElementById('presion_arterial');
-    const btnToggle = document.getElementById('togglePresionBtn');
+    // Esperar a que el DOM esté listo (el botón puede cargarse después)
+    setTimeout(function() {
+        const btnToggle = document.getElementById('togglePresionBtn');
     const ayuda = document.getElementById('presion_ayuda');
     
     if (!presionInput) return;
@@ -1775,4 +1778,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    }, 500); // Esperar 500ms a que el DOM esté listo
 });
