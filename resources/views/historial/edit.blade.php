@@ -50,6 +50,9 @@
 
         <!-- ========== OBSERVACIONES ========== -->
 @include('historial.partials.edit._observaciones')
+        <!-- ========== RECETAS MÉDICAS ========== -->
+        @include('historial.partials.edit._recetas')
+
         <!-- ========== BOTONES ========== -->
         @include('historial.partials.edit._botones-accion')
     </form>

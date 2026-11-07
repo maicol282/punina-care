@@ -23,6 +23,9 @@
 
     <!-- ========== DIAGNÓSTICOS, TRATAMIENTO Y ADJUNTOS ========== -->
     @include('historial.partials.show._diagnosticos-tratamiento')
+    <!-- ========== RECETAS MÉDICAS ========== -->
+    @include('historial.partials.show._recetas')
+
     <!-- ========== PANEL DE ACCIONES E HISTORIALES RELACIONADOS ========== -->
     @include('historial.partials.show._acciones-historiales')
 
