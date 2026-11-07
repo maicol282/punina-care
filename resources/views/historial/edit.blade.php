@@ -61,3 +61,4 @@
 @push('scripts')
 @include('historial.partials.edit._scripts')
 @endpush
+@include('historial.partials._scripts-receta')
