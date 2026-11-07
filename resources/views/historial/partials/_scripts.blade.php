@@ -1671,6 +1671,13 @@ document.querySelectorAll('.exploracion-radio').forEach(function(radio) {
 function calcularEdadGestacional() {
     const fmuInput = document.getElementById('fmu');
     const edadGestacionalInput = document.getElementById('edad_gestacional');
+    const checkboxEmbarazo = document.getElementById('esta_embarazada');
+    
+    // Si no hay checkbox o no está marcado, no calcular
+    if (!checkboxEmbarazo || !checkboxEmbarazo.checked) {
+        if (edadGestacionalInput) edadGestacionalInput.value = '';
+        return;
+    }
     
     if (!fmuInput || !edadGestacionalInput) return;
     
@@ -1695,10 +1702,16 @@ function calcularEdadGestacional() {
     edadGestacionalInput.value = semanas + ' semanas y ' + dias + ' días';
 }
 
+// Escuchar cambios en la FUM (solo si el checkbox está marcado)
 document.getElementById('fmu')?.addEventListener('change', calcularEdadGestacional);
 document.getElementById('fmu')?.addEventListener('input', calcularEdadGestacional);
 
-// Calcular al cargar si ya hay una FUM guardada (para edición)
+// Escuchar cambios en el checkbox de embarazo
+document.getElementById('esta_embarazada')?.addEventListener('change', function() {
+    calcularEdadGestacional();
+});
+
+// Calcular al cargar si ya hay una FUM guardada y el checkbox está marcado
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(calcularEdadGestacional, 500);
 });
