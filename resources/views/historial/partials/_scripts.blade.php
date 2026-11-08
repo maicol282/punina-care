@@ -160,5 +160,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+
+    // ============================================
+    // 5. REVISIÓN DE ÓRGANOS Y SISTEMAS (SP / CP)
+    // ============================================
+    document.querySelectorAll('.sistema-radio').forEach(function(radio) {
+        const targetId = radio.dataset.target;
+        const textarea = document.getElementById(targetId);
+        
+        radio.addEventListener('change', function() {
+            if (textarea) {
+                if (this.value === 'CP' && this.checked) {
+                    textarea.style.display = 'block';
+                    textarea.focus();
+                } else if (this.value === 'SP' && this.checked) {
+                    textarea.style.display = 'none';
+                    textarea.value = '';
+                }
+            }
+        });
+
+        if (radio.value === 'CP' && radio.checked && textarea) {
+            textarea.style.display = 'block';
+        }
+    });
+
 }); // Cierre de DOMContentLoaded
 </script>
