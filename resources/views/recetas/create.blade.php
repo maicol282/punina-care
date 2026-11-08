@@ -13,7 +13,7 @@
             </h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('recetas.store') }}" method="POST">
+            <form action="{{ route('recetas.store', $historial) }}" method="POST">
                 @csrf
 
                 <!-- Datos generales -->
