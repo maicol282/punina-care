@@ -1,14 +1,13 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // ============================================
-    // 1. CALCULAR EDAD GESTACIONAL (Solo si está embarazada)
+    // 1. CALCULAR EDAD GESTACIONAL
     // ============================================
     function calcularEdadGestacional() {
         const fmuInput = document.getElementById('fmu');
         const edadGestacionalInput = document.getElementById('edad_gestacional');
         const checkboxEmbarazo = document.getElementById('esta_embarazada');
         
-        // Si no hay checkbox o no está marcado, no calcular
         if (!checkboxEmbarazo || !checkboxEmbarazo.checked) {
             if (edadGestacionalInput) edadGestacionalInput.value = '';
             return;
@@ -37,16 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
         edadGestacionalInput.value = semanas + ' semanas y ' + dias + ' días';
     }
 
-    // Escuchar cambios en la FUM
     document.getElementById('fmu')?.addEventListener('change', calcularEdadGestacional);
     document.getElementById('fmu')?.addEventListener('input', calcularEdadGestacional);
-    
-    // Escuchar cambios en el checkbox de embarazo
     document.getElementById('esta_embarazada')?.addEventListener('change', calcularEdadGestacional);
-
-    // Calcular al cargar si ya hay una FUM guardada
     setTimeout(calcularEdadGestacional, 500);
-
 
     // ============================================
     // 2. LÓGICA DE PRESIÓN ARTERIAL PEDIÁTRICA
@@ -71,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function configurarPresion() {
             const edad = calcularEdad(fechaNacimiento);
-            
             if (edad > 0 && edad < 15) {
                 presionInput.disabled = true;
                 presionInput.value = 'N/A (Paciente pediátrico)';
@@ -93,17 +85,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Ejecutar al cargar
         configurarPresion();
-
-        // Escuchar cambios en la fecha de nacimiento (si existe)
         const fechaInput = document.getElementById('fecha_nacimiento_paciente');
         if (fechaInput) {
             fechaInput.addEventListener('change', configurarPresion);
             fechaInput.addEventListener('input', configurarPresion);
         }
 
-        // Botón para habilitar/deshabilitar manualmente
         if (btnToggle) {
             btnToggle.addEventListener('click', function() {
                 if (presionInput.disabled) {
@@ -123,54 +111,54 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-});
+
+    // ============================================
+    // 3. EXPLORACIÓN FÍSICA Y REVISIÓN DE ÓRGANOS (SP / CP)
+    // ============================================
+    document.querySelectorAll('.exploracion-radio').forEach(function(radio) {
+        const targetId = radio.dataset.target;
+        const textarea = document.getElementById(targetId);
+        
+        radio.addEventListener('change', function() {
+            if (textarea) {
+                if (this.value === 'CP' && this.checked) {
+                    textarea.style.display = 'block';
+                    textarea.focus();
+                } else if (this.value === 'SP' && this.checked) {
+                    textarea.style.display = 'none';
+                    textarea.value = '';
+                }
+            }
+        });
+
+        if (radio.value === 'CP' && radio.checked && textarea) {
+            textarea.style.display = 'block';
+        }
+    });
+
+    // ============================================
+    // 4. ANTECEDENTES PATOLÓGICOS (toggle-patologico)
+    // ============================================
+    document.querySelectorAll('.toggle-patologico').forEach(function(checkbox) {
+        const targetId = checkbox.dataset.target;
+        const textarea = document.getElementById(targetId);
+        
+        if (checkbox.checked && textarea) {
+            textarea.style.display = 'block';
+        }
+        
+        checkbox.addEventListener('change', function() {
+            if (textarea) {
+                if (this.checked) {
+                    textarea.style.display = 'block';
+                    textarea.focus();
+                } else {
+                    textarea.style.display = 'none';
+                    textarea.value = '';
+                }
+            }
+        });
+    });
+
+}); // Cierre de DOMContentLoaded
 </script>
-
-// ============================================
-// EXPLORACIÓN FÍSICA - SP / CP (CREATE)
-// ============================================
-document.querySelectorAll('.exploracion-radio').forEach(function(radio) {
-    const targetId = radio.dataset.target;
-    const textarea = document.getElementById(targetId);
-    
-    radio.addEventListener('change', function() {
-        if (textarea) {
-            if (this.value === 'CP' && this.checked) {
-                textarea.style.display = 'block';
-                textarea.focus();
-            } else if (this.value === 'SP' && this.checked) {
-                textarea.style.display = 'none';
-                textarea.value = '';
-            }
-        }
-    });
-
-    // Verificar estado inicial
-    if (radio.value === 'CP' && radio.checked && textarea) {
-        textarea.style.display = 'block';
-    }
-});
-
-// ============================================
-// ANTECEDENTES PATOLÓGICOS (toggle-patologico)
-// ============================================
-document.querySelectorAll('.toggle-patologico').forEach(function(checkbox) {
-    const targetId = checkbox.dataset.target;
-    const textarea = document.getElementById(targetId);
-    
-    if (checkbox.checked && textarea) {
-        textarea.style.display = 'block';
-    }
-    
-    checkbox.addEventListener('change', function() {
-        if (textarea) {
-            if (this.checked) {
-                textarea.style.display = 'block';
-                textarea.focus();
-            } else {
-                textarea.style.display = 'none';
-                textarea.value = '';
-            }
-        }
-    });
-});
