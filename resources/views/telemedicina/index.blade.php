@@ -116,7 +116,7 @@
                                         </form>
                                     @endif
                                     @if($consulta->estado == 'programada' || $consulta->estado == 'en_curso')
-                                        <a href="jitsi-meet://{{ $consulta->sala_nombre }}" target="_blank" class="btn btn-success" title="Iniciar videollamada">
+                                        <a href="https://talk.centromedicopuninacare.tech/join/{{ $consulta->sala_nombre }}" target="_blank" class="btn btn-success" title="Iniciar videollamada (MiroTalk)">
                                             <i class="fas fa-video"></i>
                                         </a>
                                     @endif

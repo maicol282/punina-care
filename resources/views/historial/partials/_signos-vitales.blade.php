@@ -10,7 +10,7 @@
                             <label class="form-label fw-semibold">Presión Arterial (mmHg)</label>
                             <div class="input-group">
                                 <input type="text" name="presion_arterial" id="presion_arterial" class="form-control" placeholder="120/80" value="{{ old('presion_arterial', $historial->presion_arterial ?? '') }}">
-                                <button type="button" class="btn btn-outline-warning" id="togglePresionBtn" title="Habilitar/Deshabilitar presión" onclick="togglePresionField()">
+                                <button type="button" class="btn btn-outline-warning" id="togglePresionBtn" title="Habilitar/Deshabilitar presión">
                                     <i class="fas fa-child"></i> <span id="btnToggleText">Habilitar</span>
                                 </button>
                             </div>

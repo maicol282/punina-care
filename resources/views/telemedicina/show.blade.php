@@ -61,8 +61,8 @@
                 </div>
                 <div class="col-md-6 text-end">
                     @if($consulta->estado !== 'finalizada' && $consulta->estado !== 'cancelada')
-                       <a href="jitsi-meet://{{ $consulta->sala_nombre }}" target="_blank" class="btn btn-success btn-lg">
-                            <i class="fas fa-video me-2"></i> Iniciar Videollamada (App Escritorio)
+                       <a href="https://talk.centromedicopuninacare.tech/join/{{ $consulta->sala_nombre }}" target="_blank" class="btn btn-success btn-lg">
+                            <i class="fas fa-video me-2"></i> Iniciar Videollamada (MiroTalk)
                         </a>
                     @else
                         <div class="alert alert-info">
