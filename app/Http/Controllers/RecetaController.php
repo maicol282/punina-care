@@ -23,23 +23,45 @@ class RecetaController extends Controller
     public function store(Request $request, HistorialClinico $historial)
     {
         $validated = $request->validate([
-            'fecha_emision' => 'required|date',
-            'medicamento' => 'required|string|max:255',
-            'presentacion' => 'nullable|string|max:100',
-            'concentracion' => 'nullable|string|max:100',
-            'dosis' => 'required|string|max:255',
-            'frecuencia' => 'required|string|max:255',
-            'duracion' => 'required|string|max:255',
-            'indicaciones' => 'nullable|string',
-            'signos_alarma' => 'nullable|string',
-'recomendaciones_no_farmacologicas' => 'nullable|string',
-            'advertencias' => 'nullable|string',
+            "fecha_emision" => "required|date",
+            "receta_medicamentos" => "required|array",
+            "receta_medicamentos.*.medicamento" => "required|string",
+            "receta_medicamentos.*.presentacion" => "nullable|string",
+            "receta_medicamentos.*.concentracion" => "nullable|string",
+            "receta_medicamentos.*.dosis" => "required|string",
+            "receta_medicamentos.*.frecuencia" => "required|string",
+            "receta_medicamentos.*.duracion" => "required|string",
+            "receta_medicamentos.*.via" => "nullable|string|max:50",
+            "receta_medicamentos.*.cantidad" => "nullable|string|max:50",
+            "receta_medicamentos.*.indicaciones" => "nullable|string",
+            "receta_medicamentos.*.advertencias" => "nullable|string",
+            "receta_fecha_emision" => "required|date",
+            "receta_advertencias" => "nullable|string",
+            "receta_signos_alarma" => "nullable|string",
+            "receta_recomendaciones_no_farmacologicas" => "nullable|string",
         ]);
+
+        $medicamentosValidos = array_filter($validated["receta_medicamentos"], function($med) {
+            return !empty($med["medicamento"]);
+        });
+
+        $validated["medicamentos_json"] = json_encode(array_values($medicamentosValidos));
+
+        $primerMedicamento = reset($medicamentosValidos);
+        if ($primerMedicamento) {
+            $validated["medicamento"] = $primerMedicamento["medicamento"];
+            $validated["concentracion"] = $primerMedicamento["concentracion"] ?? null;
+            $validated["dosis"] = $primerMedicamento["dosis"] ?? null;
+            $validated["frecuencia"] = $primerMedicamento["frecuencia"] ?? null;
+            $validated["duracion"] = $primerMedicamento["duracion"] ?? null;
+        }
+
+        unset($validated["receta_medicamentos"]);
 
         $historial->recetas()->create($validated);
 
-        return redirect()->route('recetas.index', $historial)
-            ->with('success', 'Receta agregada exitosamente.');
+        return redirect()->route("recetas.index", $historial)
+            ->with("success", "Receta agregada exitosamente.");
     }
 
 public function edit(Receta $receta)
@@ -48,56 +70,48 @@ public function edit(Receta $receta)
     return view('recetas.edit', compact('receta'));
 }
 
-public function update(Request $request, Receta $receta)
-{
-    $request->validate([
-        'receta_medicamentos' => 'required|array',
-        'receta_medicamentos.*.medicamento' => 'required|string',
-        'receta_medicamentos.*.presentacion' => 'nullable|string',
-        'receta_medicamentos.*.concentracion' => 'nullable|string',
-        'receta_medicamentos.*.dosis' => 'nullable|string',
-        'receta_medicamentos.*.frecuencia' => 'nullable|string',
-        'receta_medicamentos.*.duracion' => 'nullable|string',
-        'receta_medicamentos.*.indicaciones' => 'nullable|string',
-        'receta_fecha_emision' => 'required|date',
-        'receta_advertencias' => 'nullable|string',
-        'receta_signos_alarma' => 'nullable|string',
-        'receta_recomendaciones_no_farmacologicas' => 'nullable|string','receta_medicamentos.*.via' => 'nullable|string|max:50',
-        'receta_medicamentos.*.cantidad' => 'nullable|string|max:50',
-        'receta_medicamentos.*.advertencias' => 'nullable|string',
-    ]);
+    public function update(Request $request, Receta $receta)
+    {
+        $validated = $request->validate([
+            "fecha_emision" => "required|date",
+            "receta_medicamentos" => "required|array",
+            "receta_medicamentos.*.medicamento" => "required|string",
+            "receta_medicamentos.*.presentacion" => "nullable|string",
+            "receta_medicamentos.*.concentracion" => "nullable|string",
+            "receta_medicamentos.*.dosis" => "nullable|string",
+            "receta_medicamentos.*.frecuencia" => "nullable|string",
+            "receta_medicamentos.*.duracion" => "nullable|string",
+            "receta_medicamentos.*.via" => "nullable|string|max:50",
+            "receta_medicamentos.*.cantidad" => "nullable|string|max:50",
+            "receta_medicamentos.*.indicaciones" => "nullable|string",
+            "receta_medicamentos.*.advertencias" => "nullable|string",
+            "receta_fecha_emision" => "required|date",
+            "receta_advertencias" => "nullable|string",
+            "receta_signos_alarma" => "nullable|string",
+            "receta_recomendaciones_no_farmacologicas" => "nullable|string",
+        ]);
 
-    try {
-        $medicamentosValidos = array_filter($request->receta_medicamentos, function($med) {
-            return !empty($med['medicamento']);
+        $medicamentosValidos = array_filter($validated["receta_medicamentos"], function($med) {
+            return !empty($med["medicamento"]);
         });
 
-        $receta->fecha_emision = $request->receta_fecha_emision;
-        $receta->medicamentos_json = json_encode($medicamentosValidos);
-        
-        // Para compatibilidad con el campo medicamento legacy
+        $validated["medicamentos_json"] = json_encode(array_values($medicamentosValidos));
+
         $primerMedicamento = reset($medicamentosValidos);
-        $receta->medicamento = $primerMedicamento['medicamento'] ?? null;
-        $receta->presentacion = $primerMedicamento['presentacion'] ?? null;
-        $receta->concentracion = $primerMedicamento['concentracion'] ?? null;
-        $receta->dosis = $primerMedicamento['dosis'] ?? null;
-        $receta->frecuencia = $primerMedicamento['frecuencia'] ?? null;
-        $receta->duracion = $primerMedicamento['duracion'] ?? null;
-        $receta->indicaciones = $primerMedicamento['indicaciones'] ?? null;
-        
-        $receta->advertencias = $request->receta_advertencias;
-        $receta->signos_alarma = $request->receta_signos_alarma;
-        $receta->recomendaciones_no_farmacologicas = $request->receta_recomendaciones_no_farmacologicas;
-        $receta->save();
+        if ($primerMedicamento) {
+            $validated["medicamento"] = $primerMedicamento["medicamento"];
+            $validated["concentracion"] = $primerMedicamento["concentracion"] ?? null;
+            $validated["dosis"] = $primerMedicamento["dosis"] ?? null;
+            $validated["frecuencia"] = $primerMedicamento["frecuencia"] ?? null;
+            $validated["duracion"] = $primerMedicamento["duracion"] ?? null;
+        }
 
-        return redirect()->route('historial.show', $receta->historial_clinico_id)
-            ->with('success', 'Receta actualizada correctamente.');
+        unset($validated["receta_medicamentos"]);
 
-    } catch (\Exception $e) {
-        return redirect()->back()
-            ->with('error', 'Error al actualizar la receta: ' . $e->getMessage())
-            ->withInput();
-    }
+        $receta->update($validated);
+
+        return redirect()->route("recetas.index", $receta->historialClinico)
+            ->with("success", "Receta actualizada exitosamente.");
 }
 
     public function destroy(Receta $receta)
