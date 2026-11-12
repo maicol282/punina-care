@@ -53,7 +53,7 @@
                                     <span class="small text-muted">Arrastra o haz clic para subir</span>
                                     <span class="badge bg-light text-muted" style="font-size: 9px;">JPG, PNG, PDF</span>
                                 </div>
-                                <input type="file" class="file-input-laboratorio" name="archivos_laboratorio[]" multiple accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx" style="display: none;">
+                                <input type="file" class="file-input-laboratorio" name="archivos_laboratorio[]" multiple accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx" style="display: none;" x-on:change="mostrarPreview($event, 'laboratorio')">
                             </div>
                             <div class="file-list-laboratorio d-flex flex-wrap gap-1 mt-1"></div>
                         </div>
@@ -162,4 +162,4 @@
             </div>
         </div>
     </div>
-</div>
+@endsection

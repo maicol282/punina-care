@@ -21,6 +21,7 @@
     <!-- ========== EXPLORACIÓN FÍSICA Y SISTEMAS ========== -->
    @include('historial.partials.show._exploracion-sistemas')
 
+    @include('historial.partials.show._estudios-complementarios')
     <!-- ========== DIAGNÓSTICOS, TRATAMIENTO Y ADJUNTOS ========== -->
     @include('historial.partials.show._diagnosticos-tratamiento')
     <!-- ========== RECETAS MÉDICAS ========== -->

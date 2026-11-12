@@ -35,7 +35,12 @@ class HistorialClinicoController extends Controller
             'diagnostico' => 'nullable|string',
             'tratamiento' => 'nullable|string',
             'recomendaciones' => 'nullable|string',
-'archivos.*' => 'nullable|file|max:10240|mimes:jpeg,png,gif,webp,pdf,doc,docx,xls,xlsx',
+'archivos_laboratorio.*' => 'nullable|file|max:10240',
+            'archivos_imagen.*' => 'nullable|file|max:10240',
+            'archivos_otros.*' => 'nullable|file|max:10240',
+            'laboratorio' => 'nullable|string',
+            'estudio_imagen' => 'nullable|string',
+            'otros_exploracion' => 'nullable|string',
         ]);
 
         try {
@@ -189,7 +194,7 @@ class HistorialClinicoController extends Controller
                             'tipo_archivo' => $archivo->getMimeType(),
                             'mime_type' => $archivo->getMimeType(),
                             'tamano' => $archivo->getSize(),
-                            'descripcion' => $request->input($key),
+                            'descripcion' => $request->input($key === 'laboratorio' ? 'laboratorio' : ($key === 'imagen' ? 'estudio_imagen' : 'otros_exploracion')),
                             'categoria' => $categoria
                         ]);
                     }
@@ -292,7 +297,12 @@ if ($request->has('generar_receta') && $request->generar_receta == '1') {
             'diagnostico' => 'nullable|string',
             'tratamiento' => 'nullable|string',
             'recomendaciones' => 'nullable|string',
-'archivos.*' => 'nullable|file|max:10240|mimes:jpeg,png,gif,webp,pdf,doc,docx,xls,xlsx',
+'archivos_laboratorio.*' => 'nullable|file|max:10240',
+            'archivos_imagen.*' => 'nullable|file|max:10240',
+            'archivos_otros.*' => 'nullable|file|max:10240',
+            'laboratorio' => 'nullable|string',
+            'estudio_imagen' => 'nullable|string',
+            'otros_exploracion' => 'nullable|string',
         ]);
 
         try {
