@@ -297,3 +297,5 @@ Route::get('/consentimiento-teleconsulta', function () {
 Route::get('/declaracion-accesibilidad', function () {
     return view('legal.accesibilidad');
 })->name('legal.accesibilidad');
+
+Route::get('/adjuntos/{id}/ver', [App\Http\Controllers\HistorialClinicoController::class, 'verAdjunto'])->name('adjuntos.ver')->middleware('auth');

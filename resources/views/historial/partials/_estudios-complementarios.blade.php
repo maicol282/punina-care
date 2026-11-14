@@ -33,7 +33,7 @@
                             @if(isset($historial) && $historial->estudiosAdjuntos->where('categoria', 'Laboratorio')->count() > 0)
                                 <div class="d-flex flex-wrap gap-1 mb-1">
                                     @foreach($historial->estudiosAdjuntos->where('categoria', 'Laboratorio') as $adjunto)
-                                        <div class="border rounded-2 px-2 py-1 d-flex align-items-center gap-1" style="background: #fff; font-size: 12px;" id="archivo-{{ $adjunto->id }}">
+                                        <a href="{{ route('adjuntos.ver', $adjunto->id) }}" target="_blank" class="text-decoration-none border rounded-2 px-2 py-1 d-flex align-items-center gap-1" style="background: #fff; font-size: 12px; color: inherit;" id="archivo-{{ $adjunto->id }}">
                                             <i class="fas {{ $adjunto->icono }} text-{{ $adjunto->color }}" style="font-size: 12px;"></i>
                                             <span style="max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $adjunto->nombre_original }}</span>
                                             @if(Route::currentRouteName() == 'historial.edit')
@@ -41,7 +41,7 @@
                                                     <i class="fas fa-times"></i>
                                                 </button>
                                             @endif
-                                        </div>
+                                        </a>
                                     @endforeach
                                 </div>
                             @endif
@@ -84,7 +84,7 @@
                             @if(isset($historial) && $historial->estudiosAdjuntos->where('categoria', 'Imagen')->count() > 0)
                                 <div class="d-flex flex-wrap gap-1 mb-1">
                                     @foreach($historial->estudiosAdjuntos->where('categoria', 'Imagen') as $adjunto)
-                                        <div class="border rounded-2 px-2 py-1 d-flex align-items-center gap-1" style="background: #fff; font-size: 12px;" id="archivo-{{ $adjunto->id }}">
+                                        <a href="{{ route('adjuntos.ver', $adjunto->id) }}" target="_blank" class="text-decoration-none border rounded-2 px-2 py-1 d-flex align-items-center gap-1" style="background: #fff; font-size: 12px; color: inherit;" id="archivo-{{ $adjunto->id }}">
                                             <i class="fas {{ $adjunto->icono }} text-{{ $adjunto->color }}" style="font-size: 12px;"></i>
                                             <span style="max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $adjunto->nombre_original }}</span>
                                             @if(Route::currentRouteName() == 'historial.edit')
@@ -92,7 +92,7 @@
                                                     <i class="fas fa-times"></i>
                                                 </button>
                                             @endif
-                                        </div>
+                                        </a>
                                     @endforeach
                                 </div>
                             @endif
@@ -134,7 +134,7 @@
                             @if(isset($historial) && $historial->estudiosAdjuntos->where('categoria', 'Otros')->count() > 0)
                                 <div class="d-flex flex-wrap gap-1 mb-1">
                                     @foreach($historial->estudiosAdjuntos->where('categoria', 'Otros') as $adjunto)
-                                        <div class="border rounded-2 px-2 py-1 d-flex align-items-center gap-1" style="background: #fff; font-size: 12px;" id="archivo-{{ $adjunto->id }}">
+                                        <a href="{{ route('adjuntos.ver', $adjunto->id) }}" target="_blank" class="text-decoration-none border rounded-2 px-2 py-1 d-flex align-items-center gap-1" style="background: #fff; font-size: 12px; color: inherit;" id="archivo-{{ $adjunto->id }}">
                                             <i class="fas {{ $adjunto->icono }} text-{{ $adjunto->color }}" style="font-size: 12px;"></i>
                                             <span style="max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $adjunto->nombre_original }}</span>
                                             @if(Route::currentRouteName() == 'historial.edit')
@@ -142,7 +142,7 @@
                                                     <i class="fas fa-times"></i>
                                                 </button>
                                             @endif
-                                        </div>
+                                        </a>
                                     @endforeach
                                 </div>
                             @endif

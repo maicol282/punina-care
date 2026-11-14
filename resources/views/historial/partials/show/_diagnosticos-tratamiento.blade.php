@@ -47,35 +47,7 @@
                 </div>
             </div>
 
-            <div class="row g-4 mt-2 border-top pt-2">
-                <div class="col-12">
-                    <h6 class="small fw-bold text-muted text-uppercase mb-3 mt-3"><i class="fas fa-microscope me-2 text-primary"></i>Estudios Complementarios & Adjuntos</h6>
-                    <div class="row g-3">
-                        @foreach(['Laboratorio' => ['flask', 'primary'], 'Imagen' => ['x-ray', 'info'], 'Otros' => ['folder-open', 'secondary']] as $categoria => $icon)
-                        <div class="col-md-4">
-                            <div class="border rounded-3 p-3 h-100 bg-light border-light">
-                                <div class="d-flex align-items-center gap-2 mb-2">
-                                    <i class="fas fa-{{ $icon[0] }} text-{{ $icon[1] }}"></i>
-                                    <span class="fw-bold text-dark small">{{ $categoria }}</span>
-                                </div>
-                                @php $campoTexto = strtolower($categoria) == 'otros' ? 'otros_exploracion' : (strtolower($categoria) == 'imagen' ? 'estudio_imagen' : strtolower($categoria)); @endphp
-                                <p class="small text-muted mb-3">{{ $historial->$campoTexto ?? 'No requiere' }}</p>
-                                
-                                @if($historial->estudiosAdjuntos->where('categoria', $categoria)->count() > 0)
-                                    <div class="d-flex flex-wrap gap-2">
-                                        @foreach($historial->estudiosAdjuntos->where('categoria', $categoria) as $adjunto)
-                                            <a href="{{ route('adjuntos.download', $adjunto) }}" target="_blank" class="btn btn-sm btn-white border shadow-sm rounded-pill py-1 px-3" style="font-size: 11px;">
-                                                <i class="fas {{ $adjunto->icono }} text-{{ $adjunto->color }} me-1"></i> {{ Str::limit($adjunto->nombre_original, 15) }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+           
             
             @if($historial->observaciones)
             <div class="mt-4 pt-3 border-top">

@@ -671,4 +671,50 @@ if ($request->has('generar_receta') && $request->generar_receta == '1') {
                 ], 500);
             }
         }
+
+    /**
+     * Descargar o visualizar un archivo adjunto.
+     */
+    public function descargarAdjunto($id)
+    {
+        $adjunto = \App\Models\EstudioAdjunto::findOrFail($id);
+        
+        $ruta = storage_path('app/public/' . $adjunto->ruta);
+        
+        if (!file_exists($ruta)) {
+            abort(404, 'Archivo no encontrado en el servidor.');
+        }
+        
+        return response()->file($ruta);
+    }
+
+    /**
+     * Visualizar un archivo adjunto en el navegador.
+     */
+    public function verAdjunto($id)
+    {
+        $adjunto = \App\Models\EstudioAdjunto::findOrFail($id);
+        
+        // Lista de rutas posibles donde puede estar el archivo
+        $rutasPosibles = [
+            storage_path('app/public/' . $adjunto->ruta),
+            storage_path('app/' . $adjunto->ruta),
+            public_path('storage/' . $adjunto->ruta),
+            base_path('storage/' . $adjunto->ruta),
+        ];
+        
+        $rutaEncontrada = null;
+        foreach ($rutasPosibles as $ruta) {
+            if (file_exists($ruta)) {
+                $rutaEncontrada = $ruta;
+                break;
+            }
+        }
+        
+        if (!$rutaEncontrada) {
+            abort(404, 'Archivo no encontrado. Ruta en BD: ' . $adjunto->ruta);
+        }
+        
+        return response()->file($rutaEncontrada);
+    }
 }
