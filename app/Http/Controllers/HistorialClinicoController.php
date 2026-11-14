@@ -172,17 +172,24 @@ class HistorialClinicoController extends Controller
                             // Guardar en storage/app/public/estudios
                             $ruta = $archivo->storeAs('estudios', $nombreGuardado, 'public');
                             
-                            // Crear registro en la base de datos
-                            EstudioAdjunto::create([
-                                'historial_clinico_id' => $historial->id,
-                                'nombre_original' => $nombreOriginal,
-                                'nombre_guardado' => $nombreGuardado,
-                                'ruta' => $ruta,
-                                'tipo_archivo' => $categoria,
-                                'mime_type' => $archivo->getMimeType(),
-                                'tamano' => $archivo->getSize(),
-                                'categoria' => $categoria,
-                            ]);
+                            // Evitar duplicados: solo crear si no existe uno igual
+                            $existe = EstudioAdjunto::where('historial_clinico_id', $historial->id)
+                                ->where('nombre_original', $nombreOriginal)
+                                ->where('categoria', $categoria)
+                                ->exists();
+
+                            if (!$existe) {
+                                EstudioAdjunto::create([
+                                    'historial_clinico_id' => $historial->id,
+                                    'nombre_original' => $nombreOriginal,
+                                    'nombre_guardado' => $nombreGuardado,
+                                    'ruta' => $ruta,
+                                    'tipo_archivo' => $categoria,
+                                    'mime_type' => $archivo->getMimeType(),
+                                    'tamano' => $archivo->getSize(),
+                                    'categoria' => $categoria,
+                                ]);
+                            }
                         }
                     }
                 }
@@ -203,74 +210,6 @@ class HistorialClinicoController extends Controller
                 }
             }
 
-            // ===== GUARDAR ARCHIVOS ADJUNTOS POR CATEGORÍA =====
-            $categorias = [
-                'laboratorio' => 'Laboratorio',
-                'imagen' => 'Imagen',
-                'otros' => 'Otros'
-            ];
-
-            foreach ($categorias as $key => $categoria) {
-                $fieldName = 'archivos_' . $key;
-                if ($request->hasFile($fieldName)) {
-                    $carpeta = 'estudios/' . $historial->id . '/' . $key;
-                    
-                    foreach ($request->file($fieldName) as $archivo) {
-                        $nombreOriginal = $archivo->getClientOriginalName();
-                        $extension = $archivo->getClientOriginalExtension();
-                        $nombreGuardado = time() . '_' . uniqid() . '.' . $extension;
-                        
-                        $ruta = $archivo->storeAs($carpeta, $nombreGuardado, 'public');
-                        
-                        EstudioAdjunto::create([
-                            'historial_clinico_id' => $historial->id,
-                            'nombre_original' => $nombreOriginal,
-                            'nombre_guardado' => $nombreGuardado,
-                            'ruta' => $ruta,
-                            'tipo_archivo' => $archivo->getMimeType(),
-                            'mime_type' => $archivo->getMimeType(),
-                            'tamano' => $archivo->getSize(),
-                            'descripcion' => $request->input($key === 'laboratorio' ? 'laboratorio' : ($key === 'imagen' ? 'estudio_imagen' : 'otros_exploracion')),
-                            'categoria' => $categoria
-                        ]);
-                    }
-                }
-            }
-// ===== GUARDAR RECETA MÉDICA =====
-if ($request->has('generar_receta') && $request->generar_receta == '1') {
-    $medicamentos = $request->receta_medicamentos;
-    
-    if ($medicamentos && count($medicamentos) > 0) {
-        // Limpiar medicamentos vacíos
-        $medicamentosValidos = array_filter($medicamentos, function($med) {
-            return !empty($med['medicamento']);
-        });
-        
-        if (count($medicamentosValidos) > 0) {
-            $receta = new \App\Models\Receta();
-            $receta->historial_clinico_id = $historial->id;
-            $receta->fecha_emision = $request->receta_fecha_emision ?? now();
-            $receta->medicamentos_json = json_encode($medicamentosValidos);
-            $receta->medicamento = $medicamentosValidos[0]['medicamento'] ?? null; // Para compatibilidad
-            $receta->presentacion = $medicamentosValidos[0]['presentacion'] ?? null;
-            $receta->concentracion = $medicamentosValidos[0]['concentracion'] ?? null;
-            $receta->dosis = $medicamentosValidos[0]['dosis'] ?? null;
-            $receta->frecuencia = $medicamentosValidos[0]['frecuencia'] ?? null;
-            $receta->duracion = $medicamentosValidos[0]['duracion'] ?? null;
-            $receta->indicaciones = $medicamentosValidos[0]['indicaciones'] ?? null;
-            $receta->advertencias = $request->receta_advertencias;
-            $receta->signos_alarma = $request->receta_signos_alarma;
-            $receta->recomendaciones_no_farmacologicas = $request->receta_recomendaciones_no_farmacologicas;
-            $receta->save();
-            
-            Log::info("Receta médica generada automáticamente", [
-                'historial_id' => $historial->id,
-                'medicamentos' => count($medicamentosValidos)
-            ]);
-        }
-    }
-}
-            DB::commit();
 
             $usuario = Auth::user();
             $nombreUsuario = $usuario ? $usuario->name : 'Desconocido';
