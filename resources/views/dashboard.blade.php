@@ -4,6 +4,58 @@
 @section('page-title', 'Panel de Estadísticas')
 
 @section('content')
+
+<!-- ========== ACCESOS RÁPIDOS ========== -->
+<div class="row g-3 mb-4">
+    <div class="col-12">
+        <h6 class="fw-bold text-muted mb-3"><i class="fas fa-bolt me-2 text-warning"></i>Accesos Rápidos</h6>
+    </div>
+    <div class="col-md-3 col-6">
+        <a href="{{ route('historial.create', ['paciente' => 1]) }}" class="card quick-access-card border-0 shadow-sm h-100 text-decoration-none">
+            <div class="card-body text-center py-4">
+                <div class="icon-box bg-primary bg-opacity-10 text-primary mx-auto mb-2" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-notes-medical fa-lg"></i>
+                </div>
+                <h6 class="mb-0 fw-bold">Nuevo Historial</h6>
+                <small class="text-muted">Registrar consulta</small>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-6">
+        <a href="{{ route('pacientes.create') }}" class="card quick-access-card border-0 shadow-sm h-100 text-decoration-none">
+            <div class="card-body text-center py-4">
+                <div class="icon-box bg-success bg-opacity-10 text-success mx-auto mb-2" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user-plus fa-lg"></i>
+                </div>
+                <h6 class="mb-0 fw-bold">Nuevo Paciente</h6>
+                <small class="text-muted">Registrar paciente</small>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-6">
+        <a href="{{ route('recetas.todas') }}" class="card quick-access-card border-0 shadow-sm h-100 text-decoration-none">
+            <div class="card-body text-center py-4">
+                <div class="icon-box bg-info bg-opacity-10 text-info mx-auto mb-2" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-prescription-bottle-alt fa-lg"></i>
+                </div>
+                <h6 class="mb-0 fw-bold">Recetas</h6>
+                <small class="text-muted">Ver todas las recetas</small>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-6">
+        <a href="{{ route('telemedicina.index') }}" class="card quick-access-card border-0 shadow-sm h-100 text-decoration-none">
+            <div class="card-body text-center py-4">
+                <div class="icon-box bg-warning bg-opacity-10 text-warning mx-auto mb-2" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-video fa-lg"></i>
+                </div>
+                <h6 class="mb-0 fw-bold">Telemedicina</h6>
+                <small class="text-muted">Videollamada</small>
+            </div>
+        </a>
+    </div>
+</div>
+
 <!-- Tarjetas de estadísticas principales -->
 <div class="row mb-4">
     <div class="col-xl-3 col-md-6 mb-4">

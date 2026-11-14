@@ -326,3 +326,57 @@ main,
     padding-left: 10px;
     margin-bottom: 10px;
 }
+
+/* ============================================
+   MEJORAS DE USABILIDAD - MENÚ Y BOTONES
+   ============================================ */
+
+/* Iconos del sidebar más grandes y con espacio */
+.sidebar .nav-link i {
+    font-size: 1.2rem;
+    width: 28px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.sidebar .nav-link {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Tooltips personalizados (para que se vean bien) */
+.tooltip-inner {
+    background-color: #1a5276;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+/* Botones de acción más grandes y con iconos visibles */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+    transform: scale(1.1);
+}
+
+/* Tarjetas de acceso rápido en el dashboard */
+.quick-access-card {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.quick-access-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}

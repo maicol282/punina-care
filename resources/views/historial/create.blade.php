@@ -3,6 +3,7 @@
 @section('title', 'Nuevo Historial Clínico')
 @section('page-title', 'Registrar Nuevo Historial Clínico')
 
+@php $breadcrumbs = ['Pacientes' => route('pacientes.index'), 'Historiales' => route('historial.index'), 'Nuevo Historial' => null]; @endphp
 @section('content')
 <div class="container-fluid px-0">
     <!-- Header con botón de copiar -->

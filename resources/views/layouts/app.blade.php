@@ -11,6 +11,7 @@
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -402,7 +403,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ayudaIA">
-                                    <i class="fas fa-robot me-2 text-dark"></i> Asistente IA (Itaca)
+                                    <i class="fas fa-robot me-2 text-dark"></i> Asistente IA
                                 </button>
                             </h2>
                             <div id="ayudaIA" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
@@ -851,6 +852,252 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     </script>
+
+
+<!-- Botón flotante de ayuda -->
+<button type="button" class="btn btn-primary rounded-circle shadow-lg position-fixed" 
+        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 9998;"
+        data-bs-toggle="modal" data-bs-target="#modalAyudaRapida"
+        title="Ayuda rápida">
+    <i class="fas fa-question fa-lg"></i>
+</button>
+
+<!-- Modal de ayuda rápida -->
+<div class="modal fade" id="modalAyudaRapida" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-question-circle me-2"></i> Guía rápida de uso</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold text-primary"><i class="fas fa-user-plus me-2"></i>Registrar Paciente</h6>
+                                <p class="small text-muted mb-0">Ve a "Pacientes" → "Nuevo Paciente". Llena los datos básicos (nombre, cédula, fecha de nacimiento).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold text-success"><i class="fas fa-notes-medical me-2"></i>Crear Historial</h6>
+                                <p class="small text-muted mb-0">Desde el perfil del paciente, haz clic en "Nuevo Historial". Llena los datos y guarda.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold text-info"><i class="fas fa-video me-2"></i>Telemedicina</h6>
+                                <p class="small text-muted mb-0">Ve a "Punina Care" → "Nueva Consulta". Al guardar, haz clic en "Unirse a Videollamada" (usa Chrome o Edge).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <h6 class="fw-bold text-warning"><i class="fas fa-file-pdf me-2"></i>Firmar Documentos</h6>
+                                <p class="small text-muted mb-0">Sube tu certificado .p12 en "Mi Perfil". Los PDFs se firmarán automáticamente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Botón flotante de "Volver" -->
+<button type="button" class="btn btn-dark rounded-circle shadow-lg position-fixed" 
+        style="bottom: 20px; left: 20px; width: 50px; height: 50px; z-index: 9997;"
+        onclick="history.back()" title="Volver atrás">
+    <i class="fas fa-arrow-left fa-lg"></i>
+</button>
+
+
+<script>
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'F1') {
+        event.preventDefault();
+        var modal = document.getElementById('modalAyudaRapida');
+        if (modal) {
+            var bsModal = new bootstrap.Modal(modal);
+            bsModal.show();
+        }
+    }
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar si el usuario ya vio el tour
+    const tourVisto = localStorage.getItem('punina_tour_visto');
+    
+    if (!tourVisto && typeof window.driver !== 'undefined') {
+        const driver = window.driver.js.driver;
+        const driverObj = driver({
+            showProgress: true,
+            showButtons: ['next', 'previous', 'close'],
+            steps: [
+                {
+                    element: '.sidebar-brand',
+                    popover: {
+                        title: '👋 ¡Bienvenido a Punina Care!',
+                        description: 'Este es tu sistema médico. Vamos a dar un recorrido rápido para que aprendas a usarlo.'
+                    }
+                },
+                {
+                    element: '.sidebar-nav',
+                    popover: {
+                        title: '📋 Menú de Navegación',
+                        description: 'Aquí encontrarás todas las secciones: Pacientes, Historiales, Recetas, Telemedicina y más.'
+                    }
+                },
+                {
+                    element: '.sidebar-nav .nav-link:nth-child(2)',
+                    popover: {
+                        title: '👥 Pacientes',
+                        description: 'Haz clic aquí para ver la lista de pacientes, crear nuevos o buscar por cédula.'
+                    }
+                },
+                {
+                    element: '.sidebar-nav .nav-link:nth-child(4)',
+                    popover: {
+                        title: '📄 Historiales',
+                        description: 'Aquí puedes ver todos los historiales clínicos y crear nuevos.'
+                    }
+                },
+                {
+                    element: '.sidebar-nav .nav-link:nth-child(5)',
+                    popover: {
+                        title: '💊 Recetas',
+                        description: 'Gestiona todas las recetas médicas, envíalas por correo y descárgalas firmadas.'
+                    }
+                },
+                {
+                    element: '.sidebar-nav .nav-link:nth-child(7)',
+                    popover: {
+                        title: '📹 Telemedicina',
+                        description: 'Aquí puedes iniciar videollamadas con tus pacientes (usa Chrome o Edge).'
+                    }
+                },
+                {
+                    element: '#modalAyudaRapida',
+                    popover: {
+                        title: '❓ Ayuda Rápida',
+                        description: 'En cualquier momento puedes presionar F1 o hacer clic en el botón de ayuda para ver esta guía.'
+                    }
+                },
+                {
+                    element: 'body',
+                    popover: {
+                        title: '🚀 ¡Listo para empezar!',
+                        description: 'Ya conoces lo básico. Si necesitas ayuda, presiona F1. ¡Bienvenido a Punina Care!'
+                    }
+                }
+            ],
+            onDestroyed: () => {
+                // Marcar el tour como visto
+                localStorage.setItem('punina_tour_visto', 'true');
+            }
+        });
+        
+        // Iniciar el tour después de un pequeño delay
+        setTimeout(() => {
+            driverObj.drive();
+        }, 1000);
+    }
+});
+</script>
+
+
+<!-- BÚSQUEDA GLOBAL (COMMAND PALETTE) -->
+<div class="modal fade" id="modalBusquedaGlobal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-light border-0">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" id="inputBusquedaGlobal" class="form-control border-start-0" placeholder="Buscar pacientes, historiales, recetas... (Ctrl+K)" autocomplete="off">
+                </div>
+                <button type="button" class="btn-close ms-2" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div id="resultadosBusqueda" class="list-group list-group-flush">
+                    <div class="p-4 text-center text-muted">
+                        <i class="fas fa-keyboard fa-2x mb-2 opacity-50"></i>
+                        <p class="mb-0">Escribe para buscar o usa los atajos rápidos:</p>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-2">
+                            <a href="{{ route('pacientes.index') }}" class="btn btn-sm btn-outline-primary">Pacientes</a>
+                            <a href="{{ route('historiales.index') }}" class="btn btn-sm btn-outline-success">Historiales</a>
+                            <a href="{{ route('recetas.todas') }}" class="btn btn-sm btn-outline-info">Recetas</a>
+                            <a href="{{ route('telemedicina.index') }}" class="btn btn-sm btn-outline-warning">Telemedicina</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        var modal = document.getElementById('modalBusquedaGlobal');
+        if (modal) {
+            var bsModal = new bootstrap.Modal(modal);
+            bsModal.show();
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inputBusqueda = document.getElementById('inputBusquedaGlobal');
+    const resultados = document.getElementById('resultadosBusqueda');
+    
+    if (inputBusqueda) {
+        inputBusqueda.addEventListener('input', function() {
+            const query = this.value.trim();
+            if (query.length < 2) {
+                resultados.innerHTML = '<div class="p-4 text-center text-muted"><i class="fas fa-keyboard fa-2x mb-2 opacity-50"></i><p class="mb-0">Escribe al menos 2 caracteres...</p></div>';
+                return;
+            }
+            
+            // Aquí iría la búsqueda real (AJAX a un endpoint)
+            // Por ahora, mostramos un placeholder
+            resultados.innerHTML = '<div class="p-4 text-center text-muted"><div class="spinner-border spinner-border-sm me-2"></div>Buscando "<strong>' + query + '</strong>"...</div>';
+            
+            // Simulación de búsqueda (en el futuro, reemplazar con fetch real)
+            setTimeout(() => {
+                resultados.innerHTML = `
+                    <div class="p-3 text-muted">
+                        <p class="small mb-2">Resultados para "<strong>${query}</strong>":</p>
+                        <a href="{{ route('pacientes.index') }}?buscar=${encodeURIComponent(query)}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-user me-2 text-primary"></i> Buscar pacientes con "${query}"
+                        </a>
+                        <a href="{{ route('historiales.index') }}?buscar=${encodeURIComponent(query)}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-notes-medical me-2 text-success"></i> Buscar historiales con "${query}"
+                        </a>
+                        <a href="{{ route('recetas.todas') }}?buscar=${encodeURIComponent(query)}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-prescription me-2 text-info"></i> Buscar recetas con "${query}"
+                        </a>
+                    </div>
+                `;
+            }, 500);
+        });
+    }
+});
+</script>
 
 </body>
 </html>

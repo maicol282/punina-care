@@ -3,6 +3,7 @@
 @section('title', 'Lista de Pacientes')
 @section('page-title', 'Gestión de Pacientes')
 
+@php $breadcrumbs = ['Pacientes' => route('pacientes.index')]; @endphp
 @section('content')
 <div class="card border-0 shadow-sm">
     <!-- ========== CABECERA ========== -->
