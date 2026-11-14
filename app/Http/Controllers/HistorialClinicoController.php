@@ -152,6 +152,42 @@ class HistorialClinicoController extends Controller
         }
             $historial->save();
 
+            
+            // ===== GUARDAR ARCHIVOS ADJUNTOS (ESTUDIOS COMPLEMENTARIOS) =====
+            $categorias = [
+                'Laboratorio' => 'archivos_laboratorio',
+                'Imagen' => 'archivos_imagen',
+                'Otros' => 'archivos_otros',
+            ];
+
+            foreach ($categorias as $categoria => $inputName) {
+                if ($request->hasFile($inputName)) {
+                    foreach ($request->file($inputName) as $archivo) {
+                        if ($archivo->isValid()) {
+                            // Generar nombre único
+                            $nombreOriginal = $archivo->getClientOriginalName();
+                            $extension = $archivo->getClientOriginalExtension();
+                            $nombreGuardado = uniqid() . '_' . time() . '.' . $extension;
+                            
+                            // Guardar en storage/app/public/estudios
+                            $ruta = $archivo->storeAs('estudios', $nombreGuardado, 'public');
+                            
+                            // Crear registro en la base de datos
+                            EstudioAdjunto::create([
+                                'historial_clinico_id' => $historial->id,
+                                'nombre_original' => $nombreOriginal,
+                                'nombre_guardado' => $nombreGuardado,
+                                'ruta' => $ruta,
+                                'tipo_archivo' => $categoria,
+                                'mime_type' => $archivo->getMimeType(),
+                                'tamano' => $archivo->getSize(),
+                                'categoria' => $categoria,
+                            ]);
+                        }
+                    }
+                }
+            }
+
             // Guardar Diagnósticos
             if ($request->has('diagnosticos')) {
                 foreach ($request->diagnosticos as $index => $diagData) {
