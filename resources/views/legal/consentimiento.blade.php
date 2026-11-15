@@ -15,7 +15,7 @@
                 <li>Realizar la atención médica correspondiente y registrar mi información clínica en el sistema <strong>Punina Care</strong>.</li>
                 <li>Almacenar mis datos personales y de salud en dicho sistema, con las medidas de seguridad implementadas (encriptación de datos sensibles y acceso restringido).</li>
                 <li>Utilizar mis datos clínicos de forma <strong>anonimizada</strong> para herramientas de apoyo con Inteligencia Artificial (Groq), sin que mi identidad sea revelada.</li>
-                <li>Realizar teleconsultas a través de plataformas de videollamada (Jitsi Meet).</li>
+                <li>Realizar teleconsultas a través de la plataforma de videollamada MiroTalk P2P, con comunicación directa entre médico y paciente.</li>
             </ol>
 
             <p>Declaro haber sido informado sobre:</p>

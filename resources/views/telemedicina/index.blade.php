@@ -12,7 +12,7 @@
             </div>
             <div>
                 <h5 class="alert-heading fw-bold mb-1">¿Cómo funciona la Teleconsulta?</h5>
-                <p class="mb-0 small">Haga clic en el botón verde de cualquier consulta para abrir la <strong>App de Jitsi</strong>. Usted será el anfitrión. Puede navegar por el sistema sin cortes mientras la app se mantiene abierta.</p>
+                <p class="mb-0 small">Haga clic en el botón verde de cualquier consulta para abrir <strong>MiroTalk P2P</strong> en una pestaña nueva. Use Chrome o Edge para la ventana flotante.</p>
             </div>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

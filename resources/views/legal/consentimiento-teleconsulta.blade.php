@@ -14,7 +14,7 @@
             <h5 class="mt-4">Declaro haber sido informado sobre:</h5>
             <ul>
                 <li><strong>Riesgos técnicos:</strong> La comunicación electrónica puede presentar fallas de conexión, retrasos o interrupciones. A pesar de los esfuerzos de seguridad, existe un riesgo mínimo de que la información sea interceptada.</li>
-                <li><strong>Confidencialidad:</strong> La consulta se realizará a través de un servidor privado de la clínica (Jitsi Meet), no en plataformas públicas.</li>
+                <li><strong>Confidencialidad:</strong> La consulta se realizará a través de un servidor privado de la clínica (MiroTalk P2P), no en plataformas públicas.</li>
                 <li><strong>No grabación:</strong> Ni el médico ni el paciente grabarán la consulta.</li>
                 <li><strong>Limitaciones:</strong> La teleconsulta no reemplaza una evaluación física presencial si el médico lo considera necesario.</li>
             </ul>

@@ -390,7 +390,7 @@
                                     <p><strong>¿Qué puedes hacer aquí?</strong></p>
                                     <ul>
                                         <li><strong>Agendar</strong> consultas virtuales con pacientes.</li>
-                                        <li><strong>Generar</strong> enlaces de videollamada automáticos (Jitsi Meet).</li>
+                                        <li><strong>Generar</strong> enlaces de videollamada automáticos (MiroTalk P2P).</li>
                                         <li><strong>Iniciar</strong> videollamadas con un solo clic.</li>
                                         <li><strong>Registrar</strong> el inicio y fin de cada consulta.</li>
                                         <li><strong>Copiar</strong> el enlace de la reunión para compartir.</li>

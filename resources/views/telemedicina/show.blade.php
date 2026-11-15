@@ -14,9 +14,9 @@
                 <h5 class="alert-heading fw-bold mb-1">¿Cómo funciona la Teleconsulta?</h5>
                 <p class="mb-2 small">Siga estos pasos para una experiencia sin cortes:</p>
                 <ol class="mb-0 small">
-                    <li><strong>Inicie la videollamada:</strong> Haga clic en el botón verde. Se abrirá la <strong>App de Escritorio de Jitsi</strong> (si no la tiene, descárguela <a href="https://github.com/jitsi/jitsi-meet-electron/releases" target="_blank" class="alert-link">aquí</a>).</li>
+                    <li><strong>Inicie la videollamada:</strong> Haga clic en el botón verde. Se abrirá <strong>MiroTalk P2P</strong> en una pestaña nueva. Use Chrome o Edge para la ventana flotante.</li>
                     <li><strong>Sea el anfitrión:</strong> Usted será el moderador de la sala. Copie el enlace desde la app y envíeselo al paciente.</li>
-                    <li><strong>Navegue sin cortes:</strong> Deje la ventana de Jitsi abierta (puede ponerla "Siempre visible" en su sistema). Mientras tanto, navegue por Punina Care (pacientes, historiales, recetas) sin que la llamada se corte.</li>
+                    <li><strong>Navegue sin cortes:</strong> Deje la ventana de MiroTalk abierta. Puede navegar por Punina Care (pacientes, historiales, recetas) sin que la llamada se corte (la ventana flotante es ideal para esto).</li>
                 </ol>
             </div>
         </div>

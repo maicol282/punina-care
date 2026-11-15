@@ -11,7 +11,7 @@
 
             <div class="alert alert-warning border-0 shadow-sm mb-4">
                 <i class="fas fa-exclamation-triangle me-2"></i>
-                <strong>Aviso de Transparencia:</strong> Este sistema está en fase de despliegue. Mientras no se instale el servidor propio de videollamadas, las teleconsultas se realizan a través de Jitsi Meet público, que no está diseñado para datos de salud sensibles.
+                <strong>Aviso de Transparencia:</strong> Este sistema está en fase de despliegue. Las teleconsultas se realizan a través de MiroTalk P2P, con comunicación directa entre médico y paciente. El servidor propio solo gestiona la señalización inicial.
             </div>
 
             <h4>1. Responsable del Tratamiento</h4>
@@ -30,7 +30,7 @@
             <p>Para el funcionamiento del sistema, compartimos datos estrictamente necesarios con:</p>
             <ul>
                 <li><strong>Groq (IA):</strong> Recibe datos clínicos <strong>anonimizados</strong> (sin nombre ni cédula) para generar sugerencias médicas. No se envía información que identifique al paciente.</li>
-                <li><strong>Jitsi Meet:</strong> Plataforma de videollamada para teleconsultas. El servidor es propio de la clínica y está alojado en nuestra infraestructura, garantizando la privacidad de la sala. <strong>Advertencia:</strong> La teleconsulta presenta riesgos técnicos (fallas de conexión, interrupciones) y un riesgo mínimo de interceptación. El paciente debe firmar un consentimiento informado específico antes de la consulta.</li>
+                <li><strong>MiroTalk (P2P):</strong> Plataforma de videollamada para teleconsultas. La comunicación es Peer-to-Peer (P2P), lo que significa que el video y audio viajan directamente entre el médico y el paciente, sin pasar por servidores externos. El servidor propio solo gestiona la señalización inicial. <strong>Importante:</strong> El médico debe usar Google Chrome o Microsoft Edge para la ventana flotante.</li>
                 <li><strong>Gmail (Google):</strong> Servicio de correo para el envío de recetas y certificados. Los datos de salud se transmiten a través de servidores de Google (EE.UU.).</li>
             </ul>
 

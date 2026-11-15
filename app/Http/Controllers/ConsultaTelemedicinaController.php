@@ -198,7 +198,7 @@ class ConsultaTelemedicinaController extends Controller
             'fecha_inicio_real' => now(),
         ]);
 
-        // Redirige a la URL de Jitsi en una nueva pestaña
+        // Redirige a la URL de MiroTalk en una nueva pestaña
         return redirect()->away($consulta->enlace_acceso);
 
     } catch (\Exception $e) {
