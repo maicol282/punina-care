@@ -380,3 +380,13 @@ main,
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
+
+/* ============================================
+   FORZAR MAYÚSCULAS EN FORMULARIOS (VISUAL)
+   ============================================ */
+input[type="text"]:not([name="email"]):not([name="password"]):not([name="password_confirmation"]):not([name="current_password"]),
+input[type="search"]:not([name="email"]),
+textarea:not([name="email"]),
+select {
+    text-transform: uppercase;
+}
