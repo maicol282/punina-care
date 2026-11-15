@@ -349,4 +349,13 @@ public function certificadosMedicos()
 
         return implode(', ', $presentes);
     }
+
+    /**
+     * Obtener el número de historia clínica en formato HIST-CEDULA-ID.
+     */
+    public function getNumeroHistoriaAttribute()
+    {
+        $cedula = $this->paciente->cedula ?? 'S/N';
+        return 'HIST-' . $cedula . '-' . $this->id;
+    }
 }

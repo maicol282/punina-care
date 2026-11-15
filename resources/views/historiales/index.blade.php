@@ -119,7 +119,7 @@
                                 {{ $historial->paciente->cedula ?? 'SIN-CÉDULA' }}
                                 <br>
                                 <small class="text-muted" style="font-size: 11px;">
-                                    {{ $historial->fecha_consulta->format('Ymd') }}
+                                    {{ $historial->numero_historia }}
                                 </small>
                             </div>
                         </td>

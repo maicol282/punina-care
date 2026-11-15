@@ -203,7 +203,7 @@
                 <p><span class="label">• Número de cédula de identidad del paciente:</span> 
                     <strong>{{ $certificado->paciente_cedula }}</strong></p>
                 <p><span class="label">• Número de historia clínica del paciente:</span> 
-                    <strong>#{{ $certificado->historialClinico->id }}</strong></p>
+                    <strong>{{ $certificado->historialClinico->numero_historia }}</strong></p>
             </div>
 
             <p class="atendido">
