@@ -256,11 +256,46 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Presentación</label>
-                    <input type="text" name="receta_medicamentos[${newIndex}][presentacion]" class="form-control form-control-sm" placeholder="Ej: Tabletas">
+                    <select name="receta_medicamentos[${newIndex}][presentacion]" class="form-select form-select-sm">
+                        <option value="">Seleccione</option>
+                        <option value="Tableta">Tableta</option>
+                        <option value="Cápsula">Cápsula</option>
+                        <option value="Jarabe">Jarabe</option>
+                        <option value="Suspensión">Suspensión</option>
+                        <option value="Inyectable">Inyectable</option>
+                        <option value="Gotas">Gotas</option>
+                        <option value="Crema">Crema</option>
+                        <option value="Ungüento">Ungüento</option>
+                        <option value="Supositorio">Supositorio</option>
+                        <option value="Parche">Parche</option>
+                        <option value="Inhalador">Inhalador</option>
+                        <option value="Solución">Solución</option>
+                        <option value="Polvo">Polvo</option>
+                    </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Concentración</label>
-                    <input type="text" name="receta_medicamentos[${newIndex}][concentracion]" class="form-control form-control-sm" placeholder="Ej: 500mg">
+                    <select name="receta_medicamentos[${newIndex}][concentracion]" class="form-select form-select-sm">
+                        <option value="">Seleccione</option>
+                        <option value="5mg">5mg</option>
+                        <option value="10mg">10mg</option>
+                        <option value="20mg">20mg</option>
+                        <option value="25mg">25mg</option>
+                        <option value="50mg">50mg</option>
+                        <option value="100mg">100mg</option>
+                        <option value="125mg">125mg</option>
+                        <option value="200mg">200mg</option>
+                        <option value="250mg">250mg</option>
+                        <option value="400mg">400mg</option>
+                        <option value="500mg">500mg</option>
+                        <option value="600mg">600mg</option>
+                        <option value="800mg">800mg</option>
+                        <option value="1g">1g</option>
+                        <option value="2g">2g</option>
+                        <option value="100mg/5ml">100mg/5ml</option>
+                        <option value="250mg/5ml">250mg/5ml</option>
+                        <option value="500mg/5ml">500mg/5ml</option>
+                    </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Vía de Administración</label>
@@ -278,19 +313,80 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Dosis <span class="text-danger">*</span></label>
-                    <input type="text" name="receta_medicamentos[${newIndex}][dosis]" class="form-control form-control-sm" placeholder="Ej: 1 tableta" required>
+                    <select name="receta_medicamentos[${newIndex}][dosis]" class="form-select form-select-sm" required>
+                        <option value="">Seleccione</option>
+                        <option value="1 tableta">1 tableta</option>
+                        <option value="2 tabletas">2 tabletas</option>
+                        <option value="3 tabletas">3 tabletas</option>
+                        <option value="1 cápsula">1 cápsula</option>
+                        <option value="2 cápsulas">2 cápsulas</option>
+                        <option value="5ml">5ml</option>
+                        <option value="10ml">10ml</option>
+                        <option value="15ml">15ml</option>
+                        <option value="20ml">20ml</option>
+                        <option value="1 gota">1 gota</option>
+                        <option value="2 gotas">2 gotas</option>
+                        <option value="3 gotas">3 gotas</option>
+                        <option value="1 aplicación">1 aplicación</option>
+                        <option value="1 inhalación">1 inhalación</option>
+                        <option value="2 inhalaciones">2 inhalaciones</option>
+                    </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Frecuencia <span class="text-danger">*</span></label>
-                    <input type="text" name="receta_medicamentos[${newIndex}][frecuencia]" class="form-control form-control-sm" placeholder="Ej: Cada 8 horas" required>
+                    <select name="receta_medicamentos[${newIndex}][frecuencia]" class="form-select form-select-sm" required>
+                        <option value="">Seleccione</option>
+                        <option value="Cada 4 horas">Cada 4 horas</option>
+                        <option value="Cada 6 horas">Cada 6 horas</option>
+                        <option value="Cada 8 horas">Cada 8 horas</option>
+                        <option value="Cada 12 horas">Cada 12 horas</option>
+                        <option value="Cada 24 horas">Cada 24 horas</option>
+                        <option value="2 veces al día">2 veces al día</option>
+                        <option value="3 veces al día">3 veces al día</option>
+                        <option value="4 veces al día">4 veces al día</option>
+                        <option value="Una vez al día">Una vez al día</option>
+                        <option value="En la mañana">En la mañana</option>
+                        <option value="En la noche">En la noche</option>
+                        <option value="Antes de comer">Antes de comer</option>
+                        <option value="Después de comer">Después de comer</option>
+                        <option value="Según necesidad">Según necesidad</option>
+                    </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Duración <span class="text-danger">*</span></label>
-                    <input type="text" name="receta_medicamentos[${newIndex}][duracion]" class="form-control form-control-sm" placeholder="Ej: 7 días" required>
+                    <select name="receta_medicamentos[${newIndex}][duracion]" class="form-select form-select-sm" required>
+                        <option value="">Seleccione</option>
+                        <option value="3 días">3 días</option>
+                        <option value="5 días">5 días</option>
+                        <option value="7 días">7 días</option>
+                        <option value="10 días">10 días</option>
+                        <option value="14 días">14 días</option>
+                        <option value="21 días">21 días</option>
+                        <option value="1 mes">1 mes</option>
+                        <option value="2 meses">2 meses</option>
+                        <option value="3 meses">3 meses</option>
+                        <option value="6 meses">6 meses</option>
+                    </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Cantidad (Números y Letras)</label>
-                    <input type="text" name="receta_medicamentos[${newIndex}][cantidad]" class="form-control form-control-sm" placeholder="Ej: 2 (dos)">
+                    <select name="receta_medicamentos[${newIndex}][cantidad]" class="form-select form-select-sm">
+                        <option value="">Seleccione</option>
+                        <option value="1 (uno)">1 (uno)</option>
+                        <option value="2 (dos)">2 (dos)</option>
+                        <option value="3 (tres)">3 (tres)</option>
+                        <option value="4 (cuatro)">4 (cuatro)</option>
+                        <option value="5 (cinco)">5 (cinco)</option>
+                        <option value="6 (seis)">6 (seis)</option>
+                        <option value="7 (siete)">7 (siete)</option>
+                        <option value="8 (ocho)">8 (ocho)</option>
+                        <option value="9 (nueve)">9 (nueve)</option>
+                        <option value="10 (diez)">10 (diez)</option>
+                        <option value="15 (quince)">15 (quince)</option>
+                        <option value="20 (veinte)">20 (veinte)</option>
+                        <option value="30 (treinta)">30 (treinta)</option>
+                        <option value="50 (cincuenta)">50 (cincuenta)</option>
+                    </select>
                 </div>
                 <div class="col-md-8">
                     <label class="form-label fw-semibold">Indicaciones específicas</label>
