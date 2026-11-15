@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Illuminate\Pagination\Paginator::useBootstrapFive();
+
         // Registrar la Policy de Paciente
         Gate::policy(Paciente::class, PacientePolicy::class);
 
