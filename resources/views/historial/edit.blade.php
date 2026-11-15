@@ -35,11 +35,12 @@
 
         <!-- ========== SIGNOS VITALES ========== -->
         @include('historial.partials.edit._signos-vitales')
+
+<!-- ========== REVISIÓN DE ÓRGANOS Y SISTEMAS ========== -->
+        @include('historial.partials.edit._revision-sistemas')
+
         <!-- ========== EXPLORACIÓN FÍSICA ========== -->
         @include('historial.partials.edit._exploracion-fisica')
-
-        <!-- ========== REVISIÓN DE ÓRGANOS Y SISTEMAS ========== -->
-        @include('historial.partials.edit._revision-sistemas')
 
       <!-- ========== ESTUDIOS COMPLEMENTARIOS ========== -->
         @include('historial.partials.edit._estudios-complementarios')

@@ -49,11 +49,11 @@
         <!-- SIGNOS VITALES -->
         @include('historial.partials._signos-vitales')
         
-        <!-- EXPLORACIÓN FÍSICA -->
-        @include('historial.partials._exploracion-fisica')
-        
         <!-- REVISIÓN DE ÓRGANOS Y SISTEMAS -->
         @include('historial.partials._revision-sistemas')
+
+        <!-- EXPLORACIÓN FÍSICA -->
+        @include('historial.partials._exploracion-fisica')
         
         <!-- ESTUDIOS COMPLEMENTARIOS -->
         @include('historial.partials._estudios-complementarios')
