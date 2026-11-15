@@ -59,11 +59,46 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Presentación</label>
-                            <input type="text" name="receta_medicamentos[{{ $index }}][presentacion]" class="form-control form-control-sm" value="{{ $med['presentacion'] ?? '' }}" placeholder="Ej: Tabletas">
+                            <select name="receta_medicamentos[{{ $index }}][presentacion]" class="form-select form-select-sm">
+                                    <option value="">Seleccione</option>
+                                    <option value="Tableta" {{ ($med['presentacion'] ?? '') == 'Tableta' ? 'selected' : '' }}>Tableta</option>
+                                    <option value="Cápsula" {{ ($med['presentacion'] ?? '') == 'Cápsula' ? 'selected' : '' }}>Cápsula</option>
+                                    <option value="Jarabe" {{ ($med['presentacion'] ?? '') == 'Jarabe' ? 'selected' : '' }}>Jarabe</option>
+                                    <option value="Suspensión" {{ ($med['presentacion'] ?? '') == 'Suspensión' ? 'selected' : '' }}>Suspensión</option>
+                                    <option value="Inyectable" {{ ($med['presentacion'] ?? '') == 'Inyectable' ? 'selected' : '' }}>Inyectable</option>
+                                    <option value="Gotas" {{ ($med['presentacion'] ?? '') == 'Gotas' ? 'selected' : '' }}>Gotas</option>
+                                    <option value="Crema" {{ ($med['presentacion'] ?? '') == 'Crema' ? 'selected' : '' }}>Crema</option>
+                                    <option value="Ungüento" {{ ($med['presentacion'] ?? '') == 'Ungüento' ? 'selected' : '' }}>Ungüento</option>
+                                    <option value="Supositorio" {{ ($med['presentacion'] ?? '') == 'Supositorio' ? 'selected' : '' }}>Supositorio</option>
+                                    <option value="Parche" {{ ($med['presentacion'] ?? '') == 'Parche' ? 'selected' : '' }}>Parche</option>
+                                    <option value="Inhalador" {{ ($med['presentacion'] ?? '') == 'Inhalador' ? 'selected' : '' }}>Inhalador</option>
+                                    <option value="Solución" {{ ($med['presentacion'] ?? '') == 'Solución' ? 'selected' : '' }}>Solución</option>
+                                    <option value="Polvo" {{ ($med['presentacion'] ?? '') == 'Polvo' ? 'selected' : '' }}>Polvo</option>
+                                </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Concentración</label>
-                            <input type="text" name="receta_medicamentos[{{ $index }}][concentracion]" class="form-control form-control-sm" value="{{ $med['concentracion'] ?? '' }}" placeholder="Ej: 500mg">
+                            <select name="receta_medicamentos[{{ $index }}][concentracion]" class="form-select form-select-sm">
+                                    <option value="">Seleccione</option>
+                                    <option value="5mg" {{ ($med['concentracion'] ?? '') == '5mg' ? 'selected' : '' }}>5mg</option>
+                                    <option value="10mg" {{ ($med['concentracion'] ?? '') == '10mg' ? 'selected' : '' }}>10mg</option>
+                                    <option value="20mg" {{ ($med['concentracion'] ?? '') == '20mg' ? 'selected' : '' }}>20mg</option>
+                                    <option value="25mg" {{ ($med['concentracion'] ?? '') == '25mg' ? 'selected' : '' }}>25mg</option>
+                                    <option value="50mg" {{ ($med['concentracion'] ?? '') == '50mg' ? 'selected' : '' }}>50mg</option>
+                                    <option value="100mg" {{ ($med['concentracion'] ?? '') == '100mg' ? 'selected' : '' }}>100mg</option>
+                                    <option value="125mg" {{ ($med['concentracion'] ?? '') == '125mg' ? 'selected' : '' }}>125mg</option>
+                                    <option value="200mg" {{ ($med['concentracion'] ?? '') == '200mg' ? 'selected' : '' }}>200mg</option>
+                                    <option value="250mg" {{ ($med['concentracion'] ?? '') == '250mg' ? 'selected' : '' }}>250mg</option>
+                                    <option value="400mg" {{ ($med['concentracion'] ?? '') == '400mg' ? 'selected' : '' }}>400mg</option>
+                                    <option value="500mg" {{ ($med['concentracion'] ?? '') == '500mg' ? 'selected' : '' }}>500mg</option>
+                                    <option value="600mg" {{ ($med['concentracion'] ?? '') == '600mg' ? 'selected' : '' }}>600mg</option>
+                                    <option value="800mg" {{ ($med['concentracion'] ?? '') == '800mg' ? 'selected' : '' }}>800mg</option>
+                                    <option value="1g" {{ ($med['concentracion'] ?? '') == '1g' ? 'selected' : '' }}>1g</option>
+                                    <option value="2g" {{ ($med['concentracion'] ?? '') == '2g' ? 'selected' : '' }}>2g</option>
+                                    <option value="100mg/5ml" {{ ($med['concentracion'] ?? '') == '100mg/5ml' ? 'selected' : '' }}>100mg/5ml</option>
+                                    <option value="250mg/5ml" {{ ($med['concentracion'] ?? '') == '250mg/5ml' ? 'selected' : '' }}>250mg/5ml</option>
+                                    <option value="500mg/5ml" {{ ($med['concentracion'] ?? '') == '500mg/5ml' ? 'selected' : '' }}>500mg/5ml</option>
+                                </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Vía de Administración</label>
@@ -81,19 +116,80 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Dosis</label>
-                            <input type="text" name="receta_medicamentos[{{ $index }}][dosis]" class="form-control form-control-sm" value="{{ $med['dosis'] ?? '' }}" placeholder="Ej: 1 tableta">
+                            <select name="receta_medicamentos[{{ $index }}][dosis]" class="form-select form-select-sm">
+                                    <option value="">Seleccione</option>
+                                    <option value="1 tableta" {{ ($med['dosis'] ?? '') == '1 tableta' ? 'selected' : '' }}>1 tableta</option>
+                                    <option value="2 tabletas" {{ ($med['dosis'] ?? '') == '2 tabletas' ? 'selected' : '' }}>2 tabletas</option>
+                                    <option value="3 tabletas" {{ ($med['dosis'] ?? '') == '3 tabletas' ? 'selected' : '' }}>3 tabletas</option>
+                                    <option value="1 cápsula" {{ ($med['dosis'] ?? '') == '1 cápsula' ? 'selected' : '' }}>1 cápsula</option>
+                                    <option value="2 cápsulas" {{ ($med['dosis'] ?? '') == '2 cápsulas' ? 'selected' : '' }}>2 cápsulas</option>
+                                    <option value="5ml" {{ ($med['dosis'] ?? '') == '5ml' ? 'selected' : '' }}>5ml</option>
+                                    <option value="10ml" {{ ($med['dosis'] ?? '') == '10ml' ? 'selected' : '' }}>10ml</option>
+                                    <option value="15ml" {{ ($med['dosis'] ?? '') == '15ml' ? 'selected' : '' }}>15ml</option>
+                                    <option value="20ml" {{ ($med['dosis'] ?? '') == '20ml' ? 'selected' : '' }}>20ml</option>
+                                    <option value="1 gota" {{ ($med['dosis'] ?? '') == '1 gota' ? 'selected' : '' }}>1 gota</option>
+                                    <option value="2 gotas" {{ ($med['dosis'] ?? '') == '2 gotas' ? 'selected' : '' }}>2 gotas</option>
+                                    <option value="3 gotas" {{ ($med['dosis'] ?? '') == '3 gotas' ? 'selected' : '' }}>3 gotas</option>
+                                    <option value="1 aplicación" {{ ($med['dosis'] ?? '') == '1 aplicación' ? 'selected' : '' }}>1 aplicación</option>
+                                    <option value="1 inhalación" {{ ($med['dosis'] ?? '') == '1 inhalación' ? 'selected' : '' }}>1 inhalación</option>
+                                    <option value="2 inhalaciones" {{ ($med['dosis'] ?? '') == '2 inhalaciones' ? 'selected' : '' }}>2 inhalaciones</option>
+                                </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Frecuencia</label>
-                            <input type="text" name="receta_medicamentos[{{ $index }}][frecuencia]" class="form-control form-control-sm" value="{{ $med['frecuencia'] ?? '' }}" placeholder="Ej: Cada 8 horas">
+                            <select name="receta_medicamentos[{{ $index }}][frecuencia]" class="form-select form-select-sm">
+                                    <option value="">Seleccione</option>
+                                    <option value="Cada 4 horas" {{ ($med['frecuencia'] ?? '') == 'Cada 4 horas' ? 'selected' : '' }}>Cada 4 horas</option>
+                                    <option value="Cada 6 horas" {{ ($med['frecuencia'] ?? '') == 'Cada 6 horas' ? 'selected' : '' }}>Cada 6 horas</option>
+                                    <option value="Cada 8 horas" {{ ($med['frecuencia'] ?? '') == 'Cada 8 horas' ? 'selected' : '' }}>Cada 8 horas</option>
+                                    <option value="Cada 12 horas" {{ ($med['frecuencia'] ?? '') == 'Cada 12 horas' ? 'selected' : '' }}>Cada 12 horas</option>
+                                    <option value="Cada 24 horas" {{ ($med['frecuencia'] ?? '') == 'Cada 24 horas' ? 'selected' : '' }}>Cada 24 horas</option>
+                                    <option value="2 veces al día" {{ ($med['frecuencia'] ?? '') == '2 veces al día' ? 'selected' : '' }}>2 veces al día</option>
+                                    <option value="3 veces al día" {{ ($med['frecuencia'] ?? '') == '3 veces al día' ? 'selected' : '' }}>3 veces al día</option>
+                                    <option value="4 veces al día" {{ ($med['frecuencia'] ?? '') == '4 veces al día' ? 'selected' : '' }}>4 veces al día</option>
+                                    <option value="Una vez al día" {{ ($med['frecuencia'] ?? '') == 'Una vez al día' ? 'selected' : '' }}>Una vez al día</option>
+                                    <option value="En la mañana" {{ ($med['frecuencia'] ?? '') == 'En la mañana' ? 'selected' : '' }}>En la mañana</option>
+                                    <option value="En la noche" {{ ($med['frecuencia'] ?? '') == 'En la noche' ? 'selected' : '' }}>En la noche</option>
+                                    <option value="Antes de comer" {{ ($med['frecuencia'] ?? '') == 'Antes de comer' ? 'selected' : '' }}>Antes de comer</option>
+                                    <option value="Después de comer" {{ ($med['frecuencia'] ?? '') == 'Después de comer' ? 'selected' : '' }}>Después de comer</option>
+                                    <option value="Según necesidad" {{ ($med['frecuencia'] ?? '') == 'Según necesidad' ? 'selected' : '' }}>Según necesidad</option>
+                                </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Duración</label>
-                            <input type="text" name="receta_medicamentos[{{ $index }}][duracion]" class="form-control form-control-sm" value="{{ $med['duracion'] ?? '' }}" placeholder="Ej: 7 días">
+                            <select name="receta_medicamentos[{{ $index }}][duracion]" class="form-select form-select-sm">
+                                    <option value="">Seleccione</option>
+                                    <option value="3 días" {{ ($med['duracion'] ?? '') == '3 días' ? 'selected' : '' }}>3 días</option>
+                                    <option value="5 días" {{ ($med['duracion'] ?? '') == '5 días' ? 'selected' : '' }}>5 días</option>
+                                    <option value="7 días" {{ ($med['duracion'] ?? '') == '7 días' ? 'selected' : '' }}>7 días</option>
+                                    <option value="10 días" {{ ($med['duracion'] ?? '') == '10 días' ? 'selected' : '' }}>10 días</option>
+                                    <option value="14 días" {{ ($med['duracion'] ?? '') == '14 días' ? 'selected' : '' }}>14 días</option>
+                                    <option value="21 días" {{ ($med['duracion'] ?? '') == '21 días' ? 'selected' : '' }}>21 días</option>
+                                    <option value="1 mes" {{ ($med['duracion'] ?? '') == '1 mes' ? 'selected' : '' }}>1 mes</option>
+                                    <option value="2 meses" {{ ($med['duracion'] ?? '') == '2 meses' ? 'selected' : '' }}>2 meses</option>
+                                    <option value="3 meses" {{ ($med['duracion'] ?? '') == '3 meses' ? 'selected' : '' }}>3 meses</option>
+                                    <option value="6 meses" {{ ($med['duracion'] ?? '') == '6 meses' ? 'selected' : '' }}>6 meses</option>
+                                </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Cantidad (Números y Letras)</label>
-                            <input type="text" name="receta_medicamentos[{{ $index }}][cantidad]" class="form-control form-control-sm" value="{{ $med['cantidad'] ?? '' }}" placeholder="Ej: 2 (dos)">
+                            <select name="receta_medicamentos[{{ $index }}][cantidad]" class="form-select form-select-sm">
+                                    <option value="">Seleccione</option>
+                                    <option value="1 (uno)" {{ ($med['cantidad'] ?? '') == '1 (uno)' ? 'selected' : '' }}>1 (uno)</option>
+                                    <option value="2 (dos)" {{ ($med['cantidad'] ?? '') == '2 (dos)' ? 'selected' : '' }}>2 (dos)</option>
+                                    <option value="3 (tres)" {{ ($med['cantidad'] ?? '') == '3 (tres)' ? 'selected' : '' }}>3 (tres)</option>
+                                    <option value="4 (cuatro)" {{ ($med['cantidad'] ?? '') == '4 (cuatro)' ? 'selected' : '' }}>4 (cuatro)</option>
+                                    <option value="5 (cinco)" {{ ($med['cantidad'] ?? '') == '5 (cinco)' ? 'selected' : '' }}>5 (cinco)</option>
+                                    <option value="6 (seis)" {{ ($med['cantidad'] ?? '') == '6 (seis)' ? 'selected' : '' }}>6 (seis)</option>
+                                    <option value="7 (siete)" {{ ($med['cantidad'] ?? '') == '7 (siete)' ? 'selected' : '' }}>7 (siete)</option>
+                                    <option value="8 (ocho)" {{ ($med['cantidad'] ?? '') == '8 (ocho)' ? 'selected' : '' }}>8 (ocho)</option>
+                                    <option value="9 (nueve)" {{ ($med['cantidad'] ?? '') == '9 (nueve)' ? 'selected' : '' }}>9 (nueve)</option>
+                                    <option value="10 (diez)" {{ ($med['cantidad'] ?? '') == '10 (diez)' ? 'selected' : '' }}>10 (diez)</option>
+                                    <option value="15 (quince)" {{ ($med['cantidad'] ?? '') == '15 (quince)' ? 'selected' : '' }}>15 (quince)</option>
+                                    <option value="20 (veinte)" {{ ($med['cantidad'] ?? '') == '20 (veinte)' ? 'selected' : '' }}>20 (veinte)</option>
+                                    <option value="30 (treinta)" {{ ($med['cantidad'] ?? '') == '30 (treinta)' ? 'selected' : '' }}>30 (treinta)</option>
+                                    <option value="50 (cincuenta)" {{ ($med['cantidad'] ?? '') == '50 (cincuenta)' ? 'selected' : '' }}>50 (cincuenta)</option>
+                                </select>
                         </div>
                         <div class="col-md-8">
                             <label class="form-label fw-semibold">Indicaciones específicas</label>
