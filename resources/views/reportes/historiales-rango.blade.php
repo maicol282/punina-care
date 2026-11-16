@@ -67,7 +67,7 @@
                 <tr>
                     <td>{{ $historial->fecha_consulta->format('d/m/Y') }}</td>
                     <td>{{ $historial->paciente->nombre_completo }}</td>
-                    <td>{{ $historial->doctor ?? 'N/E' }}</td>
+                    <td>{{ $historial->doctor ?? 'No Refiere' }}</td>
                     <td>{{ Str::limit($historial->motivo_consulta, 40) }}</td>
                     <td>{{ Str::limit($historial->diagnostico, 40) }}</td>
                 </tr>

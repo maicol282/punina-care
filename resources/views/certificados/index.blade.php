@@ -74,7 +74,7 @@
                         <td>
                             <strong>{{ $certificado->paciente->nombre }} {{ $certificado->paciente->apellido }}</strong>
                             <br>
-                            <small class="text-muted">Cédula: {{ $certificado->paciente->cedula ?? 'N/E' }}</small>
+                            <small class="text-muted">Cédula: {{ $certificado->paciente->cedula ?? 'No Refiere' }}</small>
                         </td>
                         <td>{{ $certificado->fecha_atencion->format('d/m/Y') }}</td>
                         <td>

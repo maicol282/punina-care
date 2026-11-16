@@ -169,10 +169,10 @@
             <div class="value">{{ $reposo->paciente->nombre }} {{ $reposo->paciente->apellido }}</div>
             
             <div class="label" style="margin-top: 12px;">Cédula</div>
-            <div class="value">{{ $reposo->paciente->cedula ?? 'No especificada' }}</div>
+            <div class="value">{{ $reposo->paciente->cedula ?? 'No Refiere' }}</div>
             
             <div class="label" style="margin-top: 12px;">Teléfono</div>
-            <div class="value">{{ $reposo->paciente->telefono ?? 'No especificado' }}</div>
+            <div class="value">{{ $reposo->paciente->telefono ?? 'No Refiere' }}</div>
         </div>
         <div>
             <div class="label">Fecha de Inicio</div>

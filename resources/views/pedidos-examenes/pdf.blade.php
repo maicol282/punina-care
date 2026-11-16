@@ -40,7 +40,7 @@
                 <td class="info-label">Paciente:</td>
                 <td>{{ $pedido->paciente->nombre_completo }}</td>
                 <td class="info-label">Cédula:</td>
-                <td>{{ $pedido->paciente->cedula ?? 'No registrada' }}</td>
+                <td>{{ $pedido->paciente->cedula ?? 'No Refiere' }}</td>
             </tr>
             <tr>
                 <td class="info-label">Edad:</td>

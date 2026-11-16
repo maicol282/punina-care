@@ -193,13 +193,13 @@
                 <p><span class="label">• Apellidos y nombres completos del afiliado/paciente:</span> 
                     <strong>{{ $certificado->paciente_nombre }}</strong></p>
                 <p><span class="label">• Dirección domiciliaria:</span> 
-                    {{ $certificado->paciente_direccion ?? 'No especificada' }}</p>
+                    {{ $certificado->paciente_direccion ?? 'No Refiere' }}</p>
                 <p><span class="label">• Número telefónico de contacto:</span> 
-                    {{ $certificado->paciente_telefono ?? 'No especificado' }}</p>
+                    {{ $certificado->paciente_telefono ?? 'No Refiere' }}</p>
                 <p><span class="label">• Institución/empresa donde trabaja:</span> 
-                    {{ $certificado->paciente_empresa ?? 'No especificada' }}</p>
+                    {{ $certificado->paciente_empresa ?? 'No Refiere' }}</p>
                 <p><span class="label">• Puesto de trabajo del paciente:</span> 
-                    {{ $certificado->paciente_puesto ?? 'No especificado' }}</p>
+                    {{ $certificado->paciente_puesto ?? 'No Refiere' }}</p>
                 <p><span class="label">• Número de cédula de identidad del paciente:</span> 
                     <strong>{{ $certificado->paciente_cedula }}</strong></p>
                 <p><span class="label">• Número de historia clínica del paciente:</span> 
@@ -280,7 +280,7 @@
     <div class="linea"></div>
     <div class="nombre">{{ $certificado->medico_nombre }}</div>
     <div class="cargo">{{ $certificado->medico_especialidad ?? 'Medicina General' }}</div>
-    <div class="cedula">CI: {{ $certificado->medico_cedula ?? 'N/E' }}</div>
+    <div class="cedula">CI: {{ $certificado->medico_cedula ?? 'No Refiere' }}</div>
     <div style="font-size: 11px; color: #27ae60; margin-top: 5px;">
         ✅ Documento firmado electrónicamente
         <br>

@@ -59,10 +59,10 @@
                             <div class="col-7">
                                 <p>{{ $certificado->paciente_nombre }}</p>
                                 <p>{{ $certificado->paciente_cedula }}</p>
-                                <p>{{ $certificado->paciente_direccion ?? 'No especificada' }}</p>
-                                <p>{{ $certificado->paciente_telefono ?? 'No especificado' }}</p>
-                                <p>{{ $certificado->paciente_empresa ?? 'No especificada' }}</p>
-                                <p>{{ $certificado->paciente_puesto ?? 'No especificado' }}</p>
+                                <p>{{ $certificado->paciente_direccion ?? 'No Refiere' }}</p>
+                                <p>{{ $certificado->paciente_telefono ?? 'No Refiere' }}</p>
+                                <p>{{ $certificado->paciente_empresa ?? 'No Refiere' }}</p>
+                                <p>{{ $certificado->paciente_puesto ?? 'No Refiere' }}</p>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                             </div>
                             <div class="col-md-4">
                                 <strong>Cédula:</strong>
-                                <p>{{ $certificado->medico_cedula ?? 'N/E' }}</p>
+                                <p>{{ $certificado->medico_cedula ?? 'No Refiere' }}</p>
                             </div>
                         </div>
                     </div>

@@ -83,7 +83,7 @@
                                 <td>
                                     <strong>{{ $reposo->paciente->nombre }} {{ $reposo->paciente->apellido }}</strong>
                                     <br>
-                                    <small class="text-muted">Cédula: {{ $reposo->paciente->cedula ?? 'N/E' }}</small>
+                                    <small class="text-muted">Cédula: {{ $reposo->paciente->cedula ?? 'No Refiere' }}</small>
                                 </td>
                                 <td>{{ $reposo->fecha_inicio->format('d/m/Y') }}</td>
                                 <td>{{ $reposo->fecha_fin->format('d/m/Y') }}</td>

@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-md-4">
                                 <strong><i class="fas fa-id-card me-2"></i>Cédula:</strong>
-                                {{ $paciente->cedula ?? 'N/E' }}
+                                {{ $paciente->cedula ?? 'No Refiere' }}
                             </div>
                             <div class="col-md-4">
                                 <strong><i class="fas fa-calendar me-2"></i>Historial:</strong>

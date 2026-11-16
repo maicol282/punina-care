@@ -19,7 +19,7 @@
                             </div>
                             <div>
                                 <span class="badge bg-{{ $loop->first ? 'light' : 'secondary' }} text-dark me-2">
-                                    Dr. {{ $historial->doctor ?? 'No especificado' }}
+                                    Dr. {{ $historial->doctor ?? 'No Refiere' }}
                                 </span>
                                 <a href="{{ route('historial.show', $historial) }}" 
                                    class="btn btn-sm btn-{{ $loop->first ? 'light' : 'primary' }}"

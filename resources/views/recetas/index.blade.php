@@ -57,7 +57,7 @@
                                         <i class="fas fa-exclamation-triangle"></i> {{ Str::limit($receta->signos_alarma, 30) }}
                                     </span>
                                 @else
-                                    <span class="badge bg-secondary">No registrados</span>
+                                    <span class="badge bg-secondary">No Refieres</span>
                                 @endif
                             </td>
                             <td>

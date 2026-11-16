@@ -250,7 +250,7 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td><span class="text-muted">{{ $paciente->telefono ?? 'N/E' }}</span></td>
+                                <td><span class="text-muted">{{ $paciente->telefono ?? 'No Refiere' }}</span></td>
                                 <td><span class="badge bg-light text-dark border">{{ $paciente->created_at->diffForHumans() }}</span></td>
                             </tr>
                             @empty
@@ -318,7 +318,7 @@
                                     <small class="text-muted">Historial Actualizado</small>
                                 </div>
                             </div>
-                            <small class="text-muted">{{ $actividad->fecha_consulta ? Carbon\Carbon::parse($actividad->fecha_consulta)->format('d/m/Y') : 'N/E' }}</small>
+                            <small class="text-muted">{{ $actividad->fecha_consulta ? Carbon\Carbon::parse($actividad->fecha_consulta)->format('d/m/Y') : 'No Refiere' }}</small>
                         </div>
                     </li>
                     @empty

@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-md-4">
                                 <strong><i class="fas fa-id-card me-2"></i>Cédula:</strong>
-                                {{ $reposo->paciente->cedula ?? 'N/E' }}
+                                {{ $reposo->paciente->cedula ?? 'No Refiere' }}
                             </div>
                             <div class="col-md-4">
                                 <strong><i class="fas fa-hashtag me-2"></i>N° Reposo:</strong>

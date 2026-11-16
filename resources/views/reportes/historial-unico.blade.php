@@ -235,19 +235,19 @@
         </tr>
         <tr>
             <td class="label">Cédula:</td>
-            <td>{{ $historial->paciente->cedula ?? 'No registrada' }}</td>
+            <td>{{ $historial->paciente->cedula ?? 'No Refiere' }}</td>
             <td class="label">Género:</td>
             <td>{{ $historial->paciente->genero == 'M' ? 'Masculino' : 'Femenino' }}</td>
         </tr>
         <tr>
             <td class="label">Teléfono:</td>
-            <td>{{ $historial->paciente->telefono ?? 'No registrado' }}</td>
+            <td>{{ $historial->paciente->telefono ?? 'No Refiere' }}</td>
             <td class="label">Email:</td>
-            <td>{{ $historial->paciente->email ?? 'No registrado' }}</td>
+            <td>{{ $historial->paciente->email ?? 'No Refiere' }}</td>
         </tr>
         <tr>
             <td class="label">Dirección:</td>
-            <td colspan="3">{{ $historial->paciente->direccion ?? 'No registrada' }}</td>
+            <td colspan="3">{{ $historial->paciente->direccion ?? 'No Refiere' }}</td>
         </tr>
     </table>
 </div>
@@ -267,11 +267,11 @@
             <td class="label">Fecha Consulta:</td>
             <td>{{ $historial->fecha_consulta->format('d/m/Y') }}</td>
             <td class="label">Doctor:</td>
-            <td>{{ $historial->doctor ?? 'No especificado' }}</td>
+            <td>{{ $historial->doctor ?? 'No Refiere' }}</td>
         </tr>
         <tr>
             <td class="label">Motivo:</td>
-            <td colspan="3">{{ $historial->motivo_consulta ?? 'No registrado' }}</td>
+            <td colspan="3">{{ $historial->motivo_consulta ?? 'No Refiere' }}</td>
         </tr>
     </table>
 </div>
@@ -283,24 +283,24 @@
     <div class="section-title">[ANTECEDENTES PERSONALES PATOLÓGICOS]</div>
     <table class="grid-2">
         <tr>
-            <td><span class="field-label">Hospitalizaciones</span><span class="field-value">{{ $historial->hospitalizaciones ?? 'No registra' }}</span></td>
-            <td><span class="field-label">Cardiovasculares</span><span class="field-value">{{ $historial->cardiovasculares ?? 'No registra' }}</span></td>
+            <td><span class="field-label">Hospitalizaciones</span><span class="field-value">{{ $historial->hospitalizaciones ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Cardiovasculares</span><span class="field-value">{{ $historial->cardiovasculares ?? 'No Refiere' }}</span></td>
         </tr>
         <tr>
-            <td><span class="field-label">Pulmonares</span><span class="field-value">{{ $historial->pulmonales ?? 'No registra' }}</span></td>
-            <td><span class="field-label">Digestivos</span><span class="field-value">{{ $historial->digestivos ?? 'No registra' }}</span></td>
+            <td><span class="field-label">Pulmonares</span><span class="field-value">{{ $historial->pulmonales ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Digestivos</span><span class="field-value">{{ $historial->digestivos ?? 'No Refiere' }}</span></td>
         </tr>
         <tr>
-            <td><span class="field-label">Diabetes</span><span class="field-value">{{ $historial->diabetes ?? 'No registra' }}</span></td>
-            <td><span class="field-label">Renales</span><span class="field-value">{{ $historial->renales ?? 'No registra' }}</span></td>
+            <td><span class="field-label">Diabetes</span><span class="field-value">{{ $historial->diabetes ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Renales</span><span class="field-value">{{ $historial->renales ?? 'No Refiere' }}</span></td>
         </tr>
         <tr>
-            <td><span class="field-label">Quirúrgicos</span><span class="field-value">{{ $historial->quirurgicos ?? 'No registra' }}</span></td>
-            <td><span class="field-label">Transfusiones</span><span class="field-value">{{ $historial->transfusiones ?? 'No registra' }}</span></td>
+            <td><span class="field-label">Quirúrgicos</span><span class="field-value">{{ $historial->quirurgicos ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Transfusiones</span><span class="field-value">{{ $historial->transfusiones ?? 'No Refiere' }}</span></td>
         </tr>
         <tr>
-            <td><span class="field-label">Alergias a medicamentos</span><span class="field-value">{{ $historial->alergias_patologicas ?? 'No registra' }}</span></td>
-            <td><span class="field-label">Otros Patológicos</span><span class="field-value">{{ $historial->otros_patologicos ?? 'No registra' }}</span></td>
+            <td><span class="field-label">Alergias a medicamentos</span><span class="field-value">{{ $historial->alergias_patologicas ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Otros Patológicos</span><span class="field-value">{{ $historial->otros_patologicos ?? 'No Refiere' }}</span></td>
         </tr>
     </table>
 </div>
@@ -310,15 +310,15 @@
     <div class="section-title">[ANTECEDENTES PERSONALES NO PATOLÓGICOS]</div>
     <table class="grid-2">
         <tr>
-            <td><span class="field-label">Alcohol</span><span class="field-value">{{ $historial->alcohol ?? 'No registra' }}</span></td>
-            <td><span class="field-label">Tabaquismo</span><span class="field-value">{{ $historial->tabaquismo ?? 'No registra' }}</span></td>
+            <td><span class="field-label">Alcohol</span><span class="field-value">{{ $historial->alcohol ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Tabaquismo</span><span class="field-value">{{ $historial->tabaquismo ?? 'No Refiere' }}</span></td>
         </tr>
         <tr>
-            <td><span class="field-label">Drogas</span><span class="field-value">{{ $historial->drogas ?? 'No registra' }}</span></td>
-            <td><span class="field-label">Inmunizaciones</span><span class="field-value">{{ $historial->inmunizaciones ?? 'No registra' }}</span></td>
+            <td><span class="field-label">Drogas</span><span class="field-value">{{ $historial->drogas ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Inmunizaciones</span><span class="field-value">{{ $historial->inmunizaciones ?? 'No Refiere' }}</span></td>
         </tr>
         <tr>
-            <td colspan="2"><span class="field-label">Otros No Patológicos</span><span class="field-value">{{ $historial->otros_no_patologicos ?? 'No registra' }}</span></td>
+            <td colspan="2"><span class="field-label">Otros No Patológicos</span><span class="field-value">{{ $historial->otros_no_patologicos ?? 'No Refiere' }}</span></td>
         </tr>
     </table>
 </div>
@@ -373,7 +373,7 @@
         <tr>
             <td><span class="field-label">Menarquia</span><span class="field-value">{{ $historial->menarquia ?? 'No aplica' }}</span></td>
             <td><span class="field-label">Ritmo Menstrual</span><span class="field-value">{{ $historial->ritmo ?? 'No aplica' }}</span></td>
-            <td><span class="field-label">F.M.U</span><span class="field-value">{{ $historial->fmu ? \Carbon\Carbon::parse($historial->fmu)->format('d/m/Y') : 'No registrada' }}</span></td>
+            <td><span class="field-label">F.M.U</span><span class="field-value">{{ $historial->fmu ? \Carbon\Carbon::parse($historial->fmu)->format('d/m/Y') : 'No Refiere' }}</span></td>
         </tr>
         <tr>
             <td><span class="field-label">G (Gestas)</span><span class="field-value">{{ $historial->gestas ?? '0' }}</span></td>
@@ -403,7 +403,7 @@
 <div class="section">
     <div class="section-title">[ENFERMEDAD ACTUAL]</div>
     <table class="data-table">
-        <tr><td>{{ $historial->enfermedad_actual ?? 'No registra' }}</td></tr>
+        <tr><td>{{ $historial->enfermedad_actual ?? 'No Refiere' }}</td></tr>
     </table>
 </div>
 
@@ -413,18 +413,18 @@
     <div class="section-title">[SIGNOS VITALES]</div>
     <table class="grid-3">
         <tr>
-            <td><span class="field-label">Presión Arterial</span><span class="field-value">{{ $historial->presion_arterial ?? 'No registrada' }}</span></td>
-            <td><span class="field-label">FC (lpm)</span><span class="field-value">{{ $historial->fc ?? 'No registrada' }}</span></td>
-            <td><span class="field-label">Sat O2 (%)</span><span class="field-value">{{ $historial->sat ?? 'No registrada' }}</span></td>
+            <td><span class="field-label">Presión Arterial</span><span class="field-value">{{ $historial->presion_arterial ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">FC (lpm)</span><span class="field-value">{{ $historial->fc ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Sat O2 (%)</span><span class="field-value">{{ $historial->sat ?? 'No Refiere' }}</span></td>
         </tr>
         <tr>
-            <td><span class="field-label">FR (rpm)</span><span class="field-value">{{ $historial->fr ?? 'No registrada' }}</span></td>
+            <td><span class="field-label">FR (rpm)</span><span class="field-value">{{ $historial->fr ?? 'No Refiere' }}</span></td>
             <td><span class="field-label">Temperatura (°C)</span><span class="field-value">{{ $historial->temperatura ?? '36.5' }}</span></td>
             <td><span class="field-label">IMC (kg/m²)</span><span class="field-value">{{ $historial->imc ?? 'No calculado' }}</span></td>
         </tr>
         <tr>
-            <td><span class="field-label">Peso (kg)</span><span class="field-value">{{ $historial->peso ?? 'No registrado' }}</span></td>
-            <td><span class="field-label">Talla (m)</span><span class="field-value">{{ $historial->altura ?? 'No registrada' }}</span></td>
+            <td><span class="field-label">Peso (kg)</span><span class="field-value">{{ $historial->peso ?? 'No Refiere' }}</span></td>
+            <td><span class="field-label">Talla (m)</span><span class="field-value">{{ $historial->altura ?? 'No Refiere' }}</span></td>
             <td><span class="field-label">Masa Corporal</span><span class="field-value">{{ $historial->masa_corporal ?? 'No calculado' }}</span></td>
         </tr>
     </table>
@@ -580,7 +580,7 @@
                     <tr>
                         <td style="text-align: center;">{{ $loop->iteration }}</td>
                         <td>{{ $diag->descripcion }}</td>
-                        <td>{{ $diag->cie10_code ?? 'No registrado' }}</td>
+                        <td>{{ $diag->cie10_code ?? 'No Refiere' }}</td>
                         <td style="text-align: center;">
                             <span class="badge {{ $diag->tipo == 'PRE' ? 'badge-orange' : 'badge-blue' }}">
                                 {{ $diag->tipo == 'PRE' ? 'Presuntivo' : 'Definitivo' }}
@@ -601,11 +601,11 @@
     <table class="data-table">
         <tr>
             <td style="width: 20%;"><span class="field-label">Tratamiento</span></td>
-            <td>{{ $historial->tratamiento ?? 'No registra' }}</td>
+            <td>{{ $historial->tratamiento ?? 'No Refiere' }}</td>
         </tr>
         <tr>
             <td style="width: 20%;"><span class="field-label">Recomendaciones</span></td>
-            <td>{{ $historial->recomendaciones ?? 'No registra' }}</td>
+            <td>{{ $historial->recomendaciones ?? 'No Refiere' }}</td>
         </tr>
     </table>
 </div>

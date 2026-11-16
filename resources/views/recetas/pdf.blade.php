@@ -392,7 +392,7 @@
             </td>
             <td width="25%">
                 <span class="info-label"> Cédula:</span>
-                <span class="info-value">{{ $receta->historialClinico->paciente->cedula ?? 'No registrada' }}</span>
+                <span class="info-value">{{ $receta->historialClinico->paciente->cedula ?? 'No Refiere' }}</span>
             </td>
             <td width="15%">
                 <span class="info-label"> Edad:</span>
@@ -415,7 +415,7 @@
                         $generoTexto = match($genero) {
                             'M', 'Masculino' => 'Masculino',
                             'F', 'Femenino' => 'Femenino',
-                            default => 'No especificado'
+                            default => 'No Refiere'
                         };
                     @endphp
                     {{ $generoTexto }}
@@ -431,9 +431,9 @@
                     @endphp
                     @if($diagnostico)
                         <span class="badge-cie10">{{ $diagnostico->cie10_code ?? 'N/C' }}</span>
-                        {{ $diagnostico->descripcion ?? 'No especificado' }}
+                        {{ $diagnostico->descripcion ?? 'No Refiere' }}
                     @else
-                        {{ $receta->historialClinico->diagnostico ?? 'No especificado' }}
+                        {{ $receta->historialClinico->diagnostico ?? 'No Refiere' }}
                     @endif
                 </span>
             </td>

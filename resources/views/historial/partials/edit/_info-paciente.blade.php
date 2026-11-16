@@ -9,7 +9,7 @@
                 </div>
                 <span class="badge bg-light text-dark px-3 py-2 border mt-2 mt-sm-0">
                     <i class="fas fa-id-card me-1"></i>
-                    {{ $historial->paciente->cedula ?? 'SIN-CÉDULA' }}
+                    {{ $historial->paciente->cedula ?? 'No Refiere' }}
                     <span class="mx-2">|</span>
                     <i class="far fa-calendar-alt me-1"></i>
                     {{ $historial->fecha_consulta->format('Ymd') }}

@@ -116,7 +116,7 @@
                         <td class="ps-3">
                             <div class="fw-bold text-primary" style="font-size: 13px;">
                                 <i class="fas fa-id-card me-1"></i>
-                                {{ $historial->paciente->cedula ?? 'SIN-CÉDULA' }}
+                                {{ $historial->paciente->cedula ?? 'No Refiere' }}
                                 <br>
                                 <small class="text-muted" style="font-size: 11px;">
                                     {{ $historial->numero_historia }}
@@ -148,7 +148,7 @@
                                 <div class="bg-light rounded-circle p-1 me-2 text-center" style="width: 24px; height: 24px; line-height: 1;">
                                     <i class="fas fa-user-md text-primary" style="font-size: 10px;"></i>
                                 </div>
-                                <span class="text-dark">{{ $historial->doctor ?? 'N/E' }}</span>
+                                <span class="text-dark">{{ $historial->doctor ?? 'No Refiere' }}</span>
                             </div>
                         </td>
                         <td style="max-width: 250px;">
@@ -174,7 +174,7 @@
                                 </span>
                             @else
                                 <span class="text-muted small">
-                                    <i class="fas fa-minus-circle text-muted me-1"></i> No especificado
+                                    <i class="fas fa-minus-circle text-muted me-1"></i> No Refiere
                                 </span>
                             @endif
                         </td>

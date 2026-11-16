@@ -443,7 +443,7 @@
                         </div>
                         <div>
                             <div class="detail-label">Diagnóstico</div>
-                            <div class="detail-value">${ext.diagnostico || 'No especificado'}</div>
+                            <div class="detail-value">${ext.diagnostico || 'No Refiere'}</div>
                         </div>
                     </div>
 
@@ -454,7 +454,7 @@
                         </div>
                         <div>
                             <div class="detail-label">Medicamento</div>
-                            <div class="detail-value">${ext.medicamento || 'No especificado'}</div>
+                            <div class="detail-value">${ext.medicamento || 'No Refiere'}</div>
                         </div>
                     </div>
 

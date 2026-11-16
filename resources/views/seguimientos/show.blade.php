@@ -51,7 +51,7 @@
                                 Consulta del {{ $seguimiento->historialClinico->fecha_consulta->format('d/m/Y') }}
                             </a>
                         </p>
-                        <p><strong>Doctor:</strong> {{ $seguimiento->historialClinico->doctor ?? 'N/E' }}</p>
+                        <p><strong>Doctor:</strong> {{ $seguimiento->historialClinico->doctor ?? 'No Refiere' }}</p>
                     </div>
                     <div class="col-md-6">
                         <h6 class="fw-bold text-primary">

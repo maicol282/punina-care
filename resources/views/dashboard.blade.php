@@ -273,7 +273,7 @@
                             <tr>
                                 <td>{{ $cita->historialClinico->paciente->nombre_completo }}</td>
                                 <td>{{ $cita->proxima_cita->format('d/m/Y') }}</td>
-                                <td>{{ $cita->historialClinico->doctor ?? 'N/E' }}</td>
+                                <td>{{ $cita->historialClinico->doctor ?? 'No Refiere' }}</td>
                             </tr>
                             @empty
                             <tr>

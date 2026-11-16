@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-3">
                     <strong><i class="fas fa-id-card me-2"></i>Cédula:</strong>
-                    {{ $paciente->cedula ?? 'N/E' }}
+                    {{ $paciente->cedula ?? 'No Refiere' }}
                 </div>
                 <div class="col-md-3">
                     <strong><i class="fas fa-calendar me-2"></i>Historial:</strong>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-3">
                     <strong><i class="fas fa-phone me-2"></i>Teléfono:</strong>
-                    {{ $paciente->telefono ?? 'N/E' }}
+                    {{ $paciente->telefono ?? 'No Refiere' }}
                 </div>
             </div>
         </div>
@@ -183,7 +183,7 @@
                             </div>
                             <div class="col-md-4">
                                 <strong>Cédula:</strong>
-                                <span class="text-primary">{{ $medico->cedula ?? 'N/E' }}</span>
+                                <span class="text-primary">{{ $medico->cedula ?? 'No Refiere' }}</span>
                             </div>
                         </div>
                     </div>

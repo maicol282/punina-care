@@ -17,13 +17,13 @@
                     <strong>Paciente:</strong> {{ $certificado->paciente->nombre }} {{ $certificado->paciente->apellido }}
                 </div>
                 <div class="col-md-3">
-                    <strong>Cédula:</strong> {{ $certificado->paciente->cedula ?? 'N/E' }}
+                    <strong>Cédula:</strong> {{ $certificado->paciente->cedula ?? 'No Refiere' }}
                 </div>
                 <div class="col-md-3">
                     <strong>Historial:</strong> {{ $certificado->historialClinico->fecha_consulta->format('d/m/Y') }}
                 </div>
                 <div class="col-md-3">
-                    <strong>Teléfono:</strong> {{ $certificado->paciente->telefono ?? 'N/E' }}
+                    <strong>Teléfono:</strong> {{ $certificado->paciente->telefono ?? 'No Refiere' }}
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@
                 <strong>Especialidad:</strong> {{ $certificado->medico_especialidad ?? 'Medicina General' }}
             </div>
             <div class="col-md-4">
-                <strong>Cédula:</strong> {{ $certificado->medico_cedula ?? 'N/E' }}
+                <strong>Cédula:</strong> {{ $certificado->medico_cedula ?? 'No Refiere' }}
             </div>
         </div>
     </div>

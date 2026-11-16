@@ -79,27 +79,27 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-id-card me-2 text-muted"></i>Cédula:</span>
-                    <span class="badge bg-secondary">{{ $paciente->cedula ?? 'No registrada' }}</span>
+                    <span class="badge bg-secondary">{{ $paciente->cedula ?? 'No Refiere' }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-briefcase me-2 text-muted"></i>Ocupación:</span>
-                    <span class="badge bg-info">{{ $paciente->ocupacion ?? 'No registrada' }}</span>
+                    <span class="badge bg-info">{{ $paciente->ocupacion ?? 'No Refiere' }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-map-marker-alt me-2 text-muted"></i>País:</span>
-                    <span>{{ $paciente->pais ?? 'No especificado' }}</span>
+                    <span>{{ $paciente->pais ?? 'No Refiere' }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-map-marker-alt me-2 text-muted"></i>Provincia:</span>
-                    <span>{{ $paciente->provincia ?? 'No especificado' }}</span>
+                    <span>{{ $paciente->provincia ?? 'No Refiere' }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-map-marker-alt me-2 text-muted"></i>Ciudad:</span>
-                    <span>{{ $paciente->ciudad ?? 'No especificado' }}</span>
+                    <span>{{ $paciente->ciudad ?? 'No Refiere' }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-home me-2 text-muted"></i>Dirección:</span>
-                    <span>{{ $paciente->direccion ?? 'No especificada' }}</span>
+                    <span>{{ $paciente->direccion ?? 'No Refiere' }}</span>
                 </li>
                 @if($paciente->alergias)
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">

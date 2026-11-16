@@ -21,7 +21,7 @@
                             @foreach($historial->diagnosticos as $diag)
                                 <tr class="border-bottom">
                                     <td class="ps-3 py-3 fw-medium text-dark">{{ $diag->descripcion }}</td>
-                                    <td class="py-3"><span class="badge bg-light text-dark border">{{ $diag->cie10_code ?? 'N/E' }}</span></td>
+                                    <td class="py-3"><span class="badge bg-light text-dark border">{{ $diag->cie10_code ?? 'No Refiere' }}</span></td>
                                     <td class="py-3 text-end pe-3">
                                         <span class="badge {{ $diag->tipo == 'PRE' ? 'bg-warning text-dark' : 'bg-success' }} rounded-pill px-3">
                                             {{ $diag->tipo == 'PRE' ? 'Presuntivo' : 'Definitivo' }}
@@ -39,11 +39,11 @@
             <div class="row g-4 mt-2">
                 <div class="col-md-6 border-end">
                     <h6 class="small fw-bold text-muted text-uppercase mb-2"><i class="fas fa-pills me-2 text-primary"></i>Plan de Tratamiento</h6>
-                    <div class="p-3 bg-light rounded-3 text-dark border h-100" style="white-space: pre-wrap;">{{ $historial->tratamiento ?? 'No registra' }}</div>
+                    <div class="p-3 bg-light rounded-3 text-dark border h-100" style="white-space: pre-wrap;">{{ $historial->tratamiento ?? 'No Refiere' }}</div>
                 </div>
                 <div class="col-md-6">
                     <h6 class="small fw-bold text-muted text-uppercase mb-2"><i class="fas fa-clipboard-list me-2 text-primary"></i>Recomendaciones</h6>
-                    <div class="p-3 bg-light rounded-3 text-dark border h-100" style="white-space: pre-wrap;">{{ $historial->recomendaciones ?? 'No registra' }}</div>
+                    <div class="p-3 bg-light rounded-3 text-dark border h-100" style="white-space: pre-wrap;">{{ $historial->recomendaciones ?? 'No Refiere' }}</div>
                 </div>
             </div>
 

@@ -164,7 +164,7 @@
             </tr>
             <tr>
                 <td><strong>Cédula:</strong></td>
-                <td>{{ $historial->paciente->cedula ?? 'No registrada' }}</td>
+                <td>{{ $historial->paciente->cedula ?? 'No Refiere' }}</td>
                 <td><strong>Género:</strong></td>
                 <td>{{ $historial->paciente->genero == 'M' ? 'Masculino' : 'Femenino' }}</td>
             </tr>
@@ -176,7 +176,7 @@
             </tr>
             <tr>
                 <td><strong>Dirección:</strong></td>
-                <td colspan="3">{{ $historial->paciente->direccion ?? 'No registrada' }}</td>
+                <td colspan="3">{{ $historial->paciente->direccion ?? 'No Refiere' }}</td>
             </tr>
         </table>
     </div>
@@ -189,7 +189,7 @@
                 <td><strong>Fecha:</strong></td>
                 <td>{{ $historial->fecha_consulta->format('d/m/Y') }}</td>
                 <td><strong>Doctor:</strong></td>
-                <td>{{ $historial->doctor ?? 'No especificado' }}</td>
+                <td>{{ $historial->doctor ?? 'No Refiere' }}</td>
             </tr>
             <tr>
                 <td><strong>Motivo:</strong></td>
@@ -203,19 +203,19 @@
         <div class="section-title">📊 SIGNOS VITALES</div>
         <table class="signos-table">
             <tr>
-                <td><strong>Presión Arterial:</strong><br>{{ $historial->presion_arterial ?? 'No registrada' }}</td>
-                <td><strong>Frecuencia Cardíaca:</strong><br>{{ $historial->fc ?? 'No registrada' }} lpm</td>
+                <td><strong>Presión Arterial:</strong><br>{{ $historial->presion_arterial ?? 'No Refiere' }}</td>
+                <td><strong>Frecuencia Cardíaca:</strong><br>{{ $historial->fc ?? 'No Refiere' }} lpm</td>
             </tr>
             <tr>
-                <td><strong>Saturación O2:</strong><br>{{ $historial->sat ?? 'No registrada' }}%</td>
-                <td><strong>Frecuencia Respiratoria:</strong><br>{{ $historial->fr ?? 'No registrada' }} rpm</td>
+                <td><strong>Saturación O2:</strong><br>{{ $historial->sat ?? 'No Refiere' }}%</td>
+                <td><strong>Frecuencia Respiratoria:</strong><br>{{ $historial->fr ?? 'No Refiere' }} rpm</td>
                 <td><strong>Temperatura:</strong><br>{{ $historial->temperatura ?? '36.5' }} °C</td>
                 
             </tr>
             <tr>
                 <td><strong>Peso:</strong><br>{{ $historial->peso ?? '70' }} kg</td>
                 <td><strong>Talla:</strong><br>{{ $historial->altura ?? '1.65' }} m</td>
-                <td><strong>Glicemia:</strong><br>{{ $historial->glicemia ?? 'No registrada' }} mg/dL</td>
+                <td><strong>Glicemia:</strong><br>{{ $historial->glicemia ?? 'No Refiere' }} mg/dL</td>
                 
             </tr>
         </table>
@@ -275,7 +275,7 @@
             <tr>
                 <td width="33%"><span class="field-label">🩸 Menarquia</span><span class="field-value">{{ $historial->menarquia ?? 'No aplica' }}</span></td>
                 <td width="33%"><span class="field-label">📅 Ritmo</span><span class="field-value">{{ $historial->ritmo ?? 'No aplica' }}</span></td>
-                <td width="34%"><span class="field-label">📆 F.M.U</span><span class="field-value">{{ $historial->fmu ? \Carbon\Carbon::parse($historial->fmu)->format('d/m/Y') : 'No registrada' }}</span></td>
+                <td width="34%"><span class="field-label">📆 F.M.U</span><span class="field-value">{{ $historial->fmu ? \Carbon\Carbon::parse($historial->fmu)->format('d/m/Y') : 'No Refiere' }}</span></td>
             </tr>
             <tr>
                 <td><span class="field-label">🤰 Gestas</span><span class="field-value">{{ $historial->gestas ?? '0' }}</span></td>
@@ -429,7 +429,7 @@
                 <div style="font-weight: 700; font-size: 14px; color: #1a5276;">{{ $paciente->nombre }} {{ $paciente->apellido }}</div>
                 <div style="font-size: 12px; color: #555;">Paciente / Representante</div>
                 <div style="font-size: 9px; color: #888; margin-top: 5px;">
-                    Cédula: {{ $paciente->cedula ?? 'N/E' }}
+                    Cédula: {{ $paciente->cedula ?? 'No Refiere' }}
                 </div>
             </td>
         </tr>

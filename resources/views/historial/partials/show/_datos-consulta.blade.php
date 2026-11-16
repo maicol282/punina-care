@@ -26,15 +26,15 @@
                 </div>
                 <div class="col-md-3">
                     <span class="d-block text-muted small fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Doctor Responsable</span>
-                    <span class="text-dark fw-medium"><i class="fas fa-user-md text-primary me-1"></i> {{ $historial->doctor ?? 'No registrado' }}</span>
+                    <span class="text-dark fw-medium"><i class="fas fa-user-md text-primary me-1"></i> {{ $historial->doctor ?? 'No Refiere' }}</span>
                 </div>
                 <div class="col-md-6">
                     <span class="d-block text-muted small fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Motivo de Consulta</span>
-                    <div class="p-3 bg-light rounded-3 text-dark border">{{ $historial->motivo_consulta ?? 'No registrado' }}</div>
+                    <div class="p-3 bg-light rounded-3 text-dark border">{{ $historial->motivo_consulta ?? 'No Refiere' }}</div>
                 </div>
                 <div class="col-12 mt-4">
                     <span class="d-block text-muted small fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Enfermedad Actual</span>
-                    <p class="text-dark mb-0 lh-lg">{{ $historial->enfermedad_actual ?? 'No registra' }}</p>
+                    <p class="text-dark mb-0 lh-lg">{{ $historial->enfermedad_actual ?? 'No Refiere' }}</p>
                 </div>
             </div>
         </div>

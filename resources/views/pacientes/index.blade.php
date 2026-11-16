@@ -134,7 +134,7 @@
                     @forelse($pacientes as $paciente)
                     <tr>
                         <td class="ps-3 fw-semibold text-muted">{{ $paciente->id }}</td>
-                        <td><span class="badge bg-light text-dark border">{{ $paciente->cedula ?? 'N/E' }}</span></td>
+                        <td><span class="badge bg-light text-dark border">{{ $paciente->cedula ?? 'No Refiere' }}</span></td>
                         <td>
                             <div class="d-flex align-items-center">
                                 <div class="avatar bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-2" style="width:35px; height:35px; display:flex; align-items:center; justify-content:center;">

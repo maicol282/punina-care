@@ -53,9 +53,9 @@
                             </div>
                             <div class="col-7">
                                 <p>{{ $reposo->paciente->nombre }} {{ $reposo->paciente->apellido }}</p>
-                                <p>{{ $reposo->paciente->cedula ?? 'N/E' }}</p>
-                                <p>{{ $reposo->paciente->telefono ?? 'N/E' }}</p>
-                                <p>{{ $reposo->paciente->email ?? 'N/E' }}</p>
+                                <p>{{ $reposo->paciente->cedula ?? 'No Refiere' }}</p>
+                                <p>{{ $reposo->paciente->telefono ?? 'No Refiere' }}</p>
+                                <p>{{ $reposo->paciente->email ?? 'No Refiere' }}</p>
                             </div>
                         </div>
                     </div>

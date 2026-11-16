@@ -51,7 +51,7 @@
                                         data-telefono="{{ $paciente->telefono }}"
                                         data-email="{{ $paciente->email }}"
                                         {{ old('paciente_id') == $paciente->id ? 'selected' : '' }}>
-                                    {{ $paciente->nombre }} {{ $paciente->apellido }} - {{ $paciente->cedula ?? 'N/E' }}
+                                    {{ $paciente->nombre }} {{ $paciente->apellido }} - {{ $paciente->cedula ?? 'No Refiere' }}
                                 </option>
                             @endforeach
                         </select>

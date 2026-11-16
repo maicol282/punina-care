@@ -51,11 +51,11 @@
                 <td width="50%"><strong>Edad:</strong> {{ $historial->paciente->edad }} años</td>
             </tr>
             <tr>
-                <td><strong>Cédula:</strong> {{ $historial->paciente->cedula ?? 'No registrada' }}</td>
+                <td><strong>Cédula:</strong> {{ $historial->paciente->cedula ?? 'No Refiere' }}</td>
                 <td><strong>Teléfono:</strong> {{ $historial->paciente->telefono }}</td>
             </tr>
             <tr>
-                <td><strong>Doctor:</strong> {{ $historial->doctor ?? 'No especificado' }}</td>
+                <td><strong>Doctor:</strong> {{ $historial->doctor ?? 'No Refiere' }}</td>
                 <td><strong>Fecha Consulta:</strong> {{ $historial->fecha_consulta->format('d/m/Y') }}</td>
             </tr>
         </table>

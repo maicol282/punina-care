@@ -82,7 +82,7 @@
                             <td>
                                 <strong>{{ $consulta->paciente->nombre }} {{ $consulta->paciente->apellido }}</strong>
                                 <br>
-                                <small class="text-muted">Cédula: {{ $consulta->paciente->cedula ?? 'N/E' }}</small>
+                                <small class="text-muted">Cédula: {{ $consulta->paciente->cedula ?? 'No Refiere' }}</small>
                             </td>
                             <td>{{ $consulta->medico->name }}</td>
                             <td>

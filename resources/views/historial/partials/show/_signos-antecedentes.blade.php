@@ -55,7 +55,7 @@
                         @foreach($patologicos as $campo => $label)
                             <li class="list-group-item d-flex justify-content-between align-items-start px-0 bg-transparent border-light py-2">
                                 <span class="text-muted small fw-medium">{{ $label }}</span>
-                                <span class="text-dark text-end ms-3" style="font-size: 13px;">{{ $historial->$campo ?? 'No registra' }}</span>
+                                <span class="text-dark text-end ms-3" style="font-size: 13px;">{{ $historial->$campo ?? 'No Refiere' }}</span>
                             </li>
                         @endforeach
                         </ul>
@@ -86,7 +86,7 @@
                         @foreach($noPatologicos as $campo => $data)
                             <div class="border rounded px-3 py-2 bg-light w-100 d-flex justify-content-between">
                                 <span class="small text-muted"><i class="fas {{ $data[1] }} me-2 text-secondary"></i>{{ $data[0] }}</span>
-                                <span class="small text-dark">{{ $historial->$campo ?? 'No registra' }}</span>
+                                <span class="small text-dark">{{ $historial->$campo ?? 'No Refiere' }}</span>
                             </div>
                         @endforeach
                     </div>

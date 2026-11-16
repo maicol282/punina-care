@@ -17,7 +17,7 @@
                 <div class="text-end">
                     <div class="badge bg-white text-primary px-3 py-2 rounded-pill fs-6 mb-1 shadow-sm">
                         <i class="fas fa-id-card me-2"></i>
-                        {{ $historial->paciente->cedula ?? 'SIN-CÉDULA' }}
+                        {{ $historial->paciente->cedula ?? 'No Refiere' }}
                         <span class="mx-2">|</span>
                         <i class="far fa-calendar-alt me-1"></i>
                         {{ $historial->fecha_consulta->format('Ymd') }}
