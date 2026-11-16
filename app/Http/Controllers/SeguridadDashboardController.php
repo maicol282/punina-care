@@ -167,6 +167,23 @@ class SeguridadDashboardController extends Controller
             $totalPacientes
         );
 
+
+        // ============ CIE-10 POR ATENCIÓN DE PACIENTES POR DOCTOR ============
+        $cie10PorDoctor = HistorialClinico::select(
+                'doctor',
+                'cie10_code',
+                DB::raw('COUNT(*) as total')
+            )
+            ->whereNotNull('doctor')
+            ->where('doctor', '!=', '')
+            ->whereNotNull('cie10_code')
+            ->where('cie10_code', '!=', '')
+            ->groupBy('doctor', 'cie10_code')
+            ->orderBy('doctor')
+            ->orderBy('total', 'desc')
+            ->get()
+            ->groupBy('doctor'); // Agrupar por doctor para facilitar la vista
+
         return view('seguridad.dashboard', compact(
             'totalPacientes',
             'totalHistoriales',
@@ -183,7 +200,8 @@ class SeguridadDashboardController extends Controller
             'ultimosPacientes',
             'actividadReciente',
             'pacientesPorCiudad',
-            'pacientesPorProvincia'
+            'pacientesPorProvincia',
+            'cie10PorDoctor'
         ));
     }
         public function exportarExcel()

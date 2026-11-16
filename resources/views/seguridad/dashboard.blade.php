@@ -448,6 +448,57 @@
         </div>
     </div>
 </div>
+
+<!-- ========== CIE-10 POR DOCTOR ========== -->
+<div class="row g-4 mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-transparent py-3">
+                <h6 class="mb-0 fw-bold text-dark">
+                    <i class="fas fa-stethoscope me-2 text-primary"></i> CIE-10 por Atención de Pacientes por Doctor
+                </h6>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="ps-4">Doctor</th>
+                                <th>Código CIE-10</th>
+                                <th class="text-center">Atenciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($cie10PorDoctor as $doctor => $diagnosticos)
+                                @foreach($diagnosticos as $diag)
+                                <tr>
+                                    @if($loop->first)
+                                        <td class="ps-4 fw-medium" rowspan="{{ $diagnosticos->count() }}">{{ $doctor }}</td>
+                                    @endif
+                                    <td>
+                                        <span class="badge bg-info bg-opacity-10 text-info border border-info rounded-pill">
+                                            {{ $diag->cie10_code }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center fw-bold">{{ $diag->total }}</td>
+                                </tr>
+                                @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted py-4">
+                                        <i class="fas fa-inbox fa-2x mb-2 opacity-50 d-block"></i>
+                                        No hay datos de CIE-10 por doctor.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('scripts')
