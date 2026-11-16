@@ -62,34 +62,47 @@ class SeguridadDashboardController extends Controller
         $pacientes = Paciente::whereNotNull('fecha_nacimiento')->get();
         
         $rangosEdad = [
-            '0-17 años' => 0,
-            '18-30 años' => 0,
-            '31-45 años' => 0,
-            '46-60 años' => 0,
-            '60+ años' => 0,
+            'Neonato / Recién nacido (0 a 28 días)' => 0,
+            'Lactante menor (1 a 11 meses)' => 0,
+            'Lactante mayor (12 a 23 meses)' => 0,
+            'Preescolar (2 a 5 años)' => 0,
+            'Escolar (6 a 11 años)' => 0,
+            'Adolescente (12 a 19 años)' => 0,
+            'Adulto joven (20 a 39 años)' => 0,
+            'Adulto maduro / medio (40 a 59 años)' => 0,
+            'Adulto mayor (Vejez) (60+ años)' => 0,
             'Sin especificar' => 0
         ];
         
         foreach ($pacientes as $paciente) {
             if ($paciente->fecha_nacimiento) {
-                $edad = Carbon::parse($paciente->fecha_nacimiento)->age;
-                if ($edad < 18) { $rangosEdad['0-17 años']++; }
-                elseif ($edad <= 30) { $rangosEdad['18-30 años']++; }
-                elseif ($edad <= 45) { $rangosEdad['31-45 años']++; }
-                elseif ($edad <= 60) { $rangosEdad['46-60 años']++; }
-                else { $rangosEdad['60+ años']++; }
+                $fechaNac = Carbon::parse($paciente->fecha_nacimiento);
+                $edad = $fechaNac->age;
+                $meses = $fechaNac->diffInMonths(now());
+                $dias = $fechaNac->diffInDays(now());
+                
+                if ($dias <= 28) { $rangosEdad['Neonato / Recién nacido (0 a 28 días)']++; }
+                elseif ($meses >= 1 && $meses <= 11) { $rangosEdad['Lactante menor (1 a 11 meses)']++; }
+                elseif ($meses >= 12 && $meses <= 23) { $rangosEdad['Lactante mayor (12 a 23 meses)']++; }
+                elseif ($edad >= 2 && $edad <= 5) { $rangosEdad['Preescolar (2 a 5 años)']++; }
+                elseif ($edad >= 6 && $edad <= 11) { $rangosEdad['Escolar (6 a 11 años)']++; }
+                elseif ($edad >= 12 && $edad <= 19) { $rangosEdad['Adolescente (12 a 19 años)']++; }
+                elseif ($edad >= 20 && $edad <= 39) { $rangosEdad['Adulto joven (20 a 39 años)']++; }
+                elseif ($edad >= 40 && $edad <= 59) { $rangosEdad['Adulto maduro / medio (40 a 59 años)']++; }
+                else { $rangosEdad['Adulto mayor (Vejez) (60+ años)']++; }
             } else { $rangosEdad['Sin especificar']++; }
         }
         
-        $edadesStats = collect($rangosEdad)->map(function($total, $rango) use ($totalPacientes) {
-            return (object) [
-                'rango_edad' => $rango, 
-                'total' => $total,
-                'porcentaje' => $totalPacientes > 0 ? round(($total / $totalPacientes) * 100, 1) : 0
-            ];
-        })->filter(function($item) {
-            return $item->total > 0;
-        })->values();
+        $edadesStats = [];
+        foreach ($rangosEdad as $rango => $total) {
+            if ($total > 0) {
+                $edadesStats[] = (object) [
+                    'rango_edad' => $rango,
+                    'total' => $total,
+                    'porcentaje' => $totalPacientes > 0 ? round(($total / $totalPacientes) * 100, 1) : 0
+                ];
+            }
+        }
 
         // ============ TOP 5 DIAGNÓSTICOS (con porcentaje) ============
         $topDiagnosticos = PercentageHelper::addPercentage(

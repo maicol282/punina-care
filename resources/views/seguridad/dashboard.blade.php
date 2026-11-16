@@ -469,10 +469,15 @@
         (function() {
             const ctx = document.getElementById('consultasChart').getContext('2d');
             const meses = @json($meses);
-            const labels = @json($consultasPorMes->map(function($item) use ($meses) {
-                return $meses[$item->mes - 1] . ' ' . $item->año;
-            }));
-            const data = @json($consultasPorMes->pluck('total'));
+            @php
+                $consultasLabels = $consultasPorMes->map(function($item) use ($meses) {
+                    $mesIndex = ((int) $item->mes) - 1;
+                    $mesNombre = isset($meses[$mesIndex]) ? $meses[$mesIndex] : 'Mes ' . $item->mes;
+                    return $mesNombre . ' ' . $item->año;
+                })->toArray();
+            @endphp
+            const labels = @json($consultasLabels);
+            const data = @json(array_column($consultasPorMes->toArray(), 'total'));
             
             new Chart(ctx, {
                 type: 'line',
@@ -502,10 +507,13 @@
         @if($pacientesGenero->count() > 0)
         (function() {
             const ctx = document.getElementById('generoChart').getContext('2d');
-            const labels = @json($pacientesGenero->map(function($item) {
-                return $item->genero == 'Masculino' || $item->genero == 'M' ? 'Masculino' : ($item->genero == 'Femenino' || $item->genero == 'F' ? 'Femenino' : 'Otro');
-            }));
-            const data = @json($pacientesGenero->pluck('total'));
+            @php
+                $generoLabels = $pacientesGenero->map(function($item) {
+                    return $item->genero == 'Masculino' || $item->genero == 'M' ? 'Masculino' : ($item->genero == 'Femenino' || $item->genero == 'F' ? 'Femenino' : 'Otro');
+                })->toArray();
+            @endphp
+            const labels = @json($generoLabels);
+            const data = @json(array_column($pacientesGenero->toArray(), 'total'));
             
             new Chart(ctx, {
                 type: 'doughnut',
@@ -523,10 +531,15 @@
         (function() {
             const ctx = document.getElementById('pacientesChart').getContext('2d');
             const meses = @json($meses);
-            const labels = @json($pacientesPorMes->map(function($item) use ($meses) {
-                return $meses[$item->mes - 1] . ' ' . $item->año;
-            }));
-            const data = @json($pacientesPorMes->pluck('total'));
+            @php
+                $pacientesMesLabels = $pacientesPorMes->map(function($item) use ($meses) {
+                    $mesIndex = ((int) $item->mes) - 1;
+                    $mesNombre = isset($meses[$mesIndex]) ? $meses[$mesIndex] : 'Mes ' . $item->mes;
+                    return $mesNombre . ' ' . $item->año;
+                })->toArray();
+            @endphp
+            const labels = @json($pacientesMesLabels);
+            const data = @json(array_column($pacientesPorMes->toArray(), 'total'));
             
             new Chart(ctx, {
                 type: 'bar',
@@ -540,11 +553,11 @@
         @endif
 
         // 4. EDADES
-        @if($edadesStats->count() > 0)
+        @if(count($edadesStats) > 0)
         (function() {
             const ctx = document.getElementById('edadChart').getContext('2d');
-            const labels = @json($edadesStats->pluck('rango_edad'));
-            const data = @json($edadesStats->pluck('total'));
+            const labels = @json(array_column($edadesStats, 'rango_edad'));
+            const data = @json(array_column($edadesStats, 'total'));
             const colores = ['#0f2b45', '#2b7a62', '#f39c12', '#e74c3c', '#3498db', '#1abc9c'];
             
             new Chart(ctx, {
@@ -562,8 +575,13 @@
         @if($topDiagnosticos->count() > 0)
         (function() {
             const ctx = document.getElementById('topDiagnosticosChart').getContext('2d');
-            const labels = @json($topDiagnosticos->pluck('descripcion')->map(function($d) { return strlen($d) > 25 ? substr($d, 0, 25) . '...' : $d; }));
-            const data = @json($topDiagnosticos->pluck('total'));
+            @php
+                $diagnosticosLabels = array_map(function($d) { 
+                    return strlen($d) > 25 ? substr($d, 0, 25) . '...' : $d; 
+                }, array_column($topDiagnosticos->toArray(), 'descripcion'));
+            @endphp
+            const labels = @json($diagnosticosLabels);
+            const data = @json(array_column($topDiagnosticos->toArray(), 'total'));
             
             new Chart(ctx, {
                 type: 'bar',
@@ -580,8 +598,8 @@
         @if($topMedicos->count() > 0)
         (function() {
             const ctx = document.getElementById('medicosChart').getContext('2d');
-            const labels = @json($topMedicos->pluck('doctor'));
-            const data = @json($topMedicos->pluck('total'));
+            const labels = @json(array_column($topMedicos->toArray(), 'doctor'));
+            const data = @json(array_column($topMedicos->toArray(), 'total'));
             
             new Chart(ctx, {
                 type: 'bar',
@@ -599,8 +617,8 @@
         (function() {
             const ctx = document.getElementById('cie10Chart');
             if (ctx) {
-                const labels = @json($topCie10->pluck('cie10_code'));
-                const data = @json($topCie10->pluck('total'));
+                const labels = @json(array_column($topCie10->toArray(), 'cie10_code'));
+                const data = @json(array_column($topCie10->toArray(), 'total'));
                 
                 new Chart(ctx.getContext('2d'), {
                     type: 'bar',

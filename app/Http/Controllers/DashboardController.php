@@ -26,12 +26,15 @@ public function index()
     // Pacientes por rangos de edad (reemplaza a $sangreStats)
     $edadesStats = Paciente::selectRaw("
         CASE 
-            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) < 12 THEN '0-11 años'
-            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 12 AND 17 THEN '12-17 años'
-            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 18 AND 30 THEN '18-30 años'
-            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 31 AND 45 THEN '31-45 años'
-            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 46 AND 60 THEN '46-60 años'
-            ELSE '60+ años'
+            WHEN TIMESTAMPDIFF(DAY, fecha_nacimiento, CURDATE()) <= 28 THEN 'Neonato / Recién nacido'
+            WHEN TIMESTAMPDIFF(MONTH, fecha_nacimiento, CURDATE()) BETWEEN 1 AND 11 THEN 'Lactante menor'
+            WHEN TIMESTAMPDIFF(MONTH, fecha_nacimiento, CURDATE()) BETWEEN 12 AND 23 THEN 'Lactante mayor'
+            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 2 AND 5 THEN 'Preescolar'
+            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 6 AND 11 THEN 'Escolar'
+            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 12 AND 19 THEN 'Adolescente'
+            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 20 AND 39 THEN 'Adulto joven'
+            WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 40 AND 59 THEN 'Adulto maduro / medio'
+            ELSE 'Adulto mayor (Vejez)'
         END as rango_edad,
         COUNT(*) as total
     ")->groupBy('rango_edad')->get();
