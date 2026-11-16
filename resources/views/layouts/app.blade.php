@@ -70,18 +70,18 @@
                     <span>Estadísticas</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('pacientes.create') ? 'active' : '' }}" href="{{ route('pacientes.create') }}">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Nuevo Paciente</span>
+                </a>
+            </li>
             
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('pacientes.*') ? 'active' : '' }}" href="{{ route('pacientes.index') }}">
                     <i class="fas fa-users"></i>
                     <span>Pacientes</span>
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('pacientes.create') ? 'active' : '' }}" href="{{ route('pacientes.create') }}">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Nuevo Paciente</span>
                 </a>
             </li>
             

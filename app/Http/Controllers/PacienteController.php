@@ -160,4 +160,15 @@ class PacienteController extends Controller
     {
         return redirect()->route('pacientes.index', ['search' => $request->get('search')]);
     }
+
+    /**
+     * Exportar datos de facturación a Excel.
+     */
+    public function exportarFacturacion()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(
+            new \App\Exports\FacturacionExport(),
+            'facturacion-' . date('Y-m-d') . '.xlsx'
+        );
+    }
 }

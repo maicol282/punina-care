@@ -12,10 +12,13 @@
             <i class="fas fa-users me-2 text-primary"></i> Lista de Pacientes
         </h5>
         @can('crear pacientes')
-        <a href="{{ route('pacientes.create') }}" class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm">
+        <a href="{{ route('pacientes.create') }}" class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm me-2">
             <i class="fas fa-plus me-1"></i> Nuevo Paciente
         </a>
         @endcan
+        <a href="{{ route('pacientes.exportar-facturacion') }}" class="btn btn-outline-success btn-sm rounded-pill px-3 shadow-sm" title="Exportar Facturación a Excel">
+            <i class="fas fa-file-excel me-1"></i> Exportar
+        </a>
     </div>
 
     <div class="card-body p-4">

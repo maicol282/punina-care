@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pacientes/{paciente}/ultimo-historial', [HistorialClinicoController::class, 'ultimoHistorial'])
         ->name('pacientes.ultimo-historial');
 
+Route::get('/pacientes/exportar-facturacion', [App\Http\Controllers\PacienteController::class, 'exportarFacturacion'])->name('pacientes.exportar-facturacion')->middleware('auth');
     Route::resource('pacientes', PacienteController::class);
 
     // =====================================================================
@@ -299,3 +300,5 @@ Route::get('/declaracion-accesibilidad', function () {
 })->name('legal.accesibilidad');
 
 Route::get('/adjuntos/{id}/ver', [App\Http\Controllers\HistorialClinicoController::class, 'verAdjunto'])->name('adjuntos.ver')->middleware('auth');
+
+// Exportar facturación de pacientes

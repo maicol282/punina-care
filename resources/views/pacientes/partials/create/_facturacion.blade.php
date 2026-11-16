@@ -67,6 +67,37 @@
                     </label>
                 </div>
             </div>
+
+            <!-- Fecha de emisión de factura -->
+            <div class="col-md-6 mb-3">
+                <label for="fecha_emision_factura" class="form-label">Fecha de Emisión de Factura</label>
+                <input type="date" class="form-control @error('fecha_emision_factura') is-invalid @enderror" 
+                    id="fecha_emision_factura" name="fecha_emision_factura" 
+                    value="{{ old('fecha_emision_factura', date('Y-m-d')) }}">
+                @error('fecha_emision_factura')<div class="invalid-feedback">{{ $message }}</div>@enderror
+            </div>
+
+            <!-- Precio de consulta -->
+            <div class="col-md-6 mb-3">
+                <label for="precio_consulta" class="form-label">Precio de Consulta</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" step="0.01" class="form-control @error('precio_consulta') is-invalid @enderror" 
+                        id="precio_consulta" name="precio_consulta" 
+                        value="{{ old('precio_consulta') }}" placeholder="0.00">
+                    @error('precio_consulta')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+            </div>
+
+            <!-- Pagado -->
+            <div class="col-md-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="pagado" id="pagado" value="1" {{ old('pagado') ? 'checked' : '' }}>
+                    <label class="form-check-label" for="pagado">
+                        Pagado
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 </div>
