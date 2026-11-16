@@ -619,6 +619,72 @@
     </table>
 </div>
 @endif
+<!-- ==================== RECETA MÉDICA ==================== -->
+@if($historial->recetas && $historial->recetas->count() > 0)
+    @foreach($historial->recetas as $receta)
+    <div class="section" style="page-break-inside: avoid; margin-top: 20px;">
+        <div class="section-title">[RECETA MÉDICA]</div>
+        
+        @php
+            $medicamentos = $receta->medicamentos_json ? json_decode($receta->medicamentos_json, true) : [];
+        @endphp
+        
+        @if(count($medicamentos) > 0)
+            <table class="data-table" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">Medicamento</th>
+                        <th style="width: 15%;">Presentación</th>
+                        <th style="width: 15%;">Concentración</th>
+                        <th style="width: 10%;">Vía</th>
+                        <th style="width: 15%;">Dosis</th>
+                        <th style="width: 15%;">Frecuencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($medicamentos as $index => $med)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $med['medicamento'] ?? 'No Refiere' }}</td>
+                        <td>{{ $med['presentacion'] ?? 'No Refiere' }}</td>
+                        <td>{{ $med['concentracion'] ?? 'No Refiere' }}</td>
+                        <td>{{ $med['via'] ?? 'No Refiere' }}</td>
+                        <td>{{ $med['dosis'] ?? 'No Refiere' }}</td>
+                        <td>{{ $med['frecuencia'] ?? 'No Refiere' }}</td>
+                    </tr>
+                    @if(!empty($med['duracion']) || !empty($med['cantidad']) || !empty($med['indicaciones']) || !empty($med['advertencias']))
+                    <tr>
+                        <td colspan="7" style="font-size: 10px; padding: 4px 8px; background: #f8f9fa;">
+                            @if(!empty($med['duracion'])) <strong>Duración:</strong> {{ $med['duracion'] }} | @endif
+                            @if(!empty($med['cantidad'])) <strong>Cantidad:</strong> {{ $med['cantidad'] }} | @endif
+                            @if(!empty($med['indicaciones'])) <strong>Indicaciones:</strong> {{ $med['indicaciones'] }} | @endif
+                            @if(!empty($med['advertencias'])) <strong style="color: #c0392b;">Advertencias:</strong> {{ $med['advertencias'] }} @endif
+                        </td>
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <p>{{ $receta->medicamento ?? 'No Refiere' }} - {{ $receta->dosis ?? 'No Refiere' }} - {{ $receta->frecuencia ?? 'No Refiere' }}</p>
+        @endif
+        
+        @if($receta->advertencias)
+        <div style="margin-top: 8px; padding: 8px; background: #fdf2f2; border-left: 4px solid #c0392b; font-size: 10px;">
+            <strong>Advertencias generales:</strong> {{ $receta->advertencias }}
+        </div>
+        @endif
+        
+        @if($receta->recomendaciones_no_farmacologicas)
+        <div style="margin-top: 5px; padding: 8px; background: #f0f9ff; border-left: 4px solid #2980b9; font-size: 10px;">
+            <strong>Recomendaciones no farmacológicas:</strong> {{ $receta->recomendaciones_no_farmacologicas }}
+        </div>
+        @endif
+    </div>
+    @endforeach
+@endif
+
 @include('partials.pdf._firmas')
 
 <!-- ==================== FIRMA ==================== -->

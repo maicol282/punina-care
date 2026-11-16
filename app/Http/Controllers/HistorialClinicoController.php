@@ -210,6 +210,44 @@ class HistorialClinicoController extends Controller
                 }
             }
 
+            // ===== GUARDAR RECETA MÉDICA (CREAR) =====
+            if ($request->has('generar_receta') && $request->generar_receta == '1') {
+                $medicamentos = $request->receta_medicamentos;
+                
+                if ($medicamentos && count($medicamentos) > 0) {
+                    $medicamentosValidos = array_filter($medicamentos, function($med) {
+                        return !empty($med['medicamento']);
+                    });
+                    
+                    if (count($medicamentosValidos) > 0) {
+                        $receta = new \App\Models\Receta();
+                        $receta->historial_clinico_id = $historial->id;
+                        $receta->fecha_emision = $request->receta_fecha_emision ?? now();
+                        $receta->medicamentos_json = json_encode($medicamentosValidos);
+                        $receta->medicamento = $medicamentosValidos[0]['medicamento'] ?? null;
+                        $receta->presentacion = $medicamentosValidos[0]['presentacion'] ?? null;
+                        $receta->concentracion = $medicamentosValidos[0]['concentracion'] ?? null;
+                        $receta->dosis = $medicamentosValidos[0]['dosis'] ?? null;
+                        $receta->frecuencia = $medicamentosValidos[0]['frecuencia'] ?? null;
+                        $receta->duracion = $medicamentosValidos[0]['duracion'] ?? null;
+                        $receta->indicaciones = $medicamentosValidos[0]['indicaciones'] ?? null;
+                        $receta->advertencias = $request->receta_advertencias;
+                        $receta->signos_alarma = $request->receta_signos_alarma;
+                        $receta->recomendaciones_no_farmacologicas = $request->receta_recomendaciones_no_farmacologicas;
+                        $receta->save();
+                        
+                        \Log::info("Receta médica generada desde historial", [
+                            'historial_id' => $historial->id,
+                            'receta_id' => $receta->id,
+                            'medicamentos' => count($medicamentosValidos)
+                        ]);
+                    }
+                }
+            }
+
+
+            // Confirmar la transacción ANTES del log de auditoría
+            DB::commit();
 
             $usuario = Auth::user();
             $nombreUsuario = $usuario ? $usuario->name : 'Desconocido';

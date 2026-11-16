@@ -73,7 +73,7 @@
 </div>
 @endsection
 
-@push('scripts')
+{{-- @push('scripts') --}}
     @include('historial.partials._scripts')
     @include('historial.partials._scripts-receta')
     <script>
@@ -81,4 +81,4 @@
         window.cie10ByDiagnosticoUrl = '{{ route("cie10.by-diagnostico") }}';
     </script>
 
-@endpush
+{{-- @endpush --}}
