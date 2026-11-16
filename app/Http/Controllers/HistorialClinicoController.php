@@ -149,6 +149,14 @@ class HistorialClinicoController extends Controller
             if ($edad < 15) {
                 $historial->presion_arterial = 'N/A (Paciente pediátrico)';
             }
+            // RESTRICCIÓN PARA ENFERMEROS: Limpiar datos que no debería llenar
+            if (auth()->user()->hasRole("Enfermero")) {
+                $historial->motivo_consulta = "Control de signos vitales (Enfermería)";
+                $historial->doctor = auth()->user()->name;
+                // Los signos vitales se guardan normalmente (ya vienen en el request)
+                // Limpiamos los diagnósticos, recetas y demás campos que no llenó
+                $request->merge(["diagnosticos" => [], "generar_receta" => "0"]);
+            }
         }
             $historial->save();
 

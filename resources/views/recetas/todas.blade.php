@@ -49,35 +49,43 @@
                                    class="btn btn-sm btn-secondary" target="_blank" title="Imprimir receta" data-bs-toggle="tooltip">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
+                                @can('editar recetas')
                                 <a href="{{ route('recetas.edit', $receta->id) }}" 
                                    class="btn btn-sm btn-warning" title="Editar receta" data-bs-toggle="tooltip">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                @endcan
 
+                                @can('enviar recetas')
                                 <a href="{{ route('recetas.enviar', $receta) }}" 
    class="btn btn-sm btn-info text-white" 
    title="Enviar por Correo"
    onclick="event.preventDefault(); var url = this.href; document.getElementById('modalEnviandoCorreo').classList.add('show'); document.getElementById('modalEnviandoCorreo').style.display='block'; var progressBar = document.getElementById('progressBarCorreo'); var width = 0; var interval = setInterval(function() { if (width >= 100) { clearInterval(interval); window.location.href = url; } else { width += 10; progressBar.style.width = width + '%'; progressBar.innerHTML = width + '%'; } }, 150);">
     <i class="fas fa-envelope"></i>
 </a>
+                                @endcan
                                 @if($receta->enviado)
                                 <span class="badge bg-success">Enviada</span>
                                 @endif
                                <!-- <a href="{{ route('exportar.recetas') }}" class="btn btn-success btn-sm" target="_blank">
                                     <i class="fas fa-file-excel me-1"></i> Exportar Excel
                                 </a> -->
+                                @can('eliminar recetas')
                                 <button type="button" class="btn btn-sm btn-danger"
                                         onclick="confirmDelete(event, 'delete-form-{{ $receta->id }}')"
                                         title="Eliminar receta" data-bs-toggle="tooltip">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                @endcan
                             </div>
+                            @can('eliminar recetas')
                             <form id="delete-form-{{ $receta->id }}" 
                                   action="{{ route('recetas.destroy', $receta->id) }}" 
                                   method="POST" class="d-none">
                                 @csrf
                                 @method('DELETE')
                             </form>
+                            @endcan
                         </td>
                     </tr>
                     @empty

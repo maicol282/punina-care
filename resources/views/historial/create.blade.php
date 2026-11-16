@@ -27,48 +27,44 @@
     <form action="{{ route('historial.store', $paciente) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <!-- Información del paciente -->
-        @include('historial.partials._info-paciente')
-        @include('historial.partials._datos-consulta')
-        
-        <!-- ANTECEDENTES PERSONALES PATOLÓGICOS -->
-        @include('historial.partials._antecedentes-patologicos')
-        
-        <!-- ANTECEDENTES PERSONALES NO PATOLÓGICOS -->
-        @include('historial.partials._antecedentes-no-patologicos')
-        
-        <!-- ANTECEDENTES FAMILIARES -->
-        @include('historial.partials._antecedentes-familiares')
-        
-        <!-- GINECO OBSTÉTRICOS -->
-        @include('historial.partials._gineco-obstetricos')
-        
-        <!-- ENFERMEDAD ACTUAL -->
-        @include('historial.partials._enfermedad-actual')
-        
-        <!-- SIGNOS VITALES -->
-        @include('historial.partials._signos-vitales')
-        
-        <!-- REVISIÓN DE ÓRGANOS Y SISTEMAS -->
-        @include('historial.partials._revision-sistemas')
-
-        <!-- EXPLORACIÓN FÍSICA -->
-        @include('historial.partials._exploracion-fisica')
-        
-        <!-- ESTUDIOS COMPLEMENTARIOS -->
-        @include('historial.partials._estudios-complementarios')
-        
-        <!-- DIAGNÓSTICOS -->
-        @include('historial.partials._diagnosticos')
-        
-        <!-- TRATAMIENTO Y RECOMENDACIONES -->
-        @include('historial.partials._tratamiento')
-        
-        <!-- OBSERVACIONES -->
-        @include('historial.partials._observaciones')
-        
-        <!-- BOTONES -->
-        @include('historial.partials._botones-accion')
+        @if(auth()->user()->hasRole('Enfermero'))
+            <!-- VISTA PARA ENFERMERO: Solo Signos Vitales y Alergias -->
+            <div class="alert alert-info border-0 shadow-sm mb-4">
+                <i class="fas fa-info-circle me-2"></i> Estás registrando un control de signos vitales. Solo puedes ingresar los datos de esta sección.
+            </div>
+            
+            <!-- Campos ocultos requeridos por el controlador -->
+            <input type="hidden" name="fecha_consulta" value="{{ date('Y-m-d') }}">
+            <input type="hidden" name="motivo_consulta" value="Control de signos vitales (Enfermería)">
+            <input type="hidden" name="doctor" value="{{ auth()->user()->name }}">
+            
+            <!-- Alergias (Está dentro de antecedentes patológicos) -->
+            @include('historial.partials._antecedentes-patologicos')
+            
+            <!-- Signos Vitales -->
+            @include('historial.partials._signos-vitales')
+            
+            <!-- Botones de acción -->
+            @include('historial.partials._botones-accion')
+        @else
+            <!-- VISTA COMPLETA PARA MÉDICOS Y ADMINISTRADORES -->
+            @include('historial.partials._info-paciente')
+            @include('historial.partials._datos-consulta')
+            
+            @include('historial.partials._antecedentes-patologicos')
+            @include('historial.partials._antecedentes-no-patologicos')
+            @include('historial.partials._antecedentes-familiares')
+            @include('historial.partials._gineco-obstetricos')
+            @include('historial.partials._enfermedad-actual')
+            @include('historial.partials._signos-vitales')
+            @include('historial.partials._revision-sistemas')
+            @include('historial.partials._exploracion-fisica')
+            @include('historial.partials._estudios-complementarios')
+            @include('historial.partials._diagnosticos')
+            @include('historial.partials._tratamiento')
+            @include('historial.partials._observaciones')
+            @include('historial.partials._botones-accion')
+        @endif
     </form>
 </div>
 @endsection

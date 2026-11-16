@@ -97,12 +97,14 @@
                                 <a href="{{ route('certificados.show', $certificado) }}" class="btn btn-info" title="Ver">
                                     <i class="fas fa-eye"></i>
                                 </a>
+                                @can('editar certificados')
                                 <a href="{{ route('certificados.edit', $certificado) }}" class="btn btn-warning" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="{{ route('certificados.imprimir', $certificado) }}" class="btn btn-success" title="PDF" target="_blank">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
+                                @can('eliminar certificados')
                                 <form action="{{ route('certificados.destroy', $certificado) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
@@ -113,12 +115,14 @@
                             </div>
                         </td>
                         <td>
+                            @can("enviar recetas")
 <a href="{{ route('certificados.enviar', $certificado->id) }}" 
                                class="btn btn-sm btn-info text-white" 
                                title="Enviar por Correo"
                                onclick="event.preventDefault(); var url = this.href; document.getElementById('modalEnviandoCorreo').classList.add('show'); document.getElementById('modalEnviandoCorreo').style.display='block'; var progressBar = document.getElementById('progressBarCorreo'); var width = 0; var interval = setInterval(function() { if (width >= 100) { clearInterval(interval); window.location.href = url; } else { width += 10; progressBar.style.width = width + '%'; progressBar.innerHTML = width + '%'; } }, 150);">
                                 <i class="fas fa-envelope"></i>
                             </a>
+                            @endcan
                             @if($certificado->enviado)
                             <span class="badge bg-success">Enviado</span>
                             @endif
