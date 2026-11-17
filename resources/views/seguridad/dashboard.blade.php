@@ -413,42 +413,6 @@
     </div>
 </div>
 
-<!-- ========== ACCIONES RÁPIDAS ========== -->
-<div class="row g-4 mt-1">
-    <div class="col-12">
-        <div class="card border-0 bg-transparent shadow-none">
-            <div class="card-body p-0">
-                <div class="row g-3">
-                    <div class="col-md-3 col-6">
-                        <a href="{{ route('pacientes.create') }}" class="btn btn-primary w-100 py-3 shadow-sm d-flex flex-column align-items-center">
-                            <i class="fas fa-user-plus fa-2x mb-2"></i>
-                            <span class="fw-semibold">Nuevo Paciente</span>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <a href="{{ route('pacientes.index') }}" class="btn btn-success w-100 py-3 shadow-sm d-flex flex-column align-items-center">
-                            <i class="fas fa-users fa-2x mb-2"></i>
-                            <span class="fw-semibold">Ver Pacientes</span>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <a href="{{ route('recetas.todas') }}" class="btn btn-info text-white w-100 py-3 shadow-sm d-flex flex-column align-items-center">
-                            <i class="fas fa-prescription fa-2x mb-2"></i>
-                            <span class="fw-semibold">Gestión de Recetas</span>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <a href="#" class="btn btn-warning text-white w-100 py-3 shadow-sm d-flex flex-column align-items-center" onclick="alert('Módulo de Citas en desarrollo')">
-                            <i class="fas fa-calendar-alt fa-2x mb-2"></i>
-                            <span class="fw-semibold">Agenda de Citas</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- ========== CIE-10 POR DOCTOR ========== -->
 <div class="row g-4 mb-4">
     <div class="col-12">
@@ -493,6 +457,42 @@
                             @endforelse
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ACCIONES RÁPIDAS ========== -->
+<div class="row g-4 mt-1">
+    <div class="col-12">
+        <div class="card border-0 bg-transparent shadow-none">
+            <div class="card-body p-0">
+                <div class="row g-3">
+                    <div class="col-md-3 col-6">
+                        <a href="{{ route('pacientes.create') }}" class="btn btn-primary w-100 py-3 shadow-sm d-flex flex-column align-items-center">
+                            <i class="fas fa-user-plus fa-2x mb-2"></i>
+                            <span class="fw-semibold">Nuevo Paciente</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <a href="{{ route('pacientes.index') }}" class="btn btn-success w-100 py-3 shadow-sm d-flex flex-column align-items-center">
+                            <i class="fas fa-users fa-2x mb-2"></i>
+                            <span class="fw-semibold">Ver Pacientes</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <a href="{{ route('recetas.todas') }}" class="btn btn-info text-white w-100 py-3 shadow-sm d-flex flex-column align-items-center">
+                            <i class="fas fa-prescription fa-2x mb-2"></i>
+                            <span class="fw-semibold">Gestión de Recetas</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <a href="#" class="btn btn-warning text-white w-100 py-3 shadow-sm d-flex flex-column align-items-center" onclick="alert('Módulo de Citas en desarrollo')">
+                            <i class="fas fa-calendar-alt fa-2x mb-2"></i>
+                            <span class="fw-semibold">Agenda de Citas</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
