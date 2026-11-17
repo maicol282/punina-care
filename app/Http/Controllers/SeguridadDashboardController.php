@@ -15,6 +15,10 @@ class SeguridadDashboardController extends Controller
 {
     public function index()
     {
+            if (!auth()->user()->hasAnyRole(['Administrador', 'Médico'])) {
+    abort(403, 'No tienes permiso para acceder a esta sección.');
+            }
+        
         // ============ ESTADÍSTICAS BÁSICAS ============
         $totalPacientes = Paciente::count();
         $totalHistoriales = HistorialClinico::count();
@@ -206,7 +210,11 @@ class SeguridadDashboardController extends Controller
     }
         public function exportarExcel()
     {
-        return \Maatwebsite\Excel\Facades\Excel::download(
+
+            if (!auth()->user()->hasAnyRole(['Administrador', 'Médico'])) {
+        abort(403, 'No tienes permiso para acceder a esta sección.');
+    }
+    return \Maatwebsite\Excel\Facades\Excel::download(
             new \App\Exports\EstadisticasExport(),
             'estadisticas-' . date('Y-m-d') . '.xlsx'
         );

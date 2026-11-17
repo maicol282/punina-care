@@ -38,25 +38,21 @@ require __DIR__.'/auth.php';
 |--------------------------------------------------------------------------
 | Rutas Autenticadas
 |--------------------------------------------------------------------------
-*/
-
-Route::middleware(['auth'])->group(function () {
-
-    // =====================================================================
+*/Route::middleware(['auth'])->group(function () {
     // 1. DASHBOARD
-    // =====================================================================
-    Route::get('/dashboard', fn() => redirect()->route('seguridad.dashboard'))
-    ->name('dashboard')
-    ->middleware('role:Administrador|Médico');
 
-Route::get('/seguridad/dashboard', [SeguridadDashboardController::class, 'index'])
-    ->name('seguridad.dashboard')
-    ->middleware('role:Administrador|Médico');
+    Route::get('/dashboard', function () {
+        if (!auth()->user()->hasAnyRole(['Administrador', 'Médico'])) {
+            abort(403, 'No tienes permiso para acceder a esta sección.');
+        }
+        return redirect()->route('seguridad.dashboard');
+    })->name('dashboard');
 
-Route::get('/seguridad/dashboard/exportar-excel', [SeguridadDashboardController::class, 'exportarExcel'])
-    ->name('seguridad.dashboard.exportar')
-    ->middleware('role:Administrador|Médico');
-
+    Route::get('/seguridad/dashboard', [SeguridadDashboardController::class, 'index'])
+        ->name('seguridad.dashboard');
+       
+    Route::get('/seguridad/dashboard/exportar-excel', [SeguridadDashboardController::class, 'exportarExcel'])
+    ->name('seguridad.dashboard.exportar');
     // =====================================================================
     // 2. PACIENTES
     // =====================================================================
