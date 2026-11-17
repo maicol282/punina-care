@@ -311,6 +311,27 @@ class HistorialClinicoController extends Controller
         $historial = HistorialClinico::with('paciente')->findOrFail($historialId);
         $paciente = $historial->paciente;
 
+        // RESTRICCIÓN PARA ENFERMEROS: Solo puede actualizar signos vitales y alergias
+        if (auth()->user()->hasRole('Enfermero')) {
+            // Mantenemos los datos originales de la consulta que no debe modificar
+            $request->merge([
+                'motivo_consulta' => $historial->motivo_consulta,
+                'doctor' => $historial->doctor,
+            ]);
+        }
+
+
+        // RESTRICCIÓN PARA ENFERMEROS: Solo puede actualizar signos vitales y alergias
+        if (auth()->user()->hasRole('Enfermero')) {
+            $request->merge([
+                'motivo_consulta' => $historial->motivo_consulta,
+                'doctor' => $historial->doctor,
+                // Los signos vitales se actualizan normalmente
+                // El resto de campos se mantienen igual (no se tocan)
+            ]);
+        }
+
+
         $request->validate([
             'fecha_consulta' => 'required|date',
             'motivo_consulta' => 'required|string',
