@@ -46,12 +46,16 @@ Route::middleware(['auth'])->group(function () {
     // 1. DASHBOARD
     // =====================================================================
     Route::get('/dashboard', fn() => redirect()->route('seguridad.dashboard'))
-        ->name('dashboard');
+    ->name('dashboard')
+    ->middleware('role:Administrador|Médico');
 
-    Route::get('/seguridad/dashboard', [SeguridadDashboardController::class, 'index'])
-        ->name('seguridad.dashboard');
+Route::get('/seguridad/dashboard', [SeguridadDashboardController::class, 'index'])
+    ->name('seguridad.dashboard')
+    ->middleware('role:Administrador|Médico');
 
-    Route::get('/seguridad/dashboard/exportar-excel', [SeguridadDashboardController::class, 'exportarExcel'])->name('seguridad.dashboard.exportar');
+Route::get('/seguridad/dashboard/exportar-excel', [SeguridadDashboardController::class, 'exportarExcel'])
+    ->name('seguridad.dashboard.exportar')
+    ->middleware('role:Administrador|Médico');
 
     // =====================================================================
     // 2. PACIENTES

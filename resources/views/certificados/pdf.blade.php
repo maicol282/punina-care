@@ -276,23 +276,14 @@
     @endif
 @include('partials.pdf._firmas')
 
-    
-    <div class="linea"></div>
-    <div class="nombre">{{ $certificado->medico_nombre }}</div>
-    <div class="cargo">{{ $certificado->medico_especialidad ?? 'Medicina General' }}</div>
-    <div class="cedula">CI: {{ $certificado->medico_cedula ?? 'No Refiere' }}</div>
-    <div style="font-size: 11px; color: #27ae60; margin-top: 5px;">
-        ✅ Documento firmado electrónicamente
-        <br>
-        <span style="font-size: 9px; color: #888;">{{ now()->format('d/m/Y H:i') }}</span>
+     
     </div>
 </div>
 
         <div class="footer">
             <p>
                 <span>Punina Care, RUC:1726064502001 infopuninacare@gmail.com, Telefono:0969469299, CheGuevara y Arregui, Barrio La Primavera, Consultorios médicos.</span>
-                <span class="sistema">Sistema de Gestión Clínica</span>
-                <span class="text-muted">| Documento generado electrónicamente</span>
+
             </p>
             <p class="text-muted" style="font-size: 10px;">
                 Certificado N°: {{ $certificado->numero_certificado }} | 

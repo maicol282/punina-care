@@ -1,4 +1,5 @@
-    <!-- ========== EXPLORACIÓN FÍSICA Y SISTEMAS ========== -->
+   @role('Administrador|Médico')
+   <!-- ========== EXPLORACIÓN FÍSICA Y SISTEMAS ========== -->
     <div class="row">
         <!-- EXPLORACIÓN FÍSICA -->
         @php
@@ -99,3 +100,4 @@
             </div>
         </div>
     </div>
+@endrole

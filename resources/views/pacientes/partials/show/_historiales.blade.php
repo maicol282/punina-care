@@ -21,6 +21,7 @@
                                 <span class="badge bg-{{ $loop->first ? 'light' : 'secondary' }} text-dark me-2">
                                     Dr. {{ $historial->doctor ?? 'No Refiere' }}
                                 </span>
+                                
                                 <a href="{{ route('historial.show', $historial) }}" 
                                    class="btn btn-sm btn-{{ $loop->first ? 'light' : 'primary' }}"
                                    title="Ver detalles">
@@ -61,6 +62,7 @@
                         @endif
                         
                         <div class="mt-3">
+                             
                             <a href="{{ route('historial.show', $historial) }}" 
                                class="btn btn-sm btn-outline-primary">
                                 Ver detalles completos
@@ -76,12 +78,14 @@
                                class="btn btn-sm btn-outline-secondary" target="_blank">
                                 <i class="fas fa-file-pdf me-1"></i> PDF
                             </a>
+                            @role('Administrador|Médico')
                             <a href="{{ route('recetas.index', $historial->id) }}" class="btn btn-success px-4 py-2">
                                 <i class="fas fa-prescription me-2"></i> Recetas
                             </a>
                             <a href="{{ route('pedidos-examenes.create', ['paciente_id' => $paciente->id, 'historial_id' => $historial->id]) }}" class="btn btn-sm btn-info text-white">
                             <i class="fas fa-flask me-1"></i> Exámenes
                             </a>
+                            @endrole
                         </div>
                     </div>
                 </div>
@@ -98,7 +102,7 @@
             @endforelse
         </div>
     </div>
-
+@role('Administrador|Médico')
     <!-- Tarjeta de Facturación -->
     @if($paciente->ruc || $paciente->razon_social)
     <div class="card mt-3">
@@ -158,5 +162,6 @@
             </ul>
         </div>
     </div>
+     @endrole
     @endif
 </div>

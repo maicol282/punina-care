@@ -39,9 +39,12 @@
             <input type="hidden" name="doctor" value="{{ auth()->user()->name }}">
             
             <!-- Alergias (Está dentro de antecedentes patológicos) -->
-            @include('historial.partials._antecedentes-patologicos')
             
             <!-- Signos Vitales -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Alergias a medicamentos</label>
+                <textarea name="alergias_patologicas" class="form-control" rows="2" placeholder="Penicilina, Ibuprofeno..."></textarea>
+            </div>
             @include('historial.partials._signos-vitales')
             
             <!-- Botones de acción -->
@@ -51,11 +54,14 @@
             @include('historial.partials._info-paciente')
             @include('historial.partials._datos-consulta')
             
-            @include('historial.partials._antecedentes-patologicos')
             @include('historial.partials._antecedentes-no-patologicos')
             @include('historial.partials._antecedentes-familiares')
             @include('historial.partials._gineco-obstetricos')
             @include('historial.partials._enfermedad-actual')
+            <div class="mb-3">
+                <label class="form-label fw-bold">Alergias a medicamentos</label>
+                <textarea name="alergias_patologicas" class="form-control" rows="2" placeholder="Penicilina, Ibuprofeno..."></textarea>
+            </div>
             @include('historial.partials._signos-vitales')
             @include('historial.partials._revision-sistemas')
             @include('historial.partials._exploracion-fisica')

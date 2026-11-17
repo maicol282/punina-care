@@ -16,9 +16,11 @@
             <i class="fas fa-plus me-1"></i> Nuevo Paciente
         </a>
         @endcan
+@role('Administrador|Médico')
         <a href="{{ route('pacientes.exportar-facturacion') }}" class="btn btn-outline-success btn-sm rounded-pill px-3 shadow-sm" title="Exportar Facturación a Excel">
             <i class="fas fa-file-excel me-1"></i> Exportar
         </a>
+@endrole
     </div>
 
     <div class="card-body p-4">
@@ -54,6 +56,8 @@
                     </div>
                 </form>
             </div>
+@role('Administrador|Médico')
+
             <div class="col-md-4 col-lg-6 text-md-end">
                 <button class="btn btn-outline-secondary rounded-pill shadow-sm" id="toggleFiltrosPacientes" type="button">
                     <i class="fas fa-sliders-h me-1"></i>
@@ -65,6 +69,7 @@
                     @endif
                 </button>
             </div>
+@endrole
         </div>
 
         <!-- ========== PANEL DE FILTROS OCULTO ========== -->

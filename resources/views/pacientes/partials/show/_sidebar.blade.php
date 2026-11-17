@@ -38,9 +38,11 @@
               <!--   <a href="{{ route('pedidos-examenes.create', ['paciente_id' => $paciente->id]) }}" class="btn btn-info text-white">
                  <i class="fas fa-flask me-1"></i> Pedir Exámenes
                     </a> -->
+                    @role('Administrador|Médico')
                     <a href="{{ route('pedidos-examenes.index', ['paciente_id' => $paciente->id]) }}" class="btn btn-secondary">
                      <i class="fas fa-list me-1"></i> Ver Pedidos de Exámenes
                     </a>
+                    @endrole
             </div>
         </div>
     </div>

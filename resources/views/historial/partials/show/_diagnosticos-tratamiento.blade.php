@@ -1,3 +1,4 @@
+   @role('Administrador|Médico') 
     <div class="card border-0 shadow-sm rounded-4 mb-4">
         <div class="card-header bg-transparent border-0 pt-4 pb-0 px-4">
             <h6 class="fw-bold text-dark d-flex align-items-center mb-0">
@@ -57,3 +58,4 @@
             @endif
         </div>
     </div>
+@endrole

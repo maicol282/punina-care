@@ -15,15 +15,19 @@
                 <a href="{{ route('certificados.imprimir', $certificado) }}" class="btn btn-success" target="_blank">
                     <i class="fas fa-file-pdf me-1"></i> Imprimir PDF
                 </a>
+                @role('Administrador|Médico')
                 <a href="{{ route('certificados.edit', $certificado) }}" class="btn btn-warning">
                     <i class="fas fa-edit me-1"></i> Editar
                 </a>
+                @endrole
                 <form action="{{ route('certificados.destroy', $certificado) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
+                    @role('Administrador|Médico')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar este certificado?')">
                         <i class="fas fa-trash me-1"></i> Eliminar
                     </button>
+                    @endrole
                 </form>
             </div>
         </div>
@@ -160,9 +164,11 @@
                             <i class="fas fa-notes-medical me-2"></i> Historial Asociado
                         </h6>
                         <hr>
+                        @role('Administrador|Médico')
                         <a href="{{ route('historial.show', $certificado->historialClinico) }}" class="btn btn-outline-primary">
                             <i class="fas fa-eye me-1"></i> Ver Historial del {{ $certificado->historialClinico->fecha_consulta->format('d/m/Y') }}
                         </a>
+                        @endrole
                         <a href="{{ route('pacientes.show', $certificado->paciente) }}" class="btn btn-outline-info">
                             <i class="fas fa-user me-1"></i> Ver Perfil del Paciente
                         </a>

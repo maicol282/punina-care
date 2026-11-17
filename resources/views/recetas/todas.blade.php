@@ -41,10 +41,11 @@
                         <td>{{ $receta->fecha_emision->format('d/m/Y') }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('historial.show', $receta->historialClinico) }}" 
-                                   class="btn btn-sm btn-info" title="Ver historial" data-bs-toggle="tooltip">
-                                    <i class="fas fa-eye"></i>
-                                </a>
+                               @role('Administrador|Médico')
+                                <a href="{{ route('historiales.show', $receta->historial_clinico_id) }}" class="btn btn-sm btn-info" title="Ver historial" data-bs-toggle="tooltip">
+                                <i class="fas fa-eye"></i>
+                                    </a>
+                                @endrole
                                 <a href="{{ route('recetas.imprimir', $receta->id) }}" 
                                    class="btn btn-sm btn-secondary" target="_blank" title="Imprimir receta" data-bs-toggle="tooltip">
                                     <i class="fas fa-file-pdf"></i>

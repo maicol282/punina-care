@@ -62,14 +62,19 @@
     
     
     <!-- Menú -->
+ 
+
     <nav class="sidebar-nav">
         <ul class="nav flex-column">
+ @role('Administrador|Médico')
+
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ auth()->user()->hasRole('Enfermero') ? route('pacientes.index') : route('dashboard') }}">
                     <i class="fas fa-chart-pie"></i>
                     <span>Estadísticas</span>
                 </a>
             </li>
+ @endrole
 
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('pacientes.create') ? 'active' : '' }}" href="{{ route('pacientes.create') }}">
@@ -85,12 +90,16 @@
                 </a>
             </li>
             
+ @role('Administrador|Médico')
+
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('historiales.index') ? 'active' : '' }}" href="{{ route('historiales.index') }}">
                     <i class="fas fa-notes-medical"></i>
                     <span>Historiales</span>
                 </a>
             </li>
+ @endrole
+
             
 
             <!-- ===== SEPARADOR ===== -->
@@ -103,13 +112,16 @@
                 </a>
             </li>
             
+            @role('Administrador|Médico')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('citas.*') ? 'active' : '' }}" href="{{ route('citas.index') }}">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Calendario de Citas</span>
                 </a>
             </li>
-            
+            @endrole           
+ 
+                        @role('Administrador|Médico')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('ia.*') ? 'active' : '' }}" href="{{ route('ia.index') }}">
                     <i class="fas fa-brain me-2"></i>
@@ -117,6 +129,7 @@
                     <span class="badge bg-success text-white ms-1" style="font-size: 8px;">Pro</span>
                 </a>
             </li>
+            @endrole
 
             <!-- ===== SEPARADOR ===== -->
             <li class="nav-divider"></li>
@@ -128,12 +141,14 @@
                 </a>
             </li> -->
 
-               <li class="nav-item">
+                           @role('Administrador|Médico')
+            <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('pedidos-examenes.*') ? 'active' : '' }}" href="{{ route('pedidos-examenes.index') }}">
                 <i class="fas fa-flask"></i>
                 <span>Pedidos de Exámenes</span>
                  </a>
                 </li>  
+            @endrole  
 
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('certificados.*') ? 'active' : '' }}" 
@@ -143,23 +158,27 @@
                 </a>
             </li>
             
+                        @role('Administrador|Médico')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('telemedicina.*') ? 'active' : '' }}" href="{{ route('telemedicina.index') }}">
                     <i class="fas fa-video"></i>
                     <span>Punina Care</span>
                 </a>
             </li>
+            @endrole
 
             <!-- ===== SEPARADOR ===== -->
             <li class="nav-divider"></li>
-            
+            @role('Administrador|Médico')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('profile.edit') ? 'active' : '' }}" href="{{ route('profile.edit') }}">
                     <i class="fas fa-user-cog"></i>
                     <span>Firma de documentos</span>
                 </a>
             </li>
-            
+            @endrole
+
+ 
             @role('Administrador')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('usuarios.*') ? 'active' : '' }}" href="{{ route('usuarios.index') }}">
@@ -208,7 +227,9 @@
             <h4 class="mb-0 text-primary">@yield('page-title')</h4>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Inicio</a></li>
+                    @role('Administrador|Médico')
+<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Inicio</a></li>
+@endrole
                     <li class="breadcrumb-item active">@yield('breadcrumb', 'Panel Principal')</li>
                 </ol>
             </nav>

@@ -1,3 +1,4 @@
+@role('Administrador|Médico')
 <div class="card mb-4 shadow-sm">
     <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
         <div>
@@ -66,7 +67,7 @@
         @endif
     </div>
 </div>
-
+@endrole
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {

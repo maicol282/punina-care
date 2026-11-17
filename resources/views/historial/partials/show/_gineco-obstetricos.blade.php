@@ -1,3 +1,4 @@
+    @role('Administrador|Médico')
     @if($historial->paciente->genero == 'F' || $historial->paciente->genero == 'Otro')
     <div class="card border-0 shadow-sm rounded-4 mb-4">
         <div class="card-header bg-transparent border-0 pt-4 pb-0 px-4">
@@ -50,3 +51,4 @@
         </div>
     </div>
     @endif
+@endrole

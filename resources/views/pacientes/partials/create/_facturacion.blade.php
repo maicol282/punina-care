@@ -1,3 +1,4 @@
+@role('Administrador|Médico')
 <div class="card mt-3 facturacion-field" id="facturacion-card">
     <div class="card-header bg-white d-flex justify-content-between align-items-center">
         <h6 class="mb-0"><i class="fas fa-file-invoice-dollar me-2 text-primary"></i>Datos de Facturación</h6>
@@ -107,3 +108,4 @@
     <i class="fas fa-sync fa-spin me-2"></i>
     <span id="autocompleteMessage">Copiando datos del paciente...</span>
 </div>
+@endrole

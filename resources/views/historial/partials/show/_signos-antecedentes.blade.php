@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-
+@role('Administrador|Médico')
     <div class="row">
         <div class="col-lg-6">
             <!-- ========== ANTECEDENTES PERSONALES PATOLÓGICOS ========== -->
@@ -63,7 +63,8 @@
                 </div>
             </div>
         </div>
-
+@endrole
+@role('Administrador|Médico')
         <div class="col-lg-6">
             <!-- ========== ANTECEDENTES NO PATOLÓGICOS Y FAMILIARES ========== -->
             <div class="card border-0 shadow-sm rounded-4 mb-4">
@@ -129,4 +130,5 @@
                 </div>
             </div>
         </div>
+        @endrole
     </div>

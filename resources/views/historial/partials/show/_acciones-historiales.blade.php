@@ -16,9 +16,11 @@
                         <i class="fas fa-prescription-bottle-alt me-1"></i> Recetas ({{ $historial->recetas->count() }})
                     </a>
                 @endif
+                @role('Administrador|Médico')
                 <a href="{{ route('certificados.create', $historial) }}" class="btn btn-info text-white">
                     <i class="fas fa-certificate me-1"></i> Certificado
                 </a>
+                @endrole
                 <a href="{{ route('reportes.historial', $historial) }}" target="_blank" class="btn btn-success text-white">
                     <i class="fas fa-print me-1"></i> Imprimir PDF
                 </a>
