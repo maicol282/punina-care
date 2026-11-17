@@ -80,7 +80,8 @@ class PacienteController extends Controller
             'obligado_contabilidad' => 'nullable|boolean',
             'contribuyente_especial' => 'nullable|boolean',
             'agente_retencion' => 'nullable|boolean',
-            'observaciones' => 'nullable|string'
+            'observaciones' => 'nullable|string',
+            'precio_consulta' => 'nullable|numeric|min:0',
         ]);
 
         Paciente::create($validated);
@@ -128,7 +129,8 @@ class PacienteController extends Controller
             'obligado_contabilidad' => 'nullable|boolean',
             'contribuyente_especial' => 'nullable|boolean',
             'agente_retencion' => 'nullable|boolean',
-            'observaciones' => 'nullable|string'
+            'observaciones' => 'nullable|string',
+            'precio_consulta' => 'nullable|numeric|min:0',
         ]);
 
         $paciente->update($validated);

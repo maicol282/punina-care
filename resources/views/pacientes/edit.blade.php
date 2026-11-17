@@ -176,6 +176,7 @@
                     </div>
                 </div>
             </div>
+            @role('Administrador|Médico')
             <!-- ==================== TARJETA DE FACTURACIÓN (SRI ECUADOR) ==================== -->
                     <div class="card">
                         <div class="card-header bg-white">
@@ -216,6 +217,34 @@
                                            id="email_facturacion" name="email_facturacion" value="{{ old('email_facturacion', $paciente->email_facturacion) }}">
                                     @error('email_facturacion')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="precio_consulta" class="form-label">Precio de Consulta</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" step="0.01" class="form-control @error('precio_consulta') is-invalid @enderror"
+                                               id="precio_consulta" name="precio_consulta"
+                                               value="{{ old('precio_consulta', $paciente->precio_consulta) }}" placeholder="0.00">
+                                        @error('precio_consulta')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="fecha_emision_factura" class="form-label">Fecha de Emisión de Factura</label>
+                                    <input type="date" class="form-control @error('fecha_emision_factura') is-invalid @enderror" 
+                                           id="fecha_emision_factura" name="fecha_emision_factura" 
+                                           value="{{ old('fecha_emision_factura', $paciente->fecha_emision_factura) }}">
+                                    @error('fecha_emision_factura')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check mt-4">
+                                        <input class="form-check-input" type="checkbox" name="pagado" id="pagado" value="1" 
+                                               {{ old('pagado', $paciente->pagado) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="pagado">
+                                            Pagado
+                                        </label>
+                                    </div>
+                                </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="obligado_contabilidad" id="obligado_contabilidad" value="1" 
@@ -244,6 +273,7 @@
                                     </div>
                                 </div>
                             </div>
+            @endrole
                         </div>
                     </div>
 

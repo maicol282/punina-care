@@ -103,6 +103,10 @@
                     <span><i class="fas fa-home me-2 text-muted"></i>Dirección:</span>
                     <span>{{ $paciente->direccion ?? 'No Refiere' }}</span>
                 </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <span><i class="fas fa-dollar-sign me-2 text-success"></i>Precio de Consulta:</span>
+                    <span class="fw-bold text-success">$ {{ number_format($paciente->precio_consulta ?? 0, 2) }}</span>
+                </li>
                 @if($paciente->alergias)
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <span><i class="fas fa-allergies me-2 text-danger"></i>Alergias:</span>

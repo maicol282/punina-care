@@ -1,4 +1,9 @@
 <div class="col-md-8">
+<div class="mb-3">
+    <a href="{{ route('pacientes.index') }}" class="btn btn-outline-secondary btn-sm">
+        <i class="fas fa-arrow-left me-1"></i> Volver a la lista de pacientes
+    </a>
+</div>
     <!-- Historial Clínico -->
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">

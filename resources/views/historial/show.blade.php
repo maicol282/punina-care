@@ -5,6 +5,13 @@
 
 @section('content')
 <div class="container-fluid px-0">
+
+<div class="mb-3">
+    <a href="{{ route('pacientes.show', $historial->paciente) }}" class="btn btn-outline-secondary btn-sm">
+        <i class="fas fa-arrow-left me-1"></i> Volver al Paciente
+    </a>
+</div>
+
     
     <!-- ========== ENCABEZADO DEL PACIENTE ========== -->
     @include('historial.partials.show._encabezado-paciente')
