@@ -64,6 +64,20 @@ require __DIR__.'/auth.php';
 
 Route::get('/pacientes/exportar-facturacion', [App\Http\Controllers\PacienteController::class, 'exportarFacturacion'])->name('pacientes.exportar-facturacion')->middleware('auth');
     Route::resource('pacientes', PacienteController::class);
+    // =====================================================================
+    // SUBGRUPO: Rutas restringidas (Solo Administrador, Médico, Enfermero)
+    // =====================================================================
+        // =====================================================================
+    // SUBGRUPO: Rutas restringidas (Solo Administrador, Médico, Enfermero)
+    // =====================================================================
+    Route::middleware(['role:Administrador|Médico|Enfermero'])->group(function () {
+
+
+    // =====================================================================
+    // SUBGRUPO: Rutas restringidas (Solo Administrador, Médico, Enfermero)
+    // =====================================================================
+    
+
 
     // =====================================================================
     // 3. HISTORIALES (listado global)
@@ -155,7 +169,7 @@ Route::get('/pacientes/exportar-facturacion', [App\Http\Controllers\PacienteCont
     // =====================================================================
     // 8. REPOSOS MÉDICOS
     // =====================================================================
-    Route::resource('reposos', ReposoController::class)->except(['create']);
+    Route::resource('reposos', ReposoController::class)->except(['create'])->middleware('role:Administrador|Médico');
     Route::get('/reposos/historial/{historial}/create', [ReposoController::class, 'create'])->name('reposos.create');
     Route::get('/reposos/{reposo}/imprimir', [ReposoController::class, 'imprimir'])->name('reposos.imprimir');
     Route::patch('/reposos/{reposo}/estado', [ReposoController::class, 'cambiarEstado'])->name('reposos.cambiarEstado');
@@ -256,7 +270,7 @@ Route::get('/pacientes/exportar-facturacion', [App\Http\Controllers\PacienteCont
     // =====================================================================
     // 18. USUARIOS
     // =====================================================================
-    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('usuarios', UsuarioController::class)->middleware('role:Administrador');
     Route::post('/usuarios/{usuario}/reset-password', [App\Http\Controllers\UsuarioController::class, 'resetPassword'])->name('usuarios.reset-password');
 
     // =====================================================================
@@ -273,6 +287,8 @@ Route::get('/pacientes/exportar-facturacion', [App\Http\Controllers\PacienteCont
     Route::get('/recetas/{receta}/enviar-correo', [App\Http\Controllers\RecetaController::class, 'enviarPorCorreo'])->name('recetas.enviar');
     Route::get('/pedidos-examenes/{pedido}/enviar-correo', [App\Http\Controllers\PedidoExamenController::class, 'enviarPorCorreo'])->name('pedidos-examenes.enviar');
     Route::get('/certificados/{certificado}/enviar-correo', [CertificadoMedicoController::class, 'enviarPorCorreo'])->name('certificados.enviar');
+    
+    }); // Fin del subgrupo restringido
 });
 // ===== PÁGINAS LEGALES =====
 Route::get('/terminos-y-condiciones', function () {

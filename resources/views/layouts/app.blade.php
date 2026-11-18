@@ -104,14 +104,14 @@
 
             <!-- ===== SEPARADOR ===== -->
             <li class="nav-divider"></li>
-
+	@role('Administrador|Médico|Enfermero')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('recetas.*') ? 'active' : '' }}" href="{{ route('recetas.todas') }}">
                     <i class="fas fa-prescription-bottle"></i>
                     <span>Recetas Médicas</span>
                 </a>
             </li>
-            
+            @endrole
             @role('Administrador|Médico')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('citas.*') ? 'active' : '' }}" href="{{ route('citas.index') }}">
@@ -149,7 +149,7 @@
                  </a>
                 </li>  
             @endrole  
-
+	@role('Administrador|Médico|Enfermero')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('certificados.*') ? 'active' : '' }}" 
                 href="{{ route('certificados.index') }}">
@@ -157,7 +157,7 @@
                     <span>Certificados</span>
                 </a>
             </li>
-            
+            @endrole
                         @role('Administrador|Médico')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('telemedicina.*') ? 'active' : '' }}" href="{{ route('telemedicina.index') }}">

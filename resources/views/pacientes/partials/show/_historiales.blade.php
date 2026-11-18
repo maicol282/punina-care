@@ -4,6 +4,7 @@
         <i class="fas fa-arrow-left me-1"></i> Volver a la lista de pacientes
     </a>
 </div>
+@role('Administrador|Médico|Enfermero')
     <!-- Historial Clínico -->
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -26,12 +27,13 @@
                                 <span class="badge bg-{{ $loop->first ? 'light' : 'secondary' }} text-dark me-2">
                                     Dr. {{ $historial->doctor ?? 'No Refiere' }}
                                 </span>
-                                
+                                @role('Administrador|Médico|Enfermero')
                                 <a href="{{ route('historial.show', $historial) }}" 
                                    class="btn btn-sm btn-{{ $loop->first ? 'light' : 'primary' }}"
                                    title="Ver detalles">
                                     <i class="fas fa-eye"></i>
                                 </a>
+                                @endrole
                             </div>
                         </div>
                     </div>
@@ -67,22 +69,24 @@
                         @endif
                         
                         <div class="mt-3">
-                             
+                             @role('Administrador|Médico|Enfermero')
                             <a href="{{ route('historial.show', $historial) }}" 
                                class="btn btn-sm btn-outline-primary">
                                 Ver detalles completos
                             </a>
-                        
+                        @endrole
                             @can('crear seguimientos')
                             <a href="{{ route('seguimientos.create', $historial) }}" 
                                class="btn btn-sm btn-outline-success">
                                 <i class="fas fa-plus-circle me-1"></i> Agregar Seguimiento
                             </a>
                             @endcan
+                            @role('Administrador|Médico|Enfermero')
                             <a href="{{ route('reportes.historial', $historial) }}" 
                                class="btn btn-sm btn-outline-secondary" target="_blank">
                                 <i class="fas fa-file-pdf me-1"></i> PDF
                             </a>
+                            @endrole
                             @role('Administrador|Médico')
                             <a href="{{ route('recetas.index', $historial->id) }}" class="btn btn-success px-4 py-2">
                                 <i class="fas fa-prescription me-2"></i> Recetas
@@ -107,6 +111,7 @@
             @endforelse
         </div>
     </div>
+    @endrole
 @role('Administrador|Médico')
     <!-- Tarjeta de Facturación -->
     @if($paciente->ruc || $paciente->razon_social)
