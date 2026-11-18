@@ -31,21 +31,15 @@
                     <label class="form-label">Fecha del Pedido <span class="text-danger">*</span></label>
                     <input type="date" name="fecha_pedido" class="form-control" value="{{ date('Y-m-d') }}" required>
                 </div>
-                <div class="col-md-8">
-                    <label class="form-label">Diagnóstico (CIE-10)</label>
-                    <input type="text" name="diagnostico_cie10" class="form-control" value="{{ old('diagnostico_cie10', $diagnosticoAuto ?? '') }}" placeholder="Ej: J00 - Rinofaringitis aguda">
-                </div>
+                
             </div>
 
             <div class="row mb-4">
                 <div class="col-md-6">
                     <label class="form-label">Motivo de la Solicitud</label>
-                    <textarea name="motivo" class="form-control" rows="2" placeholder="Motivo...">{{ old('motivo', $motivoAuto ?? '') }}</textarea>
+                    <textarea name="motivo" class="form-control" rows="2" required placeholder="Escriba el motivo de la solicitud...">{{ old('motivo') }}</textarea>
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label">Resumen Clínico</label>
-                    <textarea name="resumen_clinico" class="form-control" rows="2" placeholder="Resumen...">{{ old('resumen_clinico', $historial ? $historial->enfermedad_actual : '') }}</textarea>
-                </div>
+                
             </div>
 
             <hr>

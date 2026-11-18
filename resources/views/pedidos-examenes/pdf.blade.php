@@ -60,27 +60,12 @@
         </table>
     </div>
 
-    @if($pedido->motivo || $pedido->resumen_clinico || $pedido->diagnostico_cie10)
-    <div class="section-title">Información Clínica</div>
+    @if($pedido->motivo)
+    <div class="section-title">Motivo de la Solicitud</div>
     <table class="datos">
-        @if($pedido->motivo)
         <tr>
-            <th width="20%">Motivo:</th>
-            <td>{{ $pedido->motivo }}</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">{{ $pedido->motivo }}</td>
         </tr>
-        @endif
-        @if($pedido->resumen_clinico)
-        <tr>
-            <th>Resumen Clínico:</th>
-            <td>{{ $pedido->resumen_clinico }}</td>
-        </tr>
-        @endif
-        @if($pedido->diagnostico_cie10)
-        <tr>
-            <th>Diagnóstico (CIE-10):</th>
-            <td>{{ $pedido->diagnostico_cie10 }}</td>
-        </tr>
-        @endif
     </table>
     @endif
 
