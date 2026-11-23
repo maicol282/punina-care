@@ -42,7 +42,7 @@
                         <td>
                             <div class="btn-group">
                                @role('Administrador|Médico')
-                                <a href="{{ route('historiales.show', $receta->historial_clinico_id) }}" class="btn btn-sm btn-info" title="Ver historial" data-bs-toggle="tooltip">
+                                <a href="{{ route('historial.show', $receta->historial_clinico_id) }}" class="btn btn-sm btn-info" title="Ver historial" data-bs-toggle="tooltip">
                                 <i class="fas fa-eye"></i>
                                     </a>
                                 @endrole
